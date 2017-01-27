@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(schema="projetjee2")
-public class Person implements ConnectedUser, Serializable {
+public class Person implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -44,15 +44,6 @@ public class Person implements ConnectedUser, Serializable {
 		
 	}
 	
-	public void login(String login, String pwd){
-		
-	}
-	
-	@Remove
-	public void logout(){
-		
-	}
-
 	public String getFirstName() {
 		return firstName;
 	}

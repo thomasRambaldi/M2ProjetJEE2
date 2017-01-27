@@ -14,17 +14,17 @@ import javax.persistence.PersistenceContext;
 @Stateless(name = "pers", description = "Representation d'une personne")
 @TransactionManagement(TransactionManagementType.CONTAINER)
 @TransactionAttribute(value = TransactionAttributeType.REQUIRED)
-public class PersonSCRUDManager /*implements PersonSCRUD*/{
+public class PersonSCRUDManager implements PersonSCRUD{
 
 	@PersistenceContext(unitName = "myData")
 	EntityManager em;
 
-	////@Override
+	@Override
 	public List<Person> searchPerson() {
         return em.createQuery("Select p From Person p", Person.class).getResultList();
 	}
 
-	//@Override
+	@Override
 	public Person createPerson(Person p) {
 		if (p.getEmail() == null) {
             em.persist(p);
@@ -34,18 +34,18 @@ public class PersonSCRUDManager /*implements PersonSCRUD*/{
         return p;
 	}
 
-	//@Override
+	@Override
 	public Person readPerson(String email) {
 		return em.find(Person.class, email);
 	}
 	
-	//@Override
+	@Override
 	public void updatePerson(Person p, String id) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	//@Override
+	@Override
 	public void deletePerson(Person p) {
 		p = em.merge(p);
 		em.remove(p);

@@ -16,7 +16,7 @@ public class PersonControler implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
-    PersonSCRUDManager pm;
+    PersonSCRUD pm;
 
     Person thePerson  = new Person();
 
