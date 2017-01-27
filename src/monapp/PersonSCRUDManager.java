@@ -38,7 +38,13 @@ public class PersonSCRUDManager implements PersonSCRUD{
 	
 	@Override
 	public void updatePerson(Person p, String id) {
-		// TODO Auto-generated method stub
+		p = em.find(Person.class, id);
+		p.setEmail(p.getEmail());
+		p.setBirthday(p.getBirthday());
+		p.setFirstName(p.getFirstName());
+		p.setLastName(p.getLastName());
+		p.setWeb(p.getWeb());
+		p.setPassword(p.getPassword());
 	}
 
 	@Override

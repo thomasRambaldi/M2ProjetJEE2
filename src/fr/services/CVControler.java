@@ -1,9 +1,8 @@
 package fr.services;
 
 import java.sql.SQLException;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -28,7 +27,7 @@ public class CVControler {
 	        System.out.println("Create " + this);
 	        if (cvm.searchCV().size() == 0) {
 	        	CV cv1 = new CV();
-	        	Set<Activity> setCV = new HashSet<>();
+	        	ArrayList<Activity> setCV = new ArrayList<>();
 	        	Activity act = new Activity();
 	        	act.setTitle("Candidature de stage");
 	        	act.setNature(Nature.FORMATION);
