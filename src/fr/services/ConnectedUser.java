@@ -6,4 +6,5 @@ import javax.ejb.Local;
 public interface ConnectedUser {
 	public void login(String login, String pwd);
 	public void logout();
+	public boolean isLogin();
 }

@@ -1,43 +1,49 @@
 package fr.services;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
 
-import javax.ejb.Stateless;
+import javax.ejb.Stateful;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
-import fr.beans.Activity;
+import fr.beans.CV;
 
-@Stateless(name = "act", description = "Representation d'une activitee")
+@Stateful(name = "act", description = "Representation d'une activitee")
 public class CVSCRUDManager implements CVSCRUD{
 
+	@PersistenceContext(unitName = "myData")
+	EntityManager em;
+
 	@Override
-	public ArrayList<Activity> searchActivity(String search) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<CV> searchCV() {
+		return em.createQuery("Select c From CV c", CV.class).getResultList();
 	}
 
 	@Override
-	public void createActivity(Activity a) throws SQLException {
-		// TODO Auto-generated method stub
-		
+	public CV createCV(CV cv) {
+		if (cv.getId() == -1) {
+            em.persist(cv);
+        } else {
+            cv = em.merge(cv);
+        }
+        return cv;
 	}
 
 	@Override
-	public Activity readActivity(Activity a) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public CV readCV(int idCv) {
+		return em.find(CV.class, idCv);
 	}
 
 	@Override
-	public void updateActivity(Activity a, String id) throws SQLException {
+	public void updateCV(CV cv, String id) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
-	public void deleteActivity(Activity a) throws SQLException {
-		// TODO Auto-generated method stub
-		
+	public void deleteActivity(CV cv) {
+		cv = em.merge(cv);
+		em.remove(cv);		
 	}
+	
 
 }

@@ -3,9 +3,6 @@ package fr.beans;
 import java.io.Serializable;
 
 import javax.persistence.Embeddable;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 @Embeddable
@@ -13,17 +10,13 @@ public class Activity implements Serializable{
 	
 	private static final long serialVersionUID = 3595117949735258943L;
 
-	@ManyToOne
-	@JoinColumn(name="id")
-	private CV cv;
-
+	
 	@NotNull
 	private int year;
 	
 	@NotNull
 	private Nature nature;
 	
-	@Id
 	@NotNull
 	private String title;
 	
@@ -33,14 +26,6 @@ public class Activity implements Serializable{
 	
 	public Activity() {
 		
-	}
-	
-	public CV getCv() {
-		return cv;
-	}
-
-	public void setCv(CV cv) {
-		this.cv = cv;
 	}
 
 	public String getTitle() {

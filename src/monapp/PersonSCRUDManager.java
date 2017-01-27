@@ -1,19 +1,16 @@
 package monapp;
 
-import java.io.Serializable;
 import java.util.List;
 
-import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
-import javax.ejb.TransactionManagement;
-import javax.ejb.TransactionManagementType;
+import javax.ejb.Stateful;
+import javax.interceptor.AroundInvoke;
+import javax.interceptor.InvocationContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-@Stateless(name = "pers", description = "Representation d'une personne")
-@TransactionManagement(TransactionManagementType.CONTAINER)
-@TransactionAttribute(value = TransactionAttributeType.REQUIRED)
+@Stateful(name = "pers", description = "Representation d'une personne")
+//@TransactionManagement(TransactionManagementType.CONTAINER)
+//@Interceptors({AuthenticateManager.class})
 public class PersonSCRUDManager implements PersonSCRUD{
 
 	@PersistenceContext(unitName = "myData")
@@ -42,7 +39,6 @@ public class PersonSCRUDManager implements PersonSCRUD{
 	@Override
 	public void updatePerson(Person p, String id) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -50,4 +46,14 @@ public class PersonSCRUDManager implements PersonSCRUD{
 		p = em.merge(p);
 		em.remove(p);
 	}	
+	
+	@AroundInvoke
+	public Object interceptor(InvocationContext context) throws Exception {
+	   String methodName = context.getMethod().getName();
+	   System.err.println("appel de " + methodName);
+	   for (Object param : context.getParameters()) {
+	      System.err.println("param = " + param.toString());
+	   }
+	   return context.proceed();
+	}
 }

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -17,8 +18,8 @@ public class CV implements Serializable{
 
 	@Id 
 	@GeneratedValue
-	private int id;
-	
+	private Integer id = -1;
+
 	@ElementCollection
 	Set<Activity> activities;
 	
@@ -32,5 +33,9 @@ public class CV implements Serializable{
 
 	public void setActivitees(Set<Activity> activities) {
 		this.activities = activities;
+	}
+
+	public Integer getId() {
+		return id;
 	}
 }

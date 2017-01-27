@@ -1,6 +1,5 @@
 package monapp;
 
-import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -11,9 +10,7 @@ import javax.faces.bean.SessionScoped;
 
 @ManagedBean(name = "person")
 @SessionScoped
-public class PersonControler implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+public class PersonControler {
 
 	@EJB
     PersonSCRUD pm;
