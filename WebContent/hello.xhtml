@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:body>
+	<h:outputStylesheet library="css" name="style.css" />
+
+	<h:outputText value="Avant" />
+
+	<ui:composition template="/template/mylayout.xhtml">
+		<ui:define name="content">
+			<h1>
+				<h:outputText value="#{messages.helloWorld}" />
+			</h1>
+
+			<h:graphicImage library="theme1" name="tokyo.jpg" />
+
+			<h1>
+				<h:outputText value="#{messages.bye}" />
+			</h1>
+		</ui:define>
+		<ui:define name="title">Tokyo Goul Menu</ui:define>
+
+	</ui:composition>
+
+	<h:outputText value="Apres" />
+</h:body>
+</html>

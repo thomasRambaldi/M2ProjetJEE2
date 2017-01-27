@@ -1,0 +1,12 @@
+<?xml version = "1.0" encoding="UTF-8"?>
+<openejb>
+
+	<Resource id="myDS" type="DataSource">
+		JdbcDriver com.mysql.jdbc.Driver
+		JdbcUrl jdbc:mysql://localhost:3306/projetjee2?useSSL=false
+		UserName root
+		Password 
+		JtaManaged false
+	</Resource>
+
+</openejb>
