@@ -3,6 +3,8 @@ package fr.services;
 import java.util.List;
 
 import javax.ejb.Stateful;
+import javax.interceptor.AroundInvoke;
+import javax.interceptor.InvocationContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -45,5 +47,13 @@ public class CVSCRUDManager implements CVSCRUD{
 		em.remove(cv);		
 	}
 	
-
+	@AroundInvoke
+	public Object interceptor(InvocationContext context) throws Exception {
+	   String methodName = context.getMethod().getName();
+	   System.err.println("appel de " + methodName);
+	   for (Object param : context.getParameters()) {
+	      System.err.println("param = " + param.toString());
+	   }
+	   return context.proceed();
+	}
 }

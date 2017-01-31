@@ -1,10 +1,9 @@
 package fr.beans;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.ArrayList;
 
 import javax.persistence.ElementCollection;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -21,17 +20,17 @@ public class CV implements Serializable{
 	private Integer id = -1;
 
 	@ElementCollection
-	Set<Activity> activities;
+	ArrayList<Activity> activities;
 	
 	public CV(){
-		
+
 	}
 
-	public Set<Activity> getActivities() {
+	public ArrayList<Activity> getActivities() {
 		return activities;
 	}
 
-	public void setActivitees(Set<Activity> activities) {
+	public void setActivities(ArrayList<Activity> activities) {
 		this.activities = activities;
 	}
 

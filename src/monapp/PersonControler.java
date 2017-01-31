@@ -49,6 +49,11 @@ public class PersonControler {
         pm.createPerson(thePerson);
         return "showPerson";
     }
+    
+    public String remove(){
+    	pm.deletePerson(thePerson);
+    	return "index";
+    }
 
     public String newPerson() {
     	thePerson = new Person();
