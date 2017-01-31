@@ -1,4 +1,4 @@
-package fr.services;
+package monapp;
 
 import java.util.List;
 
@@ -7,8 +7,6 @@ import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
-import fr.beans.CV;
 
 @Stateful(name = "act", description = "Representation d'une activitee")
 public class CVSCRUDManager implements CVSCRUD{

@@ -1,10 +1,8 @@
-package fr.services;
+package monapp;
 
 import java.util.List;
 
 import javax.ejb.Local;
-
-import fr.beans.CV;
 
 @Local
 public interface CVSCRUD {

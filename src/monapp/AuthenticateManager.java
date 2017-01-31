@@ -1,4 +1,4 @@
-package fr.services;
+package monapp;
 
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;

@@ -15,19 +15,22 @@
 				<h:form>
 					<table>
 						<tr>
-							<th>Email</th>
-							<th>firstName</th>
-							<th>lastName</th>
-							<th>Actions</th>
+							<th>Title</th>
+							<th>Nature</th>
+							<th>Year</th>
+							<th>Description</th>
+							<th>Web Site</th>
 						</tr>
 						<c:forEach var="c" items="#{cv.CVs}">
 							<tr>
 								<td>#{c.id}</td>
-								<td><h:commandLink action="#{cv.show(c.id)}" value="Show" /></td>
+								<td>#{c.activities.nature}</td>
+								<td>#{c.activities.year}</td>
+								<td><h:commandLink action="#{cv.showCV(c.id)}" value="Show" /></td>
 							</tr>
 						</c:forEach>
 					</table>
-					<h:commandButton action="#{person. newPerson()}" value="Ajouter" />
+					<h:commandButton action="#{cv.newCV()}" value="Ajouter" />
 				</h:form>
 			</f:view>
 		</ui:define>

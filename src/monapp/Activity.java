@@ -1,4 +1,4 @@
-package fr.beans;
+package monapp;
 
 import java.io.Serializable;
 

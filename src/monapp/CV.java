@@ -1,11 +1,10 @@
-package fr.beans;
+package monapp;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -16,8 +15,9 @@ public class CV implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id 
-	@GeneratedValue
+//	@GeneratedValue
 	private Integer id = -1;
+
 
 	@ElementCollection
 	ArrayList<Activity> activities;
@@ -32,6 +32,10 @@ public class CV implements Serializable{
 
 	public void setActivities(ArrayList<Activity> activities) {
 		this.activities = activities;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public Integer getId() {
