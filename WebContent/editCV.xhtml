@@ -17,7 +17,7 @@
 				<h:panelGrid columns="3">
 
 					Titre : 
-					<h:inputText id="title" value="#{c.activities.title}">
+					<h:inputText id="title" value="#{c.activities.get(0).title}">
 						<f:validateLength minimum="5" maximum="200" />
 					</h:inputText>
 					<h:message for="title" style="color:red" />		
@@ -50,7 +50,6 @@
 					outcome="cvs" value="List of CVs" />
 						
 				</h:panelGrid>
-
 
 			</h:form>
 		</f:view>

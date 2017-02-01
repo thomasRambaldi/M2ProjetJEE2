@@ -16,7 +16,7 @@ public class CV implements Serializable{
 
 	@Id 
 //	@GeneratedValue
-	private Integer id = -1;
+	private Integer id = 0;
 
 
 	@ElementCollection
