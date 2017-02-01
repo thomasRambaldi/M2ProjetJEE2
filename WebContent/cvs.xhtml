@@ -15,21 +15,15 @@
 				<h:form>
 					<table>
 						<tr>
-							<th>Title</th>
-							<th>Nature</th>
-							<th>Year</th>
-							<th>Description</th>
-							<th>Web Site</th>
+							<th>ID</th>
+							<th>Nom</th>
 							<th>Action</th>
 						</tr>
-						<c:forEach var="c" items="#{cv.CVs}">
+						<c:forEach var="c" items="#{cv.getCVs(false)}">
 							<tr>
 								<td>#{c.id}</td>
-								<td>#{c.activities.title}</td>
-								<td>#{c.activities.year}</td>
-								<td>#{c.activities.description}</td>
-								<td>#{c.activities.web}</td>
-								<td><h:commandLink action="#{cv.showCV(c.id)}" value="Show" /></td>
+								<td>#{c.name}</td>
+								<td><h:commandLink action="#{cv.showCV(c.id, true)}" value="Show" /></td>
 							</tr>
 						</c:forEach>
 					</table>

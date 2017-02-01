@@ -1,7 +1,7 @@
 package monapp;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -17,20 +17,22 @@ public class CV implements Serializable{
 	@Id 
 //	@GeneratedValue
 	private Integer id = 0;
+	
+	private String name;
 
 
 	@ElementCollection
-	ArrayList<Activity> activities;
+	private List<Activity> activities;
 	
 	public CV(){
 
 	}
 
-	public ArrayList<Activity> getActivities() {
+	public List<Activity> getActivities() {
 		return activities;
 	}
 
-	public void setActivities(ArrayList<Activity> activities) {
+	public void setActivities(List<Activity> activities) {
 		this.activities = activities;
 	}
 
@@ -40,5 +42,13 @@ public class CV implements Serializable{
 
 	public Integer getId() {
 		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }

@@ -22,7 +22,7 @@ public class Activity implements Serializable{
 	
 	private String description;
 	
-	private String webSite;
+	private String web;
 	
 	public Activity() {
 		
@@ -44,12 +44,12 @@ public class Activity implements Serializable{
 		this.description = description;
 	}
 
-	public String getWebSite() {
-		return webSite;
+	public String getWeb() {
+		return web;
 	}
 
-	public void setWebSite(String webSite) {
-		this.webSite = webSite;
+	public void setWeb(String webSite) {
+		this.web = webSite;
 	}
 
 	public int getYear() {
