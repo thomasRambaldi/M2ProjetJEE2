@@ -11,12 +11,30 @@
 	<ui:define name="content">
 		<f:view>
 			<c:set var="c" value="#{cv.theCV}" />
-			<h1>CV #{c.id}</h1>
+			<h1>CV #{c.name}</h1>
 
-<!-- 			Pour chaque activité de nature x -->
-<!-- 				Affichier les activité de type nature -->
+			<h:form>
+				<table>
+					<tr>
+						<th>Title</th>
+						<th>Nature</th>
+						<th>Year</th>
+						<th>Description</th>
+						<th>Web Site</th>
+					</tr>
+					<c:forEach var="a" items="#{c.activities}">
+						<tr>
+							<td>${a.title}</td>
+							<td>${a.nature}</td>
+							<td>${a.year}</td>
+							<td>${a.description}</td>
+							<td>${a.web}</td>
+						</tr>
+					</c:forEach>
+				</table>
+				<h:commandButton action="#{cv.newCV()}" value="Ajouter" />
+			</h:form>
 
-			<p>Titre activité : #{c.activities.title}</p>
 
 			<h:form>
 				<p>
@@ -25,7 +43,7 @@
 			</h:form>
 
 			<p>
-				<h:link outcome="cvs">List of  Activities</h:link>
+				<h:link outcome="cvs">List of  CVs</h:link>
 			</p>
 
 		</f:view>

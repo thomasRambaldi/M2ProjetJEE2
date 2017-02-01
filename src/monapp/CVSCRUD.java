@@ -7,9 +7,9 @@ import javax.ejb.Local;
 @Local
 public interface CVSCRUD {
 
-	public List<CV> searchCV();
+	public List<CV> searchCV(boolean activities);
 	public CV createCV(CV cv);
-	public CV readCV(int idCv);
+	public CV readCV(int idCv, boolean activities);
 	public void updateCV(CV cv, String id);
 	public void deleteCV(CV cv);
 }

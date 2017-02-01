@@ -1,37 +1,45 @@
 package monapp;
 
 import java.util.List;
-
 import javax.ejb.Stateful;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionManagement;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 
 @Stateful(name = "act", description = "Representation d'une activitee")
 public class CVSCRUDManager implements CVSCRUD{
 
 	@PersistenceContext(unitName = "myData")
 	EntityManager em;
-
+	
 	@Override
-	public List<CV> searchCV() {
-		return em.createQuery("Select c From CV c", CV.class).getResultList();
+	public List<CV> searchCV(boolean activities) {
+		List<CV> cvs = em.createQuery("Select c From CV c", CV.class).getResultList();
+		if(activities)
+			cvs.get(0).getActivities().size();
+		return cvs;
 	}
 
 	@Override
 	public CV createCV(CV cv) {
 		if (cv.getId() == 0) {
-			cv = em.merge(cv);
+            cv = em.merge(cv);
         } else {
-        	em.persist(cv);
+            em.persist(cv);
         }
         return cv;
 	}
-
+	
 	@Override
-	public CV readCV(int idCv) {
-		return em.find(CV.class, idCv);
+	public CV readCV(int idCv, boolean activities) {
+		CV c =  em.find(CV.class, idCv);
+		if(activities)
+			c.getActivities().size();
+		return c;
 	}
 
 	@Override
