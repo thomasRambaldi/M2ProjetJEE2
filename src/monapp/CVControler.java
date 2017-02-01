@@ -17,6 +17,8 @@ public class CVControler {
 	@EJB
 	CVSCRUD cvm;
 
+	Activity theActivity = new Activity();
+	
 	CV theCV = new CV();
 
 	@PostConstruct
@@ -51,18 +53,7 @@ public class CVControler {
 	}
 
 	public String save() throws SQLException {
-//			    	ArrayList<Activity> listCvs = new ArrayList<>();
-//		        	Activity act = new Activity();
-//		        	act.setTitle("Candidature de stage");
-		//        	act.setNature(Nature.FORMATION);
-		//        	act.setYear(2010);
-		//        	act.setWebSite("https://www.linkedin.com/home?trk=nav_responsive_tab_home");
-		//        	act.setDescription("Site effectué à partir du cahier des charges de la JAM");
-		//        	listCvs.add(act);
-		//        	cv1.setActivities(listCvs);
-
 		cvm.createCV(theCV);
-
 		return "showCV";
 	}
 
@@ -70,12 +61,4 @@ public class CVControler {
 		theCV = new CV();
 		return "editCV";
 	}
-	
-	
-	public void getActivitiesTitle(CV cv){
-		for(int i = 0 ; i < cv.getActivities().size() ; i++){
-			cv.getActivities().get(i).getTitle();
-		}
-	}
-	
 }

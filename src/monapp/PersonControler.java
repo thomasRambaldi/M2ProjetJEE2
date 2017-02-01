@@ -22,7 +22,7 @@ public class PersonControler {
         System.out.println("Create " + this);
         if (pm.searchPerson().size() == 0) {
             Person p1 = new Person();
-            p1.setEmail("bb@bb.fr");
+            p1.setEmail("test@test.fr");
             p1.setFirstName("Martin");
             p1.setLastName("Langevin");
             p1.setPassword("azerty");

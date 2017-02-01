@@ -19,19 +19,18 @@ public class PersonSCRUDManager implements PersonSCRUD{
 	@PersistenceContext(unitName = "myData")
 	EntityManager em;
 
-//	brzo.a Remi3105!
 	@Override
 	public List<Person> searchPerson() {
-		Connection connection = em.unwrap(Connection.class);  
-		try {
-			DatabaseMetaData metaData = connection.getMetaData();
-			System.out.println(metaData.getDatabaseProductName());
-			System.out.println(metaData.getUserName());
-			System.out.println(metaData.getURL());
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		Connection connection = em.unwrap(Connection.class);  
+//		try {
+//			DatabaseMetaData metaData = connection.getMetaData();
+//			System.out.println(metaData.getDatabaseProductName());
+//			System.out.println(metaData.getUserName());
+//			System.out.println(metaData.getURL());
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
         return em.createQuery("Select p From Person p", Person.class).getResultList();
 	}

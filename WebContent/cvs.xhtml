@@ -23,14 +23,17 @@
 							<th>Action</th>
 						</tr>
 						<c:forEach var="c" items="#{cv.CVs}">
-							<tr>
-								<td>#{c.id}</td>
-								<td>#{c.activities.title}</td>
-								<td>#{c.activities.year}</td>
-								<td>#{c.activities.description}</td>
-								<td>#{c.activities.web}</td>
-								<td><h:commandLink action="#{cv.showCV(c.id)}" value="Show" /></td>
-							</tr>
+							<c:forEach var="a" items="#{c.activities}">
+								<tr>
+									<td>#{c.id}</td>
+									<td>#{a.nature}</td>
+									<td>#{a.year}</td>
+									<td>#{a.description}</td>
+									<td>#{a.webSite}</td>
+									<td><h:commandLink action="#{cv.showCV(c.id)}"
+											value="Show" /></td>
+								</tr>
+							</c:forEach>
 						</c:forEach>
 					</table>
 					<h:commandButton action="#{cv.newCV()}" value="Ajouter" />

@@ -22,9 +22,9 @@ public class CVSCRUDManager implements CVSCRUD{
 	@Override
 	public CV createCV(CV cv) {
 		if (cv.getId() == 0) {
-            em.persist(cv);
+			cv = em.merge(cv);
         } else {
-            cv = em.merge(cv);
+        	em.persist(cv);
         }
         return cv;
 	}
@@ -40,7 +40,7 @@ public class CVSCRUDManager implements CVSCRUD{
 	}
 
 	@Override
-	public void deleteActivity(CV cv) {
+	public void deleteCV(CV cv) {
 		cv = em.merge(cv);
 		em.remove(cv);		
 	}
@@ -54,4 +54,5 @@ public class CVSCRUDManager implements CVSCRUD{
 	   }
 	   return context.proceed();
 	}
+
 }
