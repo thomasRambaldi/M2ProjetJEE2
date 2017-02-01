@@ -2,30 +2,34 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:c="http://java.sun.com/jsp/jstl/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <ui:composition template="/template/mylayout.xhtml">
-    <ui:define name="content">
-        <f:view>
-            <c:set var="c" value="#{cv.theCV}" />
-            <h1>Person #{c.id}</h1>
-            <p>Id: #{c.id}</p>
-            <p>
-                <h:link outcome="cvs">List of  Activities</h:link>
-            </p>
-            
-            <h:form>
+	<ui:define name="content">
+		<f:view>
+			<c:set var="c" value="#{cv.theCV}" />
+			<h1>CV #{c.id}</h1>
+
+<!-- 			Pour chaque activité de nature x -->
+<!-- 				Affichier les activité de type nature -->
+
+			<p>Titre activité : #{c.activities.title}</p>
+
+			<h:form>
 				<p>
 					<h:commandLink action="editCV">Modifier</h:commandLink>
 				</p>
 			</h:form>
-            
-            
-        </f:view>
-    </ui:define>
+
+			<p>
+				<h:link outcome="cvs">List of  Activities</h:link>
+			</p>
+
+		</f:view>
+	</ui:define>
 </ui:composition>
 
 </html>

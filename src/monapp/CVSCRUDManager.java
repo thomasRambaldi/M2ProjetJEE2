@@ -21,7 +21,7 @@ public class CVSCRUDManager implements CVSCRUD{
 
 	@Override
 	public CV createCV(CV cv) {
-		if (cv.getId() == -1) {
+		if (cv.getId() == 0) {
             em.persist(cv);
         } else {
             cv = em.merge(cv);
