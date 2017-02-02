@@ -20,6 +20,7 @@ public class CVControler {
 	Activity theActivity = new Activity();
 	
 	CV theCV = new CV();
+	
 
 	@PostConstruct
 	public void init()  {
@@ -66,9 +67,19 @@ public class CVControler {
 		return theCV ;
 	}
 	
+	public Activity getTheActivity() {
+		return theActivity ;
+	}
+	
+	
 	public String showCV(Integer idCv, boolean activities) {
 		theCV = cvm.readCV(idCv, activities);
 		return "showCV";
+	}
+	
+	public String editActivity(Integer index) {
+		theActivity = theCV.getActivities().get(index);
+		return "editActivity";
 	}
 
 	public String save() throws SQLException {
