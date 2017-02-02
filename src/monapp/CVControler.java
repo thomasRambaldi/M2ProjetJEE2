@@ -19,7 +19,6 @@ public class CVControler {
 	Activity theActivity = new Activity();
 	
 	CV theCV = new CV();
-	List<Activity> listActivities = new ArrayList<>();
 
 	@PostConstruct
 	public void init()  {
@@ -31,13 +30,14 @@ public class CVControler {
 		act.setNature(Nature.FORMATION);
 		act.setYear(2010);
 		act.setWeb("https://www.linkedin.com/home?trk=nav_responsive_tab_home");
-		act.setDescription("Site effectuï¿½ ï¿½ partir du cahier des charges de la JAM");
+		act.setDescription("Site effectue partir du cahier des charges de la JAM");
 		Activity act2 = new Activity();
 		act2.setTitle("Candidature de stage Atos");
 		act2.setNature(Nature.FORMATION);
 		act2.setYear(2011);
 		act2.setWeb("https://www.google.com/home?trk=nav_responsive_tab_home");
 		act2.setDescription("Site de sopra steria");
+		List<Activity> listActivities = new ArrayList<>();
 		listActivities.add(act);
 		listActivities.add(act2);
 		cv1.setActivities(listActivities);
@@ -52,20 +52,23 @@ public class CVControler {
 		return theCV ;
 	}
 	
+	public Activity getTheActivity() {
+		return theActivity ;
+	}
+	
+	
 	public String showCV(Integer idCv, boolean activities) {
 		theCV = cvm.readCV(idCv, activities);
 		return "showCV";
 	}
+	
+	public String editActivity(Integer index) {
+		theActivity = theCV.getActivities().get(index);
+		return "editActivity";
+	}
 
 	public String save() throws SQLException {
-//		Activity activity = new Activity();
-//		activity.setTitle("Master 2 informatique");
-//		activity.setNature(Nature.FORMATION);
-//		activity.setYear(2010);
-//		activity.setWeb("https://www.linkedin.com/home?trk=nav_responsive_tab_home");
-//		activity.setDescription("Site effectué à partir du cahier des charges de la JAM");
-//		listActivities.add(activity);
-//		theCV.setActivities(listActivities);
+	System.out.println(theCV.getActivities().get(0).getYear());
 		cvm.createCV(theCV);
 		return "showCV";
 	}

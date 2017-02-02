@@ -10,12 +10,13 @@
 <ui:composition template="/template/mylayout.xhtml">
 	<ui:define name="content">
 		<f:view>
-			<h1>Édition de votre Activity</h1>
+			<c:set var="c" value="#{cv.theCV}" />
+			<c:set var="a" value="#{cv.theActivity}" />
+			<h1>Édition de l'activité : #{a.title}, de votre CV : #{c.name}</h1>
 			<h:form id="test">
-				<c:set var="c" value="#{cv.theCV}" />
-				<c:set var="a" value="#{c.activities}" />
-				<h:panelGrid columns="3">
 
+
+				<h:panelGrid columns="3">
 					Titre : 
 					<h:inputText id="title" value="#{a.title}">
 						<f:validateLength minimum="5" maximum="200" />
@@ -35,17 +36,18 @@
 					<h:message for="year" style="color:red" />		
 					
 					Description : 
-					<h:inputTextarea id="description" value="#{a.description}">
+					<h:inputTextarea id="description"
+						value="#{a.description}">
 						<f:validateLength minimum="5" maximum="500" />
 					</h:inputTextarea>
 					<h:message for="description" style="color:red" />		
 					
 					Site web : 
-					<h:inputText id="webSite" value="#{a.webSite}">
-						<f:validateLength minimum="4" maximum="4" />
+					<h:inputText id="web" value="#{a.web}">
+						<f:validateLength minimum="1" maximum="200" />
 					</h:inputText>
-					<h:message for="webSite" style="color:red" />
-
+					<h:message for="web" style="color:red" />
+			
 					<h:commandButton action="#{cv.save()}" value="Save" /> | <h:link
 						outcome="cvs" value="List of CVs" />
 
