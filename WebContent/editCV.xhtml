@@ -13,44 +13,44 @@
 			<h1>Édition de votre CV</h1>
 			<h:form id="test">
 				<c:set var="c" value="#{cv.theCV}" />
-
-				<h:panelGrid columns="3">
+				<c:forEach var="a" items="#{c.activities}">
+					<h:panelGrid columns="3">
 
 					Titre : 
-					<h:inputText id="title" value="#{c.activities.get(0).title}">
-						<f:validateLength minimum="5" maximum="200" />
-					</h:inputText>
-					<h:message for="title" style="color:red" />		
+					<h:inputText id="title" value="#{a.title}">
+							<f:validateLength minimum="5" maximum="200" />
+						</h:inputText>
+						<h:message for="title" style="color:red" />		
 					
 					Nature : 
-					<h:inputText id="nature" value="#{c.activities.nature}">
-						<f:validateLength minimum="5" maximum="200" />
-					</h:inputText>
-					<h:message for="nature" style="color:red" />		
+					<h:inputText id="nature" value="#{a.nature}">
+							<f:validateLength minimum="5" maximum="200" />
+						</h:inputText>
+						<h:message for="nature" style="color:red" />		
 					
 					Année : 
-					<h:inputText id="year" value="#{c.activities.year}">
-						<f:validateLength minimum="4" maximum="4" />
-					</h:inputText>
-					<h:message for="year" style="color:red" />		
+					<h:inputText id="year" value="#{a.year}">
+							<f:validateLength minimum="4" maximum="4" />
+						</h:inputText>
+						<h:message for="year" style="color:red" />		
 					
 					Description : 
-					<h:inputTextarea id="description" value="#{c.activities.description}">
-						<f:validateLength minimum="5" maximum="500" />
-					</h:inputTextarea>
-					<h:message for="description" style="color:red" />		
+					<h:inputTextarea id="description" value="#{a.description}">
+							<f:validateLength minimum="5" maximum="500" />
+						</h:inputTextarea>
+						<h:message for="description" style="color:red" />		
 					
 					Site web : 
-					<h:inputText id="webSite" value="#{c.activities.webSite}">
-						<f:validateLength minimum="4" maximum="4" />
-					</h:inputText>
-					<h:message for="webSite" style="color:red" />		
-					
-					<h:commandButton action="#{cv.save()}" value="Save" /> | <h:link
-					outcome="cvs" value="List of CVs" />
-						
-				</h:panelGrid>
+					<h:inputText id="webSite" value="#{a.web}">
+							<f:validateLength minimum="4" maximum="4" />
+						</h:inputText>
+						<h:message for="webSite" style="color:red" />
 
+						<h:commandButton action="#{cv.save()}" value="Save" /> | <h:link
+							outcome="cvs" value="List of CVs" />
+
+					</h:panelGrid>
+				</c:forEach>
 			</h:form>
 		</f:view>
 	</ui:define>

@@ -8,7 +8,6 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.persistence.TableGenerator;
 
 @ManagedBean(name = "cv")
 @SessionScoped
@@ -20,15 +19,15 @@ public class CVControler {
 	Activity theActivity = new Activity();
 	
 	CV theCV = new CV();
+	List<Activity> listActivities = new ArrayList<>();
 
 	@PostConstruct
 	public void init()  {
 		System.out.println("Create " + this);
 		CV cv1 = new CV();
 		cv1.setName("THOMAS RAMBALDI");
-		List<Activity> listActivities = new ArrayList<>();
 		Activity act = new Activity();
-		act.setTitle("Candidature de stage");
+		act.setTitle("Master 2 informatique");
 		act.setNature(Nature.FORMATION);
 		act.setYear(2010);
 		act.setWeb("https://www.linkedin.com/home?trk=nav_responsive_tab_home");
@@ -43,19 +42,6 @@ public class CVControler {
 		listActivities.add(act2);
 		cv1.setActivities(listActivities);
 		cvm.createCV(cv1);
-//		if (cvm.searchCV().size() == 0) {
-//			CV cv1 = new CV();
-//			ArrayList<Activity> listCvs = new ArrayList<>();
-//			Activity act = new Activity();
-//			act.setTitle("Candidature de stage");
-//			act.setNature(Nature.FORMATION);
-//			act.setYear(2010);
-//			act.setWebSite("https://www.linkedin.com/home?trk=nav_responsive_tab_home");
-//			act.setDescription("Site effectuï¿½ ï¿½ partir du cahier des charges de la JAM");
-//			listCvs.add(act);
-//			cv1.setActivities(listCvs);
-//			cvm.createCV(cv1);
-//		}
 	}
 
 	public List<CV> getCVs(boolean activities) throws SQLException {
@@ -72,6 +58,14 @@ public class CVControler {
 	}
 
 	public String save() throws SQLException {
+//		Activity activity = new Activity();
+//		activity.setTitle("Master 2 informatique");
+//		activity.setNature(Nature.FORMATION);
+//		activity.setYear(2010);
+//		activity.setWeb("https://www.linkedin.com/home?trk=nav_responsive_tab_home");
+//		activity.setDescription("Site effectué à partir du cahier des charges de la JAM");
+//		listActivities.add(activity);
+//		theCV.setActivities(listActivities);
 		cvm.createCV(theCV);
 		return "showCV";
 	}
@@ -80,6 +74,11 @@ public class CVControler {
 		theCV = new CV();
 		return "editCV";
 	}
+	
+    public String remove(){
+    	cvm.deleteCV(theCV);
+    	return "index";
+    }
 	
 	public void getActivitiesTitle(CV cv){
 		for(int i = 0 ; i < cv.getActivities().size() ; i++){
