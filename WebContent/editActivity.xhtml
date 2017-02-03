@@ -20,7 +20,7 @@
 					Titre : 
 					<h:inputText id="title" value="#{a.title}" required="true">
 						<f:validateLength minimum="5" maximum="200" />
-						<f:validateRegex pattern="^[a-zA-Z\s]+$" />
+						<f:validateRegex pattern="^[a-zA-Z0-9\s]+$" />
 					</h:inputText>
 					<h:message for="title" style="color:red" />		
 					
@@ -48,7 +48,7 @@
 					</h:inputText>
 					<h:message for="web" style="color:red" />
 
-					<h:commandButton action="#{cv.saveActivity()}" value="Save" /> | <h:link
+					<h:commandButton action="#{cv.save()}" value="Save" /> | <h:link
 						outcome="cvs" value="Liste des CVs" />
 
 				</h:panelGrid>

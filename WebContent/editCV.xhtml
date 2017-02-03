@@ -16,7 +16,7 @@
 				<c:set var="count" value="0" />
 				<c:forEach var="a" items="#{c.activities}">
 				<h:form>
-					<h:commandLink action="#{cv.editActivity(count)}">#{a.title}</h:commandLink>
+					<h:commandLink action="#{cv.editActivity(a.id)}">#{a.title}</h:commandLink>
 					</h:form><c:set var="count" value="${count + 1}" />
 				</c:forEach>
 		</f:view>

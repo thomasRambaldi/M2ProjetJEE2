@@ -64,13 +64,9 @@ public class CVControler {
 		return "showCV";
 	}
 
-	public String editActivity(Integer index) {
-		theActivity = theCV.getActivities().get(index);
-		return "editActivity";
-	}
 
 	public String save() throws SQLException {
-		cvm.createCV(theCV);
+		cvm.updateCV(theCV);
 		return "showCV";
 	}
 
@@ -85,10 +81,24 @@ public class CVControler {
 	}
 	
 	public String saveActivity() throws SQLException {
-		cvm.createActivity(theCV, theActivity);
+		System.out.println("------->" + theActivity);
+		theCV.getActivities().add(theActivity);
+		save();
 		return "showCV";
 	}
 
+
+	public String editActivity(Integer index) {
+		System.out.println("************>" + index);
+		for(int i = 0 ; i < theCV.getActivities().size() ; i++){
+			if( theCV.getActivities().get(i).getId() == index){
+				theActivity = theCV.getActivities().get(i);
+				cvm.updateActivity(theCV, theActivity, index);
+			}
+		}
+		return "editActivity";
+	}
+	
 	public String newActivity() {
 		theActivity = new Activity();
 		theActivity.setId( theCV.getActivities().size() + 1 );

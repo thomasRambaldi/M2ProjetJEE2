@@ -7,7 +7,6 @@ import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.swing.UIDefaults.ActiveValue;
 
 
 @Stateful(name = "act", description = "Representation d'une activitee")
@@ -33,6 +32,7 @@ public class CVSCRUDManager implements CVSCRUD{
 		}
 		return cv;
 	}
+	
 
 	@Override
 	public CV readCV(int idCv, boolean activities) {
@@ -43,8 +43,8 @@ public class CVSCRUDManager implements CVSCRUD{
 	}
 
 	@Override
-	public void updateCV(CV cv, String id) {
-		// TODO Auto-generated method stub
+	public void updateCV(CV cv) {
+		em.merge(cv);
 	}
 
 	@Override
@@ -63,17 +63,6 @@ public class CVSCRUDManager implements CVSCRUD{
 		return context.proceed();
 	}
 	
-	@Override
-	public Activity createActivity(CV cv, Activity activity){
-		cv.getActivities().add(activity);
-		System.out.println("------->");
-		System.out.println(activity.getTitle());
-		System.out.println(activity.getDescription());
-		System.out.println(activity.getWeb());
-		System.out.println(activity.getYear());
-		System.out.println(activity.getNature());
-		return activity;
-	}
 
 	@Override
 	public void deleteActivity(CV cv, Integer id) {
@@ -82,6 +71,21 @@ public class CVSCRUDManager implements CVSCRUD{
 		for(int i = 0 ; i < cv.getActivities().size() ; i++){
 			if(cv.getActivities().get(i).getId() == id)
 				cv.getActivities().remove(i).getId();
+		}
+	}
+	
+	@Override
+	public void updateActivity(CV cv, Activity activity, Integer oldId){
+		System.out.println("____________> " + activity.getTitle());
+		for(int i = 0 ; i < cv.getActivities().size() ; i++){
+			if(cv.getActivities().get(i).getId() == oldId){
+//				Activity act = em.merge(activity);
+				activity.setId(activity.getId());
+				activity.setNature(activity.getNature());
+				activity.setDescription(activity.getDescription());
+				activity.setWeb(activity.getWeb());
+				activity.setYear(activity.getYear());
+			}
 		}
 	}
 
