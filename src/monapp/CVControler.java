@@ -1,5 +1,7 @@
 package monapp;
 
+import static org.hamcrest.CoreMatchers.containsString;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -79,9 +81,8 @@ public class CVControler {
 		cvm.deleteCV(theCV);
 		return "index";
 	}
-	
+
 	public String saveActivity() throws SQLException {
-		System.out.println("------->" + theActivity);
 		theCV.getActivities().add(theActivity);
 		save();
 		return "showCV";
@@ -89,25 +90,28 @@ public class CVControler {
 
 
 	public String editActivity(Integer index) {
-		System.out.println("************>" + index);
-		for(int i = 0 ; i < theCV.getActivities().size() ; i++){
-			if( theCV.getActivities().get(i).getId() == index){
-				theActivity = theCV.getActivities().get(i);
-				cvm.updateActivity(theCV, theActivity, index);
-			}
-		}
-		return "editActivity";
-	}
-	
-	public String newActivity() {
-		theActivity = new Activity();
-		theActivity.setId( theCV.getActivities().size() + 1 );
+		theActivity = theCV.getActivities().get(index);
 		return "editActivity";
 	}
 
-	public String removeActivity(Integer id){
-		System.out.println(id);
-		cvm.deleteActivity(theCV, id);
+	public String newActivity() {
+		theActivity = new Activity();
+		theActivity.setId(theCV.getActivities().size() + 1);
+		return "createActivity";
+	}
+
+	public String removeActivity(Integer index) throws SQLException{
+		System.out.println("----->" + index);
+		for(int i = 0 ; i < theCV.getActivities().size() ; i++){
+			if(theCV.getActivities().get(i).getId() == index){
+				System.out.println( theCV.getActivities().get(i).getId());
+				System.out.println( theCV.getActivities().get(i).getTitle());
+				theCV.getActivities().remove(i);
+				save();
+				break;
+			}
+		}
+		System.out.println("CVCONTROLLER");
 		return "cvs";
 	}
 

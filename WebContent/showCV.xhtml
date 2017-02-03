@@ -23,6 +23,7 @@
 						<th>Web Site</th>
 						<th>Action</th>
 					</tr>
+					<c:set var="count" value="0" />
 					<c:forEach var="a" items="#{c.activities}">
 						<tr>
 							<td>${a.title}</td>
@@ -33,6 +34,7 @@
 							<td><h:commandLink action="#{cv.removeActivity(a.id)}"
 									value="Supprimer cette activitée" /></td>
 						</tr>
+						<c:set var="count" value="${count + 1}" />
 					</c:forEach>
 				</table>
 				<h:commandButton action="#{cv.newActivity()}"

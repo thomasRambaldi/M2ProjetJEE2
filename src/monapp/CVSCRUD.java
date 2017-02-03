@@ -13,6 +13,5 @@ public interface CVSCRUD {
 	public void updateCV(CV cv);
 	public void deleteCV(CV cv);
 
-	public void deleteActivity(CV cv, Integer id);
 	public void updateActivity(CV cv, Activity activity, Integer oldId);
 }

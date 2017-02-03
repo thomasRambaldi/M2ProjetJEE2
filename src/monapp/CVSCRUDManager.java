@@ -63,20 +63,8 @@ public class CVSCRUDManager implements CVSCRUD{
 		return context.proceed();
 	}
 	
-
-	@Override
-	public void deleteActivity(CV cv, Integer id) {
-		cv = em.merge(cv);
-		
-		for(int i = 0 ; i < cv.getActivities().size() ; i++){
-			if(cv.getActivities().get(i).getId() == id)
-				cv.getActivities().remove(i).getId();
-		}
-	}
-	
 	@Override
 	public void updateActivity(CV cv, Activity activity, Integer oldId){
-		System.out.println("____________> " + activity.getTitle());
 		for(int i = 0 ; i < cv.getActivities().size() ; i++){
 			if(cv.getActivities().get(i).getId() == oldId){
 //				Activity act = em.merge(activity);
