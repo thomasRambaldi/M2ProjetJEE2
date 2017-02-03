@@ -1,15 +1,17 @@
 package monapp;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-
 
 @Entity
 @Table(schema="projetjee2")
@@ -19,35 +21,31 @@ public class Person implements Serializable {
 
 	@Column(name = "firstName")
 	@NotNull
-	@Pattern(regexp="^([a-zA-Z-_]*$")
 	private String firstName;
 
 	@Column(name = "lastName")
-	@Pattern(regexp="^([a-zA-Z-_]*$")
 	@NotNull
 	private String lastName;
-	
+
 	@Id
 	@Column(name = "email")
-	@Pattern(regexp="^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-_]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$", message="Adresse mail invalide : exemple@exemple.com")
 	private String email;
-	
+
 	@Column(name = "web")
-//	@Pattern(regexp="^([a-zA-Z0-9.-][a-zA-Z0-9.-]*.[a-zA-Z])?$", message="Site web invalide : exemple.com")
 	private String web;
-	
+
 	@Column(name = "birthday")
 	private String birthday;
-	
+
 	@NotNull
 	@Size(min=6)
 	@Column(name = "password")
 	private String password;
-	
+
 	public Person(){
-		
+
 	}
-	
+
 	public String getFirstName() {
 		return firstName;
 	}
@@ -94,5 +92,22 @@ public class Person implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public void crypterPWD() throws UnsupportedEncodingException, NoSuchAlgorithmException{
+		String yourString = password;
+		byte[] bytesOfMessage = yourString.getBytes("UTF-8");
+
+		MessageDigest md = MessageDigest.getInstance("MD5");
+		byte[] thedigest = md.digest(bytesOfMessage); 
+		// Le hash est présent sous forme de tableau de byte
+
+		BigInteger bigInt = new BigInteger(1,thedigest);
+		String hashtext = bigInt.toString(16);
+		while(hashtext.length() < 32 ){
+			hashtext = "0"+hashtext;
+		}
+		// Le hash est présent sous la forme de String
+		this.password = hashtext;
 	}
 }

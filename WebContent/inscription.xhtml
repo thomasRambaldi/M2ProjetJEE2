@@ -8,70 +8,75 @@
 
 <ui:composition template="/template/mylayout.xhtml">
 	<ui:define name="content">
+		<f:view>
+			<h:form id="inscription">
+				<fieldset>
+					<legend>Inscription</legend>
 
-		<fieldset>
-			<legend>Inscription</legend>
-
-			<h:outputLabel for="firstName">Prénom : 
+					<h:outputLabel for="firstName">Prénom : 
 				<span class="requis">*</span>
-			</h:outputLabel>
-			<h:inputText id="firsName" value="#{inscrireBean.utilisateur.email}"
-				required="true" size="20" maxlength="60" />
-			<h:message id="idFirstName" for="firstName" errorClass="erreur" />
-			<br />
+					</h:outputLabel>
+					<h:inputText id="firsName"
+						value="#{person.firstName}" required="true"
+						size="20" maxlength="60" />
+					<h:message id="idFirstName" for="firstName" errorClass="erreur" />
+					<br />
 
-			<h:outputLabel for="lastName">Nom : 
+					<h:outputLabel for="lastName">Nom : 
 				<span class="requis">*</span>
-			</h:outputLabel>
-			<h:inputText id="lastName" value="#{inscrireBean.utilisateur.email}"
-				required="true" size="20" maxlength="60" />
-			<h:message id="idLastName" for="lastName" errorClass="erreur" />
-			<br />
+					</h:outputLabel>
+					<h:inputText id="lastName"
+						value="#{person.lastName}" required="true"
+						size="20" maxlength="60" />
+					<h:message id="idLastName" for="lastName" errorClass="erreur" />
+					<br />
 
-			<h:outputLabel for="email">Adresse email : 
+					<h:outputLabel for="email">Adresse email : 
 				<span class="requis">*</span>
-			</h:outputLabel>
-			<h:inputText id="email" value="#{inscrireBean.utilisateur.email}"
-				required="true" size="20" maxlength="60" />
-			<h:message id="idEmail" for="email" errorClass="erreur" />
-			<br />
+					</h:outputLabel>
+					<h:inputText id="email" value="#{person.email}"
+						required="true" size="20" maxlength="60" />
+					<h:message id="idEmail" for="email" errorClass="erreur" />
+					<br />
 
-			<h:outputLabel for="Naissance">Date de naissance : </h:outputLabel>
-			<h:inputText id="birthday" value="#{inscrireBean.utilisateur.email}"
-				required="true" size="20" maxlength="60" />
-			<h:message id="idBirthday" for="birthday" errorClass="erreur" />
-			<br />
+					<h:outputLabel for="Naissance">Date de naissance : </h:outputLabel>
+					<h:inputText id="birthday"
+						value="#{person.birthday}" required="true"
+						size="20" maxlength="60" />
+					<h:message id="idBirthday" for="birthday" errorClass="erreur" />
+					<br />
 
-			<h:outputLabel for="web">Site web : </h:outputLabel>
-			<h:inputText id="web" value="#{inscrireBean.utilisateur.email}"
-				required="true" size="20" maxlength="60" />
-			<h:message id="idWeb" for="web" errorClass="erreur" />
-			<br />
+					<h:outputLabel for="web">Site web : </h:outputLabel>
+					<h:inputText id="web" value="#{person.web}"
+						required="true" size="20" maxlength="60" />
+					<h:message id="idWeb" for="web" errorClass="erreur" />
+					<br />
 
-			<h:outputLabel for="password">Mot de passe 
+					<h:outputLabel for="password">Mot de passe 
 				<span class="requis">*</span>
-			</h:outputLabel>
-			<h:inputSecret id="password"
-				value="#{inscrireBean.utilisateur.motDePasse}" required="true"
-				size="20" maxlength="20" />
-			<h:message id="idPassword" for="motdepasse" errorClass="erreur" />
-			<br />
+					</h:outputLabel>
+					<h:inputSecret id="password"
+						value="#{person.password}" required="true"
+						size="20" maxlength="20" />
+					<h:message id="idPassword" for="motdepasse" errorClass="erreur" />
+					<br />
 
 
-			<h:outputLabel for="confirmation">Confirmation du mot de passe 
+					<h:outputLabel for="confirmation">Confirmation du mot de passe 
 				<span class="requis">*</span>
-			</h:outputLabel>
-			<h:inputSecret id="confirmation"
-				value="#{inscrireBean.utilisateur.motDePasse}" required="true"
-				size="20" maxlength="20" />
-			<h:message id="confirmationMessage" for="confirmation"
-				errorClass="erreur" />
-			<br />
+					</h:outputLabel>
+					<h:inputSecret id="confirmation"
+						value="#{inscrireBean.utilisateur.motDePasse}" required="true"
+						size="20" maxlength="20" />
+					<h:message id="confirmationMessage" for="confirmation"
+						errorClass="erreur" />
+					<br />
 
-			<h:commandButton value="Inscription"
-				action="#{inscrireBean.inscrire}" styleClass="sansLabel" />
-		</fieldset>
-
+					<h:commandButton value="Inscription"
+						action="#{inscrireBean.inscrire}" />
+				</fieldset>
+			</h:form>
+		</f:view>
 	</ui:define>
 </ui:composition>
 </html>

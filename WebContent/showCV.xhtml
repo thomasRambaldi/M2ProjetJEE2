@@ -21,6 +21,7 @@
 						<th>Year</th>
 						<th>Description</th>
 						<th>Web Site</th>
+						<th>Action</th>
 					</tr>
 					<c:forEach var="a" items="#{c.activities}">
 						<tr>
@@ -29,10 +30,13 @@
 							<td>${a.year}</td>
 							<td>${a.description}</td>
 							<td>${a.web}</td>
+							<td><h:commandLink action="#{cv.removeActivity(a.id)}"
+									value="Supprimer cette activitée" /></td>
 						</tr>
 					</c:forEach>
 				</table>
-				<h:commandButton action="#{cv.newCV()}" value="Ajouter" />
+				<h:commandButton action="#{cv.newActivity()}"
+					value="Ajouter une activitée" />
 			</h:form>
 
 

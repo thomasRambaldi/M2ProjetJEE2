@@ -1,5 +1,7 @@
 package monapp;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -13,9 +15,9 @@ import javax.faces.bean.SessionScoped;
 public class PersonControler {
 
 	@EJB
-    PersonSCRUD pm;
+	private PersonSCRUD pm;
 
-    Person thePerson  = new Person();
+	private Person thePerson  = new Person();
 
     @PostConstruct
     public void init()  {
@@ -26,6 +28,13 @@ public class PersonControler {
             p1.setFirstName("Martin");
             p1.setLastName("Langevin");
             p1.setPassword("azerty");
+        	try {
+    			p1.crypterPWD();
+    		} catch (UnsupportedEncodingException e) {
+    			e.printStackTrace();
+    		} catch (NoSuchAlgorithmException e) {
+    			e.printStackTrace();
+    		}
             p1.setBirthday("28/03/1992");
             p1.setWeb("www.google.fr");
             pm.createPerson(p1);
@@ -46,7 +55,13 @@ public class PersonControler {
     }
 
     public String save() throws SQLException {
-        pm.createPerson(thePerson);
+    	try {
+			thePerson.crypterPWD();
+		} catch (UnsupportedEncodingException | NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	pm.createPerson(thePerson);
         return "showPerson";
     }
     

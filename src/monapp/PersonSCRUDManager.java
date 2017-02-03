@@ -1,8 +1,5 @@
 package monapp;
 
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.ejb.Stateful;
@@ -17,7 +14,7 @@ import javax.persistence.PersistenceContext;
 public class PersonSCRUDManager implements PersonSCRUD{
 
 	@PersistenceContext(unitName = "myData")
-	EntityManager em;
+	private EntityManager em;
 
 	@Override
 	public List<Person> searchPerson() {

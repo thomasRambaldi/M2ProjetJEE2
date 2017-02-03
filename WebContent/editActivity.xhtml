@@ -18,38 +18,38 @@
 
 				<h:panelGrid columns="3">
 					Titre : 
-					<h:inputText id="title" value="#{a.title}">
+					<h:inputText id="title" value="#{a.title}" required="true">
 						<f:validateLength minimum="5" maximum="200" />
+						<f:validateRegex pattern="^[a-zA-Z\s]+$" />
 					</h:inputText>
 					<h:message for="title" style="color:red" />		
 					
 					Nature : 
-					<h:inputText id="nature" value="#{a.nature}">
-						<f:validateLength minimum="5" maximum="200" />
-					</h:inputText>
-					<h:message for="nature" style="color:red" />		
-					
+					<h:selectOneMenu id="nature" value="#{a.nature}" required="true">
+						<f:selectItems value="#{params.natures}" />
+					</h:selectOneMenu>
+					<h:message for="nature" style="color:red" />
+
 					Année : 
-					<h:inputText id="year" value="#{a.year}">
+					<h:inputText id="year" value="#{a.year}" required="true">
 						<f:validateLength minimum="4" maximum="4" />
 					</h:inputText>
 					<h:message for="year" style="color:red" />		
 					
 					Description : 
-					<h:inputTextarea id="description"
-						value="#{a.description}">
-						<f:validateLength minimum="5" maximum="500" />
+					<h:inputTextarea id="description" value="#{a.description}" required="false">
+						<f:validateLength minimum="0" maximum="500" />
 					</h:inputTextarea>
 					<h:message for="description" style="color:red" />		
 					
 					Site web : 
-					<h:inputText id="web" value="#{a.web}">
-						<f:validateLength minimum="1" maximum="200" />
+					<h:inputText id="web" value="#{a.web}" required="false">
+						<f:validateLength minimum="0" maximum="200" />
 					</h:inputText>
 					<h:message for="web" style="color:red" />
-			
-					<h:commandButton action="#{cv.save()}" value="Save" /> | <h:link
-						outcome="cvs" value="List of CVs" />
+
+					<h:commandButton action="#{cv.saveActivity()}" value="Save" /> | <h:link
+						outcome="cvs" value="Liste des CVs" />
 
 				</h:panelGrid>
 
