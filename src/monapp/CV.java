@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -23,6 +24,9 @@ public class CV implements Serializable{
 
 	@ElementCollection
 	private List<Activity> activities;
+	
+	@OneToOne(mappedBy="cv")
+	Person person;
 	
 	public CV(){
 
@@ -50,5 +54,13 @@ public class CV implements Serializable{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Person getPerson() {
+		return person;
+	}
+
+	public void setPerson(Person person) {
+		this.person = person;
 	}
 }

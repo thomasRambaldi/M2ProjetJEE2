@@ -20,7 +20,7 @@ public class AuthenticateController {
 	AuthenticateManager am;
 	
 	public String login(String login, String pwd) throws UnsupportedEncodingException, NoSuchAlgorithmException{
-		return am.login(login, crypt(pwd)) ? "userAccount": "logIn"; 
+		return am.login(login, Cryptography.crypt(pwd)) ? "userAccount": "logIn"; 
     }
 	
 	public String log_out(){
@@ -52,20 +52,6 @@ public class AuthenticateController {
 			ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler) fc.getApplication().getNavigationHandler();
 			nav.performNavigation("hello.xhtml");
 		}
-	}
-	
-	public String crypt(String s) throws UnsupportedEncodingException, NoSuchAlgorithmException{
-		byte[] bytesOfMessage = s.getBytes("UTF-8");
-
-		MessageDigest md = MessageDigest.getInstance("MD5");
-		byte[] thedigest = md.digest(bytesOfMessage); 
-
-		BigInteger bigInt = new BigInteger(1,thedigest);
-		String hashtext = bigInt.toString(16);
-		while(hashtext.length() < 32 ){
-			hashtext = "0"+hashtext;
-		}
-		return hashtext;
 	}
 	
 }
