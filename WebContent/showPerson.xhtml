@@ -11,22 +11,13 @@
 	<ui:define name="content">
 		<f:view>
 			<c:set var="c" value="#{person.thePerson}" />
+			
 			<h1>Person #{c.firstName}</h1>
 			<p>email : #{c.email}</p>
 			<p>Prénom : #{c.firstName}</p>
 			<p>Nom : #{c.lastName}</p>
 			<p>Naissance : #{c.birthday}</p>
 			<p>Site Web : #{c.web}</p>
-
-			<h:form>
-				<p>
-					<h:commandLink action="editPerson">Modifier votre profil</h:commandLink>
-				</p>
-				<p>
-					<h:commandLink action="#{person.remove()}">Supprimer votre profil</h:commandLink>
-				</p>
-
-			</h:form>
 
 		</f:view>
 	</ui:define>

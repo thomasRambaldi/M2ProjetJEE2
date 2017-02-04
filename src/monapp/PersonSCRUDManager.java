@@ -21,44 +21,41 @@ public class PersonSCRUDManager implements PersonSCRUD{
 
 	@Override
 	public List<Person> searchPerson() {
-//		Connection connection = em.unwrap(Connection.class);  
-//		try {
-//			DatabaseMetaData metaData = connection.getMetaData();
-//			System.out.println(metaData.getDatabaseProductName());
-//			System.out.println(metaData.getUserName());
-//			System.out.println(metaData.getURL());
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		
-        return em.createQuery("Select p From Person p", Person.class).getResultList();
+		//		Connection connection = em.unwrap(Connection.class);  
+		//		try {
+		//			DatabaseMetaData metaData = connection.getMetaData();
+		//			System.out.println(metaData.getDatabaseProductName());
+		//			System.out.println(metaData.getUserName());
+		//			System.out.println(metaData.getURL());
+		//		} catch (SQLException e) {
+		//			// TODO Auto-generated catch block
+		//			e.printStackTrace();
+		//		}
+
+		return em.createQuery("Select p From Person p", Person.class).getResultList();
 	}
 
 	@Override
 	public Person createPerson(Person p) {
-		if (p.getEmail() == null) {
-            em.persist(p);
-        } else {
-            p = em.merge(p);
-        }
-        return p;
+		em.persist(p);
+		return p;
 	}
 
 	@Override
 	public Person readPerson(String email) {
 		return em.find(Person.class, email);
 	}
-	
+
 	@Override
-	public void updatePerson(Person p, String id) {
-		p = em.find(Person.class, id);
-		p.setEmail(p.getEmail());
-		p.setBirthday(p.getBirthday());
-		p.setFirstName(p.getFirstName());
-		p.setLastName(p.getLastName());
-		p.setWeb(p.getWeb());
-		p.setPassword(p.getPassword());
+	public void updatePerson(Person p) {
+		p = em.merge(p);
+//		p = em.find(Person.class, id);
+//		p.setEmail(p.getEmail());
+//		p.setBirthday(p.getBirthday());
+//		p.setFirstName(p.getFirstName());
+//		p.setLastName(p.getLastName());
+//		p.setWeb(p.getWeb());
+//		p.setPassword(p.getPassword());
 	}
 
 	@Override
@@ -66,14 +63,14 @@ public class PersonSCRUDManager implements PersonSCRUD{
 		p = em.merge(p);
 		em.remove(p);
 	}	
-	
+
 	@AroundInvoke
 	public Object interceptor(InvocationContext context) throws Exception {
-	   String methodName = context.getMethod().getName();
-	   System.err.println("appel de " + methodName);
-	   for (Object param : context.getParameters()) {
-	      System.err.println("param = " + param.toString());
-	   }
-	   return context.proceed();
+		String methodName = context.getMethod().getName();
+		System.err.println("appel de " + methodName);
+		for (Object param : context.getParameters()) {
+			System.err.println("param = " + param.toString());
+		}
+		return context.proceed();
 	}
 }

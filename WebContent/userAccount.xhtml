@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<f:metadata>
+	<f:event listener="#{authController.redirect}" type="preRenderView"></f:event>
+</f:metadata>
+
+<ui:composition template="/template/mylayout.xhtml">
+	<ui:define name="content">
+		<f:view>
+
+			<c:set var="p" value="#{authController.getUser()}" />
+			<h1>Person #{p.firstName}</h1>
+			<p>email : #{p.email}</p>
+			<p>Prénom : #{p.firstName}</p>
+			<p>Nom : #{p.lastName}</p>
+			<p>Naissance : #{p.birthday}</p>
+			<p>Site Web : #{p.web}</p>
+
+
+			<h:form>
+				<p>
+					<h:commandLink action="editPerson">Modifier votre profil</h:commandLink>
+				</p>
+				<p>
+					<h:commandLink action="#{authController.removeAccount()}">Supprimer votre profil</h:commandLink>
+				</p>
+				<p>
+					<h:commandButton action="#{authController.log_out()}"
+						value="Se deconnecter" />
+				</p>
+			</h:form>
+
+		</f:view>
+	</ui:define>
+</ui:composition>
+
+</html>

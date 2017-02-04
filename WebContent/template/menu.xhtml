@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <ui:composition>
 	<div>Menu :</div>
@@ -22,9 +23,16 @@
 			</h:form></li>
 
 		<li><h:form>
-				<p>
-					<h:commandLink action="showPerson?faces-redirect=true">Votre compte</h:commandLink>
-				</p>
+				<c:if test="#{authController.isLogin()}">
+					<p>
+						<h:commandLink action="userAccount?faces-redirect=true">Votre compte</h:commandLink>
+					</p>
+				</c:if>
+				<c:if test="#{authController.isLogin() eq false}">
+					<p>
+						<h:commandLink action="logIn?faces-redirect=true">Se connecter</h:commandLink>
+					</p>
+				</c:if>
 			</h:form></li>
 
 		<li><h:form>

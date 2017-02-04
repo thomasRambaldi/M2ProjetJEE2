@@ -4,72 +4,69 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <ui:composition template="/template/mylayout.xhtml">
 	<ui:define name="content">
-
+		<c:set var="c" value="#{person.thePerson}" />
 		<fieldset>
 			<legend>Inscription</legend>
+			<h:form id="test">
 
-			<h:outputLabel for="firstName">Prénom : 
-				<span class="requis">*</span>
-			</h:outputLabel>
-			<h:inputText id="firsName" value="#{inscrireBean.utilisateur.email}"
-				required="true" size="20" maxlength="60" />
-			<h:message id="idFirstName" for="firstName" errorClass="erreur" />
-			<br />
-
-			<h:outputLabel for="lastName">Nom : 
-				<span class="requis">*</span>
-			</h:outputLabel>
-			<h:inputText id="lastName" value="#{inscrireBean.utilisateur.email}"
-				required="true" size="20" maxlength="60" />
-			<h:message id="idLastName" for="lastName" errorClass="erreur" />
-			<br />
-
-			<h:outputLabel for="email">Adresse email : 
-				<span class="requis">*</span>
-			</h:outputLabel>
-			<h:inputText id="email" value="#{inscrireBean.utilisateur.email}"
-				required="true" size="20" maxlength="60" />
-			<h:message id="idEmail" for="email" errorClass="erreur" />
-			<br />
-
-			<h:outputLabel for="Naissance">Date de naissance : </h:outputLabel>
-			<h:inputText id="birthday" value="#{inscrireBean.utilisateur.email}"
-				required="true" size="20" maxlength="60" />
-			<h:message id="idBirthday" for="birthday" errorClass="erreur" />
-			<br />
-
-			<h:outputLabel for="web">Site web : </h:outputLabel>
-			<h:inputText id="web" value="#{inscrireBean.utilisateur.email}"
-				required="true" size="20" maxlength="60" />
-			<h:message id="idWeb" for="web" errorClass="erreur" />
-			<br />
-
-			<h:outputLabel for="password">Mot de passe 
-				<span class="requis">*</span>
-			</h:outputLabel>
-			<h:inputSecret id="password"
-				value="#{inscrireBean.utilisateur.motDePasse}" required="true"
-				size="20" maxlength="20" />
-			<h:message id="idPassword" for="motdepasse" errorClass="erreur" />
-			<br />
-
-
-			<h:outputLabel for="confirmation">Confirmation du mot de passe 
-				<span class="requis">*</span>
-			</h:outputLabel>
-			<h:inputSecret id="confirmation"
-				value="#{inscrireBean.utilisateur.motDePasse}" required="true"
-				size="20" maxlength="20" />
-			<h:message id="confirmationMessage" for="confirmation"
-				errorClass="erreur" />
-			<br />
-
-			<h:commandButton value="Inscription"
-				action="#{inscrireBean.inscrire}" styleClass="sansLabel" />
+				<h:panelGrid columns="3">
+					<h:outputText value="Prénom :" />
+					<h:inputText id="firstName" value="#{c.firstName}" required="true"
+						requiredMessage="Le prénom est obligatoire">
+						<f:validateLength minimum="3" maximum="10" />
+					</h:inputText>
+					<h:message style="color:red" for="firstName" />
+					
+					<h:outputText value="Nom :" />
+					<h:inputText id="lastName" value="#{c.lastName}" required="true"
+						requiredMessage="Le nom est obligatoire">
+						<f:validateLength minimum="2" maximum="20" />
+					</h:inputText>
+					<h:message style="color:red" for="lastName" />
+					
+					<h:outputText value="Adresse email :" />
+					<h:inputText id="email" value="#{c.email}" required="true"
+						requiredMessage="L'email est obligatoire">
+						<f:validateLength minimum="2" maximum="20" />
+					</h:inputText>
+					<h:message style="color:red" for="email" />
+					
+					<h:outputText value="Naissance" />
+					<h:inputText id="birthday" value="#{c.birthday}" required="false">
+					</h:inputText>
+					<h:message style="color:red" for="birthday" />
+					
+					<h:outputText value="Site web :" />
+					<h:inputText id="web" value="#{c.web}" required="false">
+					</h:inputText>
+					<h:message style="color:red" for="web" />
+					
+					<h:outputText value="Mot de passe :" />
+					<h:inputSecret id="password" value="#{c.password}" required="true" 
+						requiredMessage="Veuillez entrer un mot de passe">
+						<f:validateLength minimum="2" maximum="20" />
+						<f:validator validatorId="passwordValidator" />
+						<f:attribute name="confirmation" value="#{confirmation}" />
+					</h:inputSecret>
+					<h:message style="color:red" for="password" />
+					
+					<h:outputText value="Confirmation du mot de passe :" />
+					<h:inputSecret id="confirmation" value="#{c.password}" required="true"
+						binding="#{confirmation}" 
+						requiredMessage="Veuillez entrer un mot de passe de confirmation">
+						<f:validateLength minimum="2" maximum="20" />
+					</h:inputSecret>
+					<h:message style="color:red" for="confirmation" />
+					
+				</h:panelGrid>
+				<h:commandButton value="Inscription"
+					action="#{person.inscription()}" />
+			</h:form>
 		</fieldset>
 
 	</ui:define>

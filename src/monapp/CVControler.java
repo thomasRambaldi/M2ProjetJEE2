@@ -33,7 +33,7 @@ public class CVControler {
 		act.setNature(Nature.FORMATION);
 		act.setYear(2010);
 		act.setWeb("https://www.linkedin.com/home?trk=nav_responsive_tab_home");
-		act.setDescription("Site effectu� � partir du cahier des charges de la JAM");
+		act.setDescription("Site effectue a partir du cahier des charges de la JAM");
 		Activity act2 = new Activity();
 		act2.setTitle("Candidature de stage Atos");
 		act2.setNature(Nature.FORMATION);
@@ -82,8 +82,14 @@ public class CVControler {
 		return "editActivity";
 	}
 
-	public String save() throws SQLException {
+	public String create(){
 		cvm.createCV(theCV);
+		return "showCV";
+	}
+	
+	public String save() throws SQLException {
+		System.out.println(theActivity.getTitle());
+		cvm.updateCV(theCV);
 		return "showCV";
 	}
 

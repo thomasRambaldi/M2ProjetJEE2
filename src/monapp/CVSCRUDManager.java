@@ -43,8 +43,8 @@ public class CVSCRUDManager implements CVSCRUD{
 	}
 
 	@Override
-	public void updateCV(CV cv, String id) {
-		// TODO Auto-generated method stub
+	public void updateCV(CV cv) {
+		cv = em.merge(cv);
 	}
 
 	@Override

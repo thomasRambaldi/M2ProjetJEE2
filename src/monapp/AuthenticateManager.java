@@ -1,24 +1,48 @@
 package monapp;
 
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.InvocationContext;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
 
-public class AuthenticateManager implements ConnectedUser{
+@Stateless(name="authManager")
+public class AuthenticateManager {
 
-	@Override
-	public void login(String login, String pwd) {
+	@EJB
+    PersonSCRUD pm;
 	
-	}
-
-	@Override
-	public void logout() {
-
-	}
-
-	@Override
-	public boolean isLogin() {
+	@EJB
+	ConnectedUserManager cm;
+	
+	public boolean login(String login, String pwd) {
+		Person log = pm.readPerson(login);
+    	if(log.equals(null)){
+    		return false;
+    	}
+    	if(! log.getPassword().equals(pwd)){
+    		return false;
+    	}
+    	cm.setUser(log);
+    	return true;
 		
-		return false;
+	}
+
+	public void logout() {
+		cm.setUser(null);
+	}
+
+	public boolean isLogin() {
+		return cm.getUser() != null;
+	}
+
+	public void removeAccount() {
+		pm.deletePerson(cm.getUser());
+	}
+	
+	public Person getUser(){
+		return cm.getUser();
+	}
+
+	public void updateData() {
+		if(isLogin()) pm.updatePerson(getUser()); 
 	}
 	
 }

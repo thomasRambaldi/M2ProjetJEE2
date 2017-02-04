@@ -10,9 +10,9 @@
 <ui:composition template="/template/mylayout.xhtml">
 	<ui:define name="content">
 		<f:view>
-			<h1>Course edition</h1>
+			<h1>Editer votre profil</h1>
 			<h:form id="test">
-				<c:set var="p" value="#{person.thePerson}" />
+				<c:set var="p" value="#{authController.getUser()}" />
 
 				<h:panelGrid columns="3">
 
@@ -43,7 +43,12 @@
 					</h:inputText>
 					<h:message for="birthday" style="color:red" />
 					
-					<h:commandButton action="#{person.save()}" value="Save" /> | <h:link
+					Mot de passe :
+					<h:inputText id="pwd" value="#{p.password}">
+					</h:inputText>
+					<h:message for="pwd" style="color:red" />
+					
+					<h:commandButton action="#{authController.save()}" value="Save" /> | <h:link
 						outcome="persons" value="List of persons" />
 						
 				</h:panelGrid>

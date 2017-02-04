@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:composition template="/template/mylayout.xhtml">
+	<ui:define name="content">
+		<f:view>
+		<c:set var="auth" value="#{authController}"/>
+			<h:form>
+				<h1>Vous connecter à LinkedOut</h1>
+				<p>Email :</p>
+				<h:inputText id="mail" binding="#{mailUser}">
+					<f:validateLength minimum="5" maximum="200" />
+				</h:inputText>
+				<h:message for="mail" style="color:red" />
+				<p>Mot de passe :</p>
+				<h:inputSecret id="mdp" binding="#{pwdUser}" />
+				<h:message id="motDePasseMessage" for="motdepasse"
+					errorClass="erreur" />
+				<h:message for="mdp" style="color:red" />
+				<h:commandButton action="#{auth.login(mailUser.value, pwdUser.value)}" value="Se connecter" />
+			</h:form>
+		</f:view>
+	</ui:define>
+</ui:composition>
+
+</html>

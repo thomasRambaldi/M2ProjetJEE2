@@ -36,7 +36,6 @@ public class Person implements Serializable {
 	private String birthday;
 	
 	@NotNull
-	@Size(min=6)
 	@Column(name = "password")
 	private String password;
 	

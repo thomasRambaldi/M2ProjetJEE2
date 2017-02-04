@@ -5,59 +5,71 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ComponentSystemEvent;
 
 @ManagedBean(name = "person")
 @SessionScoped
 public class PersonControler {
 
 	@EJB
-    PersonSCRUD pm;
+	PersonSCRUD pm;
 
-    Person thePerson  = new Person();
+	Person thePerson  = new Person();
+	Person thePersonConnected = null;
 
-    @PostConstruct
-    public void init()  {
-        System.out.println("Create " + this);
-        if (pm.searchPerson().size() == 0) {
-            Person p1 = new Person();
-            p1.setEmail("test@test.fr");
-            p1.setFirstName("Martin");
-            p1.setLastName("Langevin");
-            p1.setPassword("azerty");
-            p1.setBirthday("28/03/1992");
-            p1.setWeb("www.google.fr");
-            pm.createPerson(p1);
-        }
-    }
+	@PostConstruct
+	public void init()  {
+		System.out.println("Create " + this);
+	}
 
-    public List<Person> getPersons() throws SQLException {
-        return pm.searchPerson();
-    }
+	public List<Person> getPersons() throws SQLException {
+		return pm.searchPerson();
+	}
 
-    public Person getThePerson() {
-        return thePerson ;
-    }
+	public Person getThePerson() {
+		return thePerson ;
+	}
 
-    public String show(String email) {
-    	thePerson  = pm.readPerson(email);
-        return "showPerson";
-    }
+	public Person getThePersonConnected() {
+		return thePersonConnected;
+	}
 
-    public String save() throws SQLException {
-        pm.createPerson(thePerson);
-        return "showPerson";
-    }
-    
-    public String remove(){
-    	pm.deletePerson(thePerson);
-    	return "index";
-    }
+	public void setThePersonConnected(Person thePersonConnected) {
+		this.thePersonConnected = thePersonConnected;
+	}
 
-    public String newPerson() {
-    	thePerson = new Person();
-        return "editPerson";
-    }
+	public String show(String email) {
+		thePerson  = pm.readPerson(email);
+		return "showPerson";
+	}
 
+	public String remove(){
+		pm.deletePerson(thePerson);
+		return "index";
+	}
+
+	public String newPerson() {
+		thePerson = new Person();
+		return "editPerson";
+	}
+
+	public String inscription(){
+		FacesContext ct = FacesContext.getCurrentInstance();
+		if(pm.readPerson(thePerson.getEmail()) != null){
+			FacesMessage msg = new FacesMessage("Cet email est déjà pris");
+			ct.addMessage("test:email", msg);
+			ct.validationFailed();
+			return "inscription";
+		}
+		if(ct.isValidationFailed())
+			return "inscription";
+		pm.createPerson(thePerson);
+		return "hello";
+	}
 }
