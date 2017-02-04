@@ -1,15 +1,17 @@
 package monapp;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
-import javax.ejb.Remove;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
 
 @Entity
 @Table(schema="projetjee2")
@@ -24,25 +26,25 @@ public class Person implements Serializable {
 	@Column(name = "lastName")
 	@NotNull
 	private String lastName;
-	
+
 	@Id
 	@Column(name = "email")
 	private String email;
-	
+
 	@Column(name = "web")
 	private String web;
-	
+
 	@Column(name = "birthday")
 	private String birthday;
-	
+
 	@NotNull
 	@Column(name = "password")
 	private String password;
-	
+
 	public Person(){
-		
+
 	}
-	
+
 	public String getFirstName() {
 		return firstName;
 	}

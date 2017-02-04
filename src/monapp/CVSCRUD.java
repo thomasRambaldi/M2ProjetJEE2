@@ -12,4 +12,5 @@ public interface CVSCRUD {
 	public CV readCV(int idCv, boolean activities);
 	public void updateCV(CV cv);
 	public void deleteCV(CV cv);
+
 }

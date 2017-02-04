@@ -17,29 +17,31 @@
 				<h:panelGrid columns="3">
 
 					Email : 
-					<h:inputText id="email" value="#{p.email}">
-						<f:validateLength minimum="5" maximum="200" />
-					</h:inputText>
+					<h:outputLabel value="#{p.email}" />
 					<h:message for="email" style="color:red" />
 
 					FirstName :
 					<h:inputText id="firstName" value="#{p.firstName}">
 						<f:validateLength minimum="4" maximum="200" />
+						<f:validateRegex pattern="^[A-Za-z-]+$" />
 					</h:inputText>
 					<h:message for="firstName" style="color:red" />
 
 					Lastname :
 					<h:inputText id="lastName" value="#{p.lastName}">
+						<f:validateRegex pattern="^[A-Za-z-]+$" />
 					</h:inputText>
 					<h:message for="lastName" style="color:red" />
 					
 					Site Web :
 					<h:inputText id="web" value="#{p.web}">
+						<f:validateRegex pattern="^www.[A-Za-z0-9-_.]+.[A-za-z]{2,3}$" />
 					</h:inputText>
 					<h:message for="web" style="color:red" />
 					
 					Date de naissance :
 					<h:inputText id="birthday" value="#{p.birthday}">
+						<f:validateRegex pattern="^([0-9]{2}/[0-9]{2}/[0-9]{4})?$" />
 					</h:inputText>
 					<h:message for="birthday" style="color:red" />
 					
@@ -48,9 +50,8 @@
 					</h:inputText>
 					<h:message for="pwd" style="color:red" />
 					
-					<h:commandButton action="#{authController.save()}" value="Save" /> | <h:link
-						outcome="persons" value="List of persons" />
-						
+					<h:commandButton action="#{authController.save()}" value="Save" /> 
+
 				</h:panelGrid>
 
 

@@ -5,7 +5,6 @@ import javax.ejb.Stateless;
 
 @Stateless(name="authManager")
 public class AuthenticateManager {
-
 	@EJB
     PersonSCRUD pm;
 	
@@ -44,5 +43,5 @@ public class AuthenticateManager {
 	public void updateData() {
 		if(isLogin()) pm.updatePerson(getUser()); 
 	}
-	
+
 }

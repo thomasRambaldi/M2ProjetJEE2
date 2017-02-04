@@ -1,5 +1,7 @@
 package monapp;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -18,10 +20,9 @@ import javax.faces.event.ComponentSystemEvent;
 public class PersonControler {
 
 	@EJB
-	PersonSCRUD pm;
+	private PersonSCRUD pm;
 
-	Person thePerson  = new Person();
-	Person thePersonConnected = null;
+	private Person thePerson  = new Person();
 
 	@PostConstruct
 	public void init()  {
@@ -36,14 +37,7 @@ public class PersonControler {
 		return thePerson ;
 	}
 
-	public Person getThePersonConnected() {
-		return thePersonConnected;
-	}
-
-	public void setThePersonConnected(Person thePersonConnected) {
-		this.thePersonConnected = thePersonConnected;
-	}
-
+    
 	public String show(String email) {
 		thePerson  = pm.readPerson(email);
 		return "showPerson";

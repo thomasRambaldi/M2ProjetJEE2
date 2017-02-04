@@ -10,7 +10,6 @@ public class Activity implements Serializable{
 	
 	private static final long serialVersionUID = 3595117949735258943L;
 
-	
 	@NotNull
 	private int year;
 	
@@ -27,6 +26,7 @@ public class Activity implements Serializable{
 	public Activity() {
 		
 	}
+
 
 	public String getTitle() {
 		return title;
