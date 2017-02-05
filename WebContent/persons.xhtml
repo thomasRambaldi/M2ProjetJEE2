@@ -11,7 +11,7 @@
 	<ui:composition template="/template/mylayout.xhtml">
 		<ui:define name="content">
 			<f:view>
-				<h1>List of persons</h1>
+				<h1>Liste des personnes</h1>
 				<h:form>
 					<table>
 						<tr>
@@ -26,7 +26,7 @@
 								<td>#{c.firstName}</td>
 								<td>#{c.lastName}</td>
 								<td><h:commandLink action="#{person.show(c.email)}"
-										value="Show" /></td>
+										value="Montrer" /></td>
 							</tr>
 						</c:forEach>
 					</table>

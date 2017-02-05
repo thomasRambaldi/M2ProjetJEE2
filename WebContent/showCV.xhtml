@@ -11,7 +11,7 @@
 	<ui:define name="content">
 		<f:view>
 			<c:set var="c" value="#{cv.theCV}" />
-			<h1>#{c.name}</h1>
+			<h1>#{c.name} de #{c.person.firstName} #{c.person.lastName}</h1>
 
 			<h:form>
 				<table>
@@ -31,8 +31,13 @@
 							<td>${a.year}</td>
 							<td>${a.description}</td>
 							<td>${a.web}</td>
-							<td><h:commandLink action="#{cv.removeActivity(count)}"
-									value="Supprimer cette activitée" /></td>
+
+							<td><c:if test="#{authController.isLogin()}">
+									<h:commandLink action="#{cv.removeActivity(count)}"
+										value="Supprimer cette activitée"
+										onclick="return confirm('êtes vous sur de vouloir supprimer cette activitée')" />
+								</c:if></td>
+
 						</tr>
 						<c:set var="count" value="${count + 1}" />
 					</c:forEach>
@@ -47,14 +52,9 @@
 					<h:commandLink action="editCV">Modifier</h:commandLink>
 				</p>
 				<p>
-					<h:commandLink action="#{cv.remove()}">Supprimer votre CV</h:commandLink>
+					<h:commandLink action="#{cv.remove()}" onclick="return confirm('êtes vous sur de vouloir supprimer votre CV')">Supprimer votre CV</h:commandLink>
 				</p>
 			</h:form>
-
-
-			<p>
-				<h:link outcome="cvs">List of  CVs</h:link>
-			</p>
 
 		</f:view>
 	</ui:define>

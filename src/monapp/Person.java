@@ -39,7 +39,7 @@ public class Person implements Serializable {
 	private String password;
 	
 	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	CV cv;
+	private CV cv;
 
 	public Person(){
 

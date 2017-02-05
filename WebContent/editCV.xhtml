@@ -13,12 +13,21 @@
 			<c:set var="c" value="#{cv.theCV}" />
 			<h1>Édition de votre CV : #{c.name}</h1>
 
-				<c:set var="count" value="0" />
-				<c:forEach var="a" items="#{c.activities}">
+			<h:form>
+			Nom de votre CV : 
+			<h:inputText id="name" value="#{c.name}">
+					<f:validateLength minimum="4" maximum="200" />
+				</h:inputText>
+				<h:commandButton action="#{cv.save()}" value="Sauvegarder" />
+			</h:form>
+
+			<c:set var="count" value="0" />
+			<c:forEach var="a" items="#{c.activities}">
 				<h:form>
 					<h:commandLink action="#{cv.editActivity(count)}">#{a.title}</h:commandLink>
-					</h:form><c:set var="count" value="${count + 1}" />
-				</c:forEach>
+				</h:form>
+				<c:set var="count" value="${count + 1}" />
+			</c:forEach>
 		</f:view>
 	</ui:define>
 </ui:composition>

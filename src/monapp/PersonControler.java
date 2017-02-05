@@ -31,12 +31,18 @@ public class PersonControler {
 		Person p1 = new Person();
 		p1.setFirstName("Martin");
         p1.setLastName("Langevin");
-        p1.setPassword("azerty");
+        p1.setEmail("test@test.fr");
+        try {
+			p1.setPassword( Cryptography.crypt("azerty"));
+		} catch (UnsupportedEncodingException | NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         p1.setBirthday("28/03/1992");
         p1.setWeb("www.google.fr");
         CV cv1 = new CV();
         cv1.setId(0);
-		cv1.setName("THOMAS RAMBALDI");
+		cv1.setName("Candidature de stage");
 		Activity act = new Activity();
 		act.setTitle("Master 2 informatique");
 		act.setNature(Nature.FORMATION);

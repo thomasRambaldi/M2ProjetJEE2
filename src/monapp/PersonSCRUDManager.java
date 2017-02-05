@@ -34,7 +34,10 @@ public class PersonSCRUDManager implements PersonSCRUD{
 
 	@Override
 	public Person createPerson(Person p) {
-		em.persist(p);
+		if (p.getEmail() == null) 
+			em.persist(p);
+		else
+			em.merge(p);
 		return p;
 	}
 
