@@ -10,49 +10,47 @@
 <ui:composition>
 	<div>Menu :</div>
 	<ul>
-		<li><h:form>
+		<h:form>
+			<li>
 				<p>
 					<h:commandLink action="#{navigation.hello}" value="Hello" />
 				</p>
-			</h:form></li>
+			</li>
 
-		<li><h:form>
-				<p>
-					<h:commandLink action="inscription?faces-redirect=true">Inscription</h:commandLink>
-				</p>
-			</h:form></li>
+			<c:if test="#{authController.isLogin() eq false}">
+				<li><p>
+						<h:commandLink action="inscription?faces-redirect=true">Inscription</h:commandLink>
+					</p></li>
+			</c:if>
 
-		<li><h:form>
-				<c:if test="#{authController.isLogin()}">
+			<li><c:if test="#{authController.isLogin()}">
 					<p>
 						<h:commandLink action="userAccount?faces-redirect=true">Votre compte</h:commandLink>
 					</p>
-				</c:if>
-				<c:if test="#{authController.isLogin() eq false}">
+				</c:if> <c:if test="#{authController.isLogin() eq false}">
 					<p>
 						<h:commandLink action="logIn?faces-redirect=true">Se connecter</h:commandLink>
 					</p>
-				</c:if>
-			</h:form></li>
+				</c:if></li>
 
-		<li><h:form>
+			<li>
 				<p>
 					<h:commandLink action="bye?faces-redirect=true">Bye</h:commandLink>
 				</p>
-			</h:form></li>
+			</li>
 
-		<li><h:form>
+			<li>
 				<p>
 					<h:commandLink action="persons?faces-redirect=true">Liste des personnes</h:commandLink>
 				</p>
-			</h:form></li>
+			</li>
 
-		<li><h:form>
+			<li>
 				<p>
 					<h:commandLink action="cvs?faces-redirect=true">Liste des CVs</h:commandLink>
 				</p>
-			</h:form></li>
-
+			</li>
+		</h:form>
 	</ul>
 </ui:composition>
 
