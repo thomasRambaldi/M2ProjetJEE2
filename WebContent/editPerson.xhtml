@@ -22,20 +22,21 @@
 
 					FirstName :
 					<h:inputText id="firstName" value="#{p.firstName}">
-						<f:validateLength minimum="4" maximum="200" />
+						<f:validateLength minimum="4" maximum="50" />
 						<f:validateRegex pattern="^[A-Za-z-]+$" />
 					</h:inputText>
 					<h:message for="firstName" style="color:red" />
 
 					Lastname :
 					<h:inputText id="lastName" value="#{p.lastName}">
+					<f:validateLength minimum="2" maximum="50" />
 						<f:validateRegex pattern="^[A-Za-z-]+$" />
 					</h:inputText>
 					<h:message for="lastName" style="color:red" />
 					
 					Site Web :
 					<h:inputText id="web" value="#{p.web}">
-						<f:validateRegex pattern="^www.[A-Za-z0-9-_.]+.[A-za-z]{2,3}$" />
+						<f:validateRegex pattern="^(www.[A-Za-z0-9-_.]+.[A-za-z]{2,3})?$" />
 					</h:inputText>
 					<h:message for="web" style="color:red" />
 					
@@ -47,6 +48,7 @@
 					
 					Mot de passe :
 					<h:inputText id="pwd" value="#{p.password}">
+						<f:validateLength minimum="6" maximum="20" />
 					</h:inputText>
 					<h:message for="pwd" style="color:red" />
 					
