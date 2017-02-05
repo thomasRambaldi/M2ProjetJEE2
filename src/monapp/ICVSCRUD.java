@@ -5,7 +5,7 @@ import java.util.List;
 import javax.ejb.Local;
 
 @Local
-public interface CVSCRUD {
+public interface ICVSCRUD {
 
 	public List<CV> searchCV(boolean activities);
 	public CV createCV(CV cv);

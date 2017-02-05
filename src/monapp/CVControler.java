@@ -2,7 +2,6 @@ package monapp;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -15,7 +14,7 @@ import javax.faces.bean.SessionScoped;
 public class CVControler {
 
 	@EJB
-	private CVSCRUD cvm;
+	private ICVSCRUD cvm;
 
 	private Activity theActivity = new Activity();
 

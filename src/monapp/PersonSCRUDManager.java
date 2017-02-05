@@ -11,7 +11,7 @@ import javax.persistence.PersistenceContext;
 @Stateful(name = "pers", description = "Representation d'une personne")
 //@TransactionManagement(TransactionManagementType.CONTAINER)
 //@Interceptors({AuthenticateManager.class})
-public class PersonSCRUDManager implements PersonSCRUD{
+public class PersonSCRUDManager implements IPersonSCRUD{
 
 	@PersistenceContext(unitName = "myData")
 	private EntityManager em;

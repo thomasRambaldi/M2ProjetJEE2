@@ -11,17 +11,14 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.component.UIComponent;
-import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ComponentSystemEvent;
 
 @ManagedBean(name = "person")
 @SessionScoped
 public class PersonControler {
 
 	@EJB
-	private PersonSCRUD pm;
+	private IPersonSCRUD pm;
 
 	private Person thePerson  = new Person();
 

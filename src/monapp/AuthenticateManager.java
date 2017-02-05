@@ -6,7 +6,7 @@ import javax.ejb.Stateless;
 @Stateless(name="authManager")
 public class AuthenticateManager {
 	@EJB
-    PersonSCRUD pm;
+    IPersonSCRUD pm;
 	
 	@EJB
 	ConnectedUserManager cm;

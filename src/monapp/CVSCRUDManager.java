@@ -10,7 +10,7 @@ import javax.persistence.PersistenceContext;
 
 
 @Stateful(name = "act", description = "Representation d'une activitee")
-public class CVSCRUDManager implements CVSCRUD{
+public class CVSCRUDManager implements ICVSCRUD{
 
 	@PersistenceContext(unitName = "myData")
 	private  EntityManager em;

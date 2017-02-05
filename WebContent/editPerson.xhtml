@@ -21,14 +21,16 @@
 					<h:message for="email" style="color:red" />
 
 					FirstName :
-					<h:inputText id="firstName" value="#{p.firstName}">
+					<h:inputText id="firstName" value="#{p.firstName}" required="true" 
+					requiredMessage="Le prénom est obligatoire">
 						<f:validateLength minimum="4" maximum="50" />
 						<f:validateRegex pattern="^[A-Za-z-]+$" />
 					</h:inputText>
 					<h:message for="firstName" style="color:red" />
 
 					Lastname :
-					<h:inputText id="lastName" value="#{p.lastName}">
+					<h:inputText id="lastName" value="#{p.lastName}" required="true"
+					requiredMessage="Le nom est obligatoire">
 					<f:validateLength minimum="2" maximum="50" />
 						<f:validateRegex pattern="^[A-Za-z-]+$" />
 					</h:inputText>
@@ -47,9 +49,10 @@
 					<h:message for="birthday" style="color:red" />
 					
 					Mot de passe :
-					<h:inputText id="pwd" value="#{p.password}">
+					<h:inputSecret id="pwd" value="#{p.password}" required="true"
+					requiredMessage="Le mot de passe est obligatoire" >
 						<f:validateLength minimum="6" maximum="20" />
-					</h:inputText>
+					</h:inputSecret>
 					<h:message for="pwd" style="color:red" />
 					
 					<h:commandButton action="#{authController.save()}" value="Save" /> 
