@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<f:metadata>
+	<f:event listener="#{authController.redirect}" type="preRenderView"></f:event>
+</f:metadata>
+
+<ui:composition template="/template/mylayout.xhtml">
+	<ui:define name="content">
+		<c:set var="c" value="#{cv.theCV}" />
+		<c:set var="p" value="#{authController.getUser()}" />
+		<fieldset>
+			<legend>Donnez un titre à votre cv</legend>
+			<h:form id="test">
+
+				<h:panelGrid columns="3">
+					<h:outputText value="Titre :" />
+					<h:inputText id="title" value="#{c.name}" required="true"
+						requiredMessage="Le titre est obligatoire">
+						<f:validateLength minimum="3" maximum="10" />
+					</h:inputText>
+					<h:message style="color:red" for="title" />
+					
+					<h:outputText value="Id(temporaire) :" />
+					<h:inputText id="idCv" value="#{c.id}" required="true"
+						requiredMessage="L'id est obligatoire">
+					</h:inputText>
+					<h:message style="color:red" for="idCV" />
+					
+				</h:panelGrid>
+				<h:commandButton value="Creer votre cv"
+					action="#{cv.createPersonCv(p)}" />
+			</h:form>
+		</fieldset>
+
+	</ui:define>
+</ui:composition>
+</html>

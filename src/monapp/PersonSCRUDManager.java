@@ -34,28 +34,38 @@ public class PersonSCRUDManager implements IPersonSCRUD{
 
 	@Override
 	public Person createPerson(Person p) {
-		if (p.getEmail() == null) 
+		if(readPerson(p.getEmail()) == null){
 			em.persist(p);
-		else
+		}else{
 			em.merge(p);
+		}
 		return p;
 	}
 
 	@Override
 	public Person readPerson(String email) {
-		return em.find(Person.class, email);
+		Person p = em.find(Person.class, email);
+		if(p == null)
+			return p;
+		if(p.getCv() != null){
+			p.getCv().getName();
+			p.getCv().getId();
+			if(p.getCv().getActivities() != null)
+				p.getCv().getActivities().size();
+		}
+		return p;
 	}
 
 	@Override
 	public void updatePerson(Person p) {
 		p = em.merge(p);
-//		p = em.find(Person.class, id);
-//		p.setEmail(p.getEmail());
-//		p.setBirthday(p.getBirthday());
-//		p.setFirstName(p.getFirstName());
-//		p.setLastName(p.getLastName());
-//		p.setWeb(p.getWeb());
-//		p.setPassword(p.getPassword());
+		//		p = em.find(Person.class, id);
+		//		p.setEmail(p.getEmail());
+		//		p.setBirthday(p.getBirthday());
+		//		p.setFirstName(p.getFirstName());
+		//		p.setLastName(p.getLastName());
+		//		p.setWeb(p.getWeb());
+		//		p.setPassword(p.getPassword());
 	}
 
 	@Override

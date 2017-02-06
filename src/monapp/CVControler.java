@@ -14,7 +14,7 @@ import javax.faces.bean.SessionScoped;
 public class CVControler {
 
 	@EJB
-	private ICVSCRUD cvm;
+	private CVSCRUD cvm;
 
 	private Activity theActivity = new Activity();
 
@@ -22,25 +22,25 @@ public class CVControler {
 
 	@PostConstruct
 	public void init()  {
-		System.out.println("Create " + this);
-		CV cv1 = new CV();
-		cv1.setName("THOMAS RAMBALDI");
-		Activity act = new Activity();
-		act.setTitle("Master 2 informatique");
-		act.setNature(Nature.FORMATION);
-		act.setYear(2010);
-		act.setWeb("https://www.linkedin.com/home?trk=nav_responsive_tab_home");
-		act.setDescription("Site effectue a partir du cahier des charges de la JAM");
-		Activity act2 = new Activity();
-		act2.setTitle("Candidature de stage Atos");
-		act2.setNature(Nature.FORMATION);
-		act2.setYear(2011);
-		act2.setWeb("https://www.google.com/home?trk=nav_responsive_tab_home");
-		act2.setDescription("Site de sopra steria");
-		List<Activity> listActivities = new ArrayList<>();
-		listActivities.add(act);
-		listActivities.add(act2);
-		cv1.setActivities(listActivities);
+//		System.out.println("Create " + this);
+//		CV cv1 = new CV();
+//		cv1.setName("THOMAS RAMBALDI");
+//		Activity act = new Activity();
+//		act.setTitle("Master 2 informatique");
+//		act.setNature(Nature.FORMATION);
+//		act.setYear(2010);
+//		act.setWeb("https://www.linkedin.com/home?trk=nav_responsive_tab_home");
+//		act.setDescription("Site effectue a partir du cahier des charges de la JAM");
+//		Activity act2 = new Activity();
+//		act2.setTitle("Candidature de stage Atos");
+//		act2.setNature(Nature.FORMATION);
+//		act2.setYear(2011);
+//		act2.setWeb("https://www.google.com/home?trk=nav_responsive_tab_home");
+//		act2.setDescription("Site de sopra steria");
+//		List<Activity> listActivities = new ArrayList<>();
+//		listActivities.add(act);
+//		listActivities.add(act2);
+//		cv1.setActivities(listActivities);
 		//cvm.createCV(cv1);
 	}
 
@@ -68,6 +68,11 @@ public class CVControler {
 		return "showCV";
 	}
 	
+	public String createPersonCv(Person p){
+		cvm.createPersonCV(theCV, p);
+		return "userAccount";
+	}
+	
 	public String save() throws SQLException {
 		System.out.println(theActivity.getTitle());
 		cvm.updateCV(theCV);
@@ -82,6 +87,15 @@ public class CVControler {
 	public String remove(){
 		cvm.deleteCV(theCV);
 		return "index";
+		
+	}
+	
+	public String remove(Person p){
+		CV cv = p.getCv();
+		p.setCv(null);
+		cvm.deleteCV(cv);
+		saveUserCv(cv,p);
+		return "userAccount";
 	}
 
 	public String saveActivity() throws SQLException {
@@ -89,10 +103,27 @@ public class CVControler {
 		save();
 		return "showCV";
 	}
+	
+	public String saveActivity(CV c, Person p) throws SQLException {
+		c.getActivities().add(theActivity);
+		saveUserCv(c,p);
+		return "userCV";
+	}
+	
+	public String saveUserCv(CV cv,Person user){
+		cvm.updatePerson(cv,user);
+		return "userCV";
+	}
+	
 
 
 	public String editActivity(Integer index) {
 		theActivity = theCV.getActivities().get(index);
+		return "editActivity";
+	}
+	
+	public String editActivity(CV cv,Integer index) {
+		theActivity = cv.getActivities().get(index);
 		return "editActivity";
 	}
 
@@ -100,11 +131,25 @@ public class CVControler {
 		theActivity = new Activity();
 		return "createActivity";
 	}
+	
+	public String newActivity(CV c) {
+		if(c.getActivities() == null)
+			c.setActivities(new ArrayList<>());
+		theActivity = new Activity();
+		//System.out.println("BOUGE TOI"+c.getName());
+		return "createActivity";
+	}
 
 	public String removeActivity(Integer index) throws SQLException{
 		theCV.getActivities().remove(index.intValue());
 		cvm.updateCV(theCV);
 		return "showCV";
+	}
+	
+	public String removeActivity(Person p,Integer index) throws SQLException{
+		p.getCv().getActivities().remove(index.intValue());
+		saveUserCv(p.getCv(),p);
+		return "userCV";
 	}
 
 	public void getActivitiesTitle(CV cv){

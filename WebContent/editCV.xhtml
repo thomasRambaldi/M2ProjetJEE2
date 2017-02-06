@@ -10,24 +10,30 @@
 <ui:composition template="/template/mylayout.xhtml">
 	<ui:define name="content">
 		<f:view>
-			<c:set var="c" value="#{cv.theCV}" />
+			<c:set var="p" value="#{authController.getUser()}" />
+			<c:set var="c" value="#{p.cv}" />
 			<h1>Édition de votre CV : #{c.name}</h1>
-
-			<h:form>
-			Nom de votre CV : 
-			<h:inputText id="name" value="#{c.name}">
-					<f:validateLength minimum="4" maximum="200" />
+			<h:form id="test">
+					Titre : 
+					<h:inputText id="name" value="#{c.name}" required="true">
+					<f:validateLength minimum="5" maximum="200" />
+					<f:validateRegex pattern="^[a-zA-Z0-9\s]+$" />
 				</h:inputText>
-				<h:commandButton action="#{cv.save()}" value="Sauvegarder" />
+				<h:message for="name" style="color:red" />
+				<h:commandButton action="#{cv.saveUserCv(c,p)}"
+					value="Sauvegarder le titre" />
 			</h:form>
-
 			<c:set var="count" value="0" />
 			<c:forEach var="a" items="#{c.activities}">
 				<h:form>
-					<h:commandLink action="#{cv.editActivity(count)}">#{a.title}</h:commandLink>
+					<h:commandLink action="#{cv.editActivity(c,count)}">#{a.title}</h:commandLink>
 				</h:form>
 				<c:set var="count" value="${count + 1}" />
 			</c:forEach>
+			<h:form>
+				<h:commandButton action="#{cv.newActivity(c)}"
+					value="Ajouter une activitée" />
+			</h:form>
 		</f:view>
 	</ui:define>
 </ui:composition>

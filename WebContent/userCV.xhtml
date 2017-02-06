@@ -10,8 +10,9 @@
 <ui:composition template="/template/mylayout.xhtml">
 	<ui:define name="content">
 		<f:view>
-			<c:set var="c" value="#{cv.theCV}" />
-			<h1>#{c.name} de #{c.person.firstName} #{c.person.lastName}</h1>
+			<c:set var="p" value="#{authController.getUser()}" />
+			<c:set var="c" value="#{p.cv}" />
+			<h1>#{c.name}</h1>
 
 			<h:form>
 				<table>
@@ -21,6 +22,7 @@
 						<th>Year</th>
 						<th>Description</th>
 						<th>Web Site</th>
+						<th>Action</th>
 					</tr>
 					<c:set var="count" value="0" />
 					<c:forEach var="a" items="#{c.activities}">
@@ -30,14 +32,27 @@
 							<td>${a.year}</td>
 							<td>${a.description}</td>
 							<td>${a.web}</td>
+							<td><h:commandLink action="#{cv.removeActivity(p,count)}"
+									value="Supprimer cette activitée" /></td>
 						</tr>
 						<c:set var="count" value="${count + 1}" />
 					</c:forEach>
 				</table>
 			</h:form>
 
+
+			<h:form>
+				<p>
+					<h:commandLink action="editCV">Modifier votre CV</h:commandLink>
+				</p>
+				<p>
+					<h:commandLink action="#{cv.remove(p)}">Supprimer votre CV</h:commandLink>
+				</p>
+			</h:form>
+
+
 			<p>
-				<h:link outcome="cvs">Liste de CVs</h:link>
+				<h:link outcome="cvs">List of  CVs</h:link>
 			</p>
 
 		</f:view>

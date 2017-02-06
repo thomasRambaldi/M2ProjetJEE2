@@ -30,6 +30,10 @@ public class AuthenticateController {
 		return am.isLogin();
 	}
 	
+	public boolean isNullCV(){
+		return !isLogin() || getCV() == null;
+	}
+	
 	public String save() throws SQLException {
         am.updateData();
         return "userAccount";
@@ -43,6 +47,13 @@ public class AuthenticateController {
 	public Person getUser(){
 		return am.getUser();
 	}
+	
+	public CV getCV(){
+		CV c = am.getCV();
+//		System.out.println(c.getName());
+		return c;
+	}
+	
 	
 	public void redirect(ComponentSystemEvent event){
 		if(! isLogin()){

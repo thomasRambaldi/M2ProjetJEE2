@@ -27,6 +27,14 @@ public class ConnectedUserManager {
 	public void setUser(Person user) {
 		this.user = user;
 	}
+	
+	public CV getCV() {
+		return user.getCv();
+	}
+
+	public void setCV(CV cv) {
+		user.setCv(cv);
+	}
 
 	public boolean isLogin() {
 		return user != null;
