@@ -3,7 +3,6 @@ package monapp;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -84,7 +83,7 @@ public class PersonControler {
 	public String inscription(){
 		FacesContext ct = FacesContext.getCurrentInstance();
 		if(pm.readPerson(thePerson.getEmail()) != null){
-			FacesMessage msg = new FacesMessage("Cet email est déjà pris");
+			FacesMessage msg = new FacesMessage("Cet email est deja�pris");
 			ct.addMessage("test:email", msg);
 			ct.validationFailed();
 			return "inscription";

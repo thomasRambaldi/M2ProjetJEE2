@@ -94,6 +94,7 @@ public class CVControler {
 		CV cv = p.getCv();
 		p.setCv(null);
 		cvm.deleteCV(cv);
+		System.out.println("samjdfioajfzepjvekofvoekjfgjkl,fmzjkvjefkzjnjf");
 		saveUserCv(cv,p);
 		return "userAccount";
 	}

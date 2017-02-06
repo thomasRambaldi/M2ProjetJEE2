@@ -45,15 +45,16 @@
 					Date de naissance :
 					<h:inputText id="birthday" value="#{p.birthday}">
 						<f:validateRegex pattern="^([0-9]{2}/[0-9]{2}/[0-9]{4})?$" />
+<!-- 							<f:convertDateTime pattern="dd/MM/yyyy"/>   -->
 					</h:inputText>
 					<h:message for="birthday" style="color:red" />
 					
-					Mot de passe :
-					<h:inputSecret id="pwd" value="#{p.password}" required="true"
-					requiredMessage="Le mot de passe est obligatoire" >
-						<f:validateLength minimum="6" maximum="20" />
-					</h:inputSecret>
-					<h:message for="pwd" style="color:red" />
+<!-- 					Mot de passe : -->
+<!-- 					<h:inputSecret id="pwd" value="#{p.password}" required="true" -->
+<!-- 					requiredMessage="Le mot de passe est obligatoire" > -->
+<!-- 						<f:validateLength minimum="6" maximum="20" /> -->
+<!-- 					</h:inputSecret> -->
+<!-- 					<h:message for="pwd" style="color:red" /> -->
 					
 					<h:commandButton action="#{authController.save()}" value="Save" /> 
 

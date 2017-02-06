@@ -8,7 +8,6 @@ import javax.interceptor.InvocationContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.ws.rs.DELETE;
 
 
 @Stateful(name = "act", description = "Representation d'une activitee")

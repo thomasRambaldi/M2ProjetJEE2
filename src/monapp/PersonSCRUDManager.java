@@ -1,5 +1,7 @@
 package monapp;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateful;
@@ -34,6 +36,15 @@ public class PersonSCRUDManager implements IPersonSCRUD{
 
 	@Override
 	public Person createPerson(Person p) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = null;
+		try {
+			date = dateFormat.parse(p.getBirthday());
+			p.setBirthday( dateFormat.format(date) );
+		} catch (Exception e) {
+			System.err.println("Format de date invalide. Usage : dd/MM/YYYY");
+			System.err.println(e.getMessage());
+		}
 		if(readPerson(p.getEmail()) == null){
 			em.persist(p);
 		}else{
@@ -58,14 +69,16 @@ public class PersonSCRUDManager implements IPersonSCRUD{
 
 	@Override
 	public void updatePerson(Person p) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = null;
+		try {
+			date = dateFormat.parse(p.getBirthday());
+			p.setBirthday( dateFormat.format(date) );
+		} catch (Exception e) {
+			System.err.println("Format de date invalide. Usage : dd/MM/YYYY");
+			System.err.println(e.getMessage());
+		}
 		p = em.merge(p);
-		//		p = em.find(Person.class, id);
-		//		p.setEmail(p.getEmail());
-		//		p.setBirthday(p.getBirthday());
-		//		p.setFirstName(p.getFirstName());
-		//		p.setLastName(p.getLastName());
-		//		p.setWeb(p.getWeb());
-		//		p.setPassword(p.getPassword());
 	}
 
 	@Override
