@@ -20,10 +20,9 @@
 				<h:panelGrid columns="3">
 					Titre : 
 					<h:inputText id="title" value="#{a.title}" required="true">
-						<f:validateLength minimum="5" maximum="200" />
-						<f:validateRegex pattern="^[a-zA-Z0-9\s]+$" />
+						<f:ajax  event="blur" render="titleText" />
 					</h:inputText>
-					<h:message for="title" style="color:red" />		
+					<h:message id="titleText" for="title" style="color:red" />		
 					
 					Nature : 
 					<h:selectOneMenu id="nature" value="#{a.nature}" required="true">
@@ -33,21 +32,21 @@
 
 					Année : 
 					<h:inputText id="year" value="#{a.year}" required="true">
-						<f:validateLength minimum="4" maximum="4" />
+						<f:ajax event="blur" render="yearText" />
 					</h:inputText>
-					<h:message for="year" style="color:red" />		
+					<h:message  id="yearText" for="year" style="color:red" />		
 					
 					Description : 
 					<h:inputTextarea id="description" value="#{a.description}" required="false">
-						<f:validateLength minimum="0" maximum="500" />
+						<f:ajax event="blur" render="descriptionText" />
 					</h:inputTextarea>
-					<h:message for="description" style="color:red" />		
+					<h:message  id="descriptionText" for="description" style="color:red" />		
 					
 					Site web : 
 					<h:inputText id="web" value="#{a.web}" required="false">
-						<f:validateLength minimum="0" maximum="200" />
+						<f:ajax event="blur" render="webText" />
 					</h:inputText>
-					<h:message for="web" style="color:red" />
+					<h:message id="webText" for="web" style="color:red" />
 
 					<h:commandButton action="#{cv.saveActivity(c,p)}" value="Save" /> | <h:link
 						outcome="cvs" value="Liste des CVs" />

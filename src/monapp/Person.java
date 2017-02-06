@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(schema="projetjee2")
@@ -17,25 +19,34 @@ public class Person implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Column(name = "firstName")
-	@NotNull
+	@NotNull(message="Veuillez saisir votre prénom")
+	@Size( min=4, max=50, message = "Le prénom doit avoir au moins 4 caractères" )
+	@Pattern( regexp = "^[A-Za-z-]+$", message = "Merci de saisir un prénom valide" )
 	private String firstName;
 
 	@Column(name = "lastName")
-	@NotNull
+	@NotNull(message="Veuillez saisir votre nom")
+	@Size( min=4, max=50, message = "Le nom doit avoir au moins 4 caractères" )
+	@Pattern( regexp = "^[A-Za-z-]+$", message = "Merci de saisir un nom valide" )
 	private String lastName;
 
 	@Id
 	@Column(name = "email")
+	@NotNull(message="Veuillez saisir votre email")
+	@Size( min=2, max=200, message = "Le prénom doit avoir au moins 4 caractères" )
+	@Pattern( regexp = "^[A-Za-z0-9-_.]+@[A-Za-z-.]+.[A-Za-z]{2,3}$", message = "Merci de saisir un email valide" )
 	private String email;
 
 	@Column(name = "web")
+	@Pattern( regexp = "^(www.[A-Za-z0-9-_.]+.[A-za-z]{2,3})?$", message = "Merci de saisir une URL valide" )
 	private String web;
 
 	@Column(name = "birthday")
+	@Pattern( regexp = "^([0-9]{2}/[0-9]{2}/[0-9]{4})?$", message = "Merci de saisir une date de naissance valide" )
 	private String birthday;
 
-	@NotNull
 	@Column(name = "password")
+	@NotNull(message="Veuillez saisir votre mot de passe")
 	private String password;
 	
 	@OneToOne(cascade = CascadeType.ALL)
@@ -100,4 +111,5 @@ public class Person implements Serializable {
 	public void setCv(CV cv) {
 		this.cv = cv;
 	}
+
 }

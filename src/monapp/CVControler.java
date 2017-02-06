@@ -22,26 +22,26 @@ public class CVControler {
 
 	@PostConstruct
 	public void init()  {
-//		System.out.println("Create " + this);
-//		CV cv1 = new CV();
-//		cv1.setName("THOMAS RAMBALDI");
-//		Activity act = new Activity();
-//		act.setTitle("Master 2 informatique");
-//		act.setNature(Nature.FORMATION);
-//		act.setYear(2010);
-//		act.setWeb("https://www.linkedin.com/home?trk=nav_responsive_tab_home");
-//		act.setDescription("Site effectue a partir du cahier des charges de la JAM");
-//		Activity act2 = new Activity();
-//		act2.setTitle("Candidature de stage Atos");
-//		act2.setNature(Nature.FORMATION);
-//		act2.setYear(2011);
-//		act2.setWeb("https://www.google.com/home?trk=nav_responsive_tab_home");
-//		act2.setDescription("Site de sopra steria");
-//		List<Activity> listActivities = new ArrayList<>();
-//		listActivities.add(act);
-//		listActivities.add(act2);
-//		cv1.setActivities(listActivities);
-		//cvm.createCV(cv1);
+		System.out.println("Create " + this);
+		CV cv1 = new CV();
+		cv1.setName("THOMAS RAMBALDI");
+		Activity act = new Activity();
+		act.setTitle("Master 2 informatique");
+		act.setNature(Nature.FORMATION);
+		act.setYear(2010);
+		act.setWeb("https://www.linkedin.com/home?trk=nav_responsive_tab_home");
+		act.setDescription("Site effectue a partir du cahier des charges de la JAM");
+		Activity act2 = new Activity();
+		act2.setTitle("Candidature de stage Atos");
+		act2.setNature(Nature.FORMATION);
+		act2.setYear(2011);
+		act2.setWeb("https://www.google.com/home?trk=nav_responsive_tab_home");
+		act2.setDescription("Site de sopra steria");
+		List<Activity> listActivities = new ArrayList<>();
+		listActivities.add(act);
+		listActivities.add(act2);
+		cv1.setActivities(listActivities);
+		cvm.createCV(cv1);
 	}
 
 	public List<CV> getCVs(boolean activities) throws SQLException {
@@ -94,7 +94,6 @@ public class CVControler {
 		CV cv = p.getCv();
 		p.setCv(null);
 		cvm.deleteCV(cv);
-		System.out.println("samjdfioajfzepjvekofvoekjfgjkl,fmzjkvjefkzjnjf");
 		saveUserCv(cv,p);
 		return "userAccount";
 	}

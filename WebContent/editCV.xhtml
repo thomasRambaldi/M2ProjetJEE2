@@ -16,10 +16,9 @@
 			<h:form id="test">
 					Titre : 
 					<h:inputText id="name" value="#{c.name}" required="true">
-					<f:validateLength minimum="5" maximum="200" />
-					<f:validateRegex pattern="^[a-zA-Z0-9\s]+$" />
+					<f:ajax  event="blur" render="nameText" />
 				</h:inputText>
-				<h:message for="name" style="color:red" />
+				<h:message id="nameText" for="name" style="color:red" />
 				<h:commandButton action="#{cv.saveUserCv(c,p)}"
 					value="Sauvegarder le titre" />
 			</h:form>
