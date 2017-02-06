@@ -13,7 +13,6 @@ public class Activity implements Serializable{
 	private static final long serialVersionUID = 3595117949735258943L;
 
 	@NotNull(message="Veuillez saisir une année pour votre activitée")
-	@Pattern( regexp = "^[0-9]{4}$" , message = "Merci de saisir une année valide" )
 	private Integer year;
 	
 	@NotNull
