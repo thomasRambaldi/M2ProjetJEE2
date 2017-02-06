@@ -2,7 +2,6 @@ package monapp;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -69,6 +68,11 @@ public class CVControler {
 		return "showCV";
 	}
 	
+	public String createPersonCv(Person p){
+		cvm.createPersonCV(theCV, p);
+		return "userAccount";
+	}
+	
 	public String save() throws SQLException {
 		System.out.println(theActivity.getTitle());
 		cvm.updateCV(theCV);
@@ -83,6 +87,15 @@ public class CVControler {
 	public String remove(){
 		cvm.deleteCV(theCV);
 		return "index";
+		
+	}
+	
+	public String remove(Person p){
+		CV cv = p.getCv();
+		p.setCv(null);
+		cvm.deleteCV(cv);
+		saveUserCv(cv,p);
+		return "userAccount";
 	}
 
 	public String saveActivity() throws SQLException {
@@ -90,10 +103,27 @@ public class CVControler {
 		save();
 		return "showCV";
 	}
+	
+	public String saveActivity(CV c, Person p) throws SQLException {
+		c.getActivities().add(theActivity);
+		saveUserCv(c,p);
+		return "userCV";
+	}
+	
+	public String saveUserCv(CV cv,Person user){
+		cvm.updatePerson(cv,user);
+		return "userCV";
+	}
+	
 
 
 	public String editActivity(Integer index) {
 		theActivity = theCV.getActivities().get(index);
+		return "editActivity";
+	}
+	
+	public String editActivity(CV cv,Integer index) {
+		theActivity = cv.getActivities().get(index);
 		return "editActivity";
 	}
 
@@ -101,11 +131,25 @@ public class CVControler {
 		theActivity = new Activity();
 		return "createActivity";
 	}
+	
+	public String newActivity(CV c) {
+		if(c.getActivities() == null)
+			c.setActivities(new ArrayList<>());
+		theActivity = new Activity();
+		//System.out.println("BOUGE TOI"+c.getName());
+		return "createActivity";
+	}
 
 	public String removeActivity(Integer index) throws SQLException{
 		theCV.getActivities().remove(index.intValue());
 		cvm.updateCV(theCV);
 		return "showCV";
+	}
+	
+	public String removeActivity(Person p,Integer index) throws SQLException{
+		p.getCv().getActivities().remove(index.intValue());
+		saveUserCv(p.getCv(),p);
+		return "userCV";
 	}
 
 	public void getActivitiesTitle(CV cv){

@@ -24,9 +24,19 @@
 			<p>Site Web : #{p.web}</p>
 
 			<h:form>
+				<c:if test="#{authController.isNullCV() eq false}">
 				<p>
 					<h:commandLink action="userCV">Voir votre curriculum vitae</h:commandLink>
 				</p>
+				<p>
+					<h:commandLink action="editCV">Editer votre curriculum vitae</h:commandLink>
+				</p>
+				</c:if>
+				<c:if test="#{authController.isNullCV()}">
+				<p>
+					<h:commandLink action="createCV">Créer votre curriculum vitae</h:commandLink>
+				</p>
+				</c:if>
 				<p>
 					<h:commandLink action="editPerson">Modifier votre profil</h:commandLink>
 				</p>

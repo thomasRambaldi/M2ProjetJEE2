@@ -38,7 +38,7 @@ public class Person implements Serializable {
 	@Column(name = "password")
 	private String password;
 	
-	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@OneToOne(cascade = CascadeType.ALL)
 	CV cv;
 
 	public Person(){

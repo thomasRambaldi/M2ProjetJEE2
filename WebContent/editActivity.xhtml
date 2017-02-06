@@ -10,7 +10,8 @@
 <ui:composition template="/template/mylayout.xhtml">
 	<ui:define name="content">
 		<f:view>
-			<c:set var="c" value="#{cv.theCV}" />
+			<c:set var="p" value="#{authController.getUser()}" />
+			<c:set var="c" value="#{p.cv}" />
 			<c:set var="a" value="#{cv.theActivity}" />
 			<h1>Édition de l'activité : #{a.title}, de votre CV : #{c.name}</h1>
 			<h:form id="test">
@@ -48,7 +49,7 @@
 					</h:inputText>
 					<h:message for="web" style="color:red" />
 
-					<h:commandButton action="#{cv.save()}" value="Save" /> | <h:link
+					<h:commandButton action="#{cv.saveUserCv(c,p)}" value="Save" /> | <h:link
 						outcome="cvs" value="Liste des CVs" />
 
 				</h:panelGrid>

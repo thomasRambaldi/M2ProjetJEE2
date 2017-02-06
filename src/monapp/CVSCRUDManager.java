@@ -7,6 +7,8 @@ import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.ws.rs.DELETE;
 
 
 @Stateful(name = "act", description = "Representation d'une activitee")
@@ -32,7 +34,7 @@ public class CVSCRUDManager implements CVSCRUD{
 		}
 		return cv;
 	}
-	
+
 
 	@Override
 	public CV readCV(int idCv, boolean activities) {
@@ -50,8 +52,15 @@ public class CVSCRUDManager implements CVSCRUD{
 
 	@Override
 	public void deleteCV(CV cv) {
-		cv = em.merge(cv);
-		em.remove(cv);		
+//				CV c =  em.find(CV.class, cv.getId());
+//				em.remove(c);
+//		if (!em.contains(cv)){
+//			cv = em.merge(cv);
+//		}
+//		em.remove(cv);
+		Query query = em.createQuery("delete from CV c where c.id = :idCv");
+		query.setParameter("idCv", cv.getId());
+		int result = query.executeUpdate();
 	}
 
 	@AroundInvoke
@@ -63,6 +72,20 @@ public class CVSCRUDManager implements CVSCRUD{
 		}
 		return context.proceed();
 	}
-	
+
+	@Override
+	public void createPersonCV(CV cv, Person p) {
+		p.setCv(cv);
+		p=em.merge(p);
+	}
+
+	@Override
+	public void updatePerson(CV cv, Person p){
+		cv.getActivities().size();
+		p.setCv(cv);
+		p=em.merge(p);
+	//	em.merge(p);
+	}
+
 
 }

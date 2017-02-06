@@ -13,7 +13,7 @@ public class AuthenticateManager {
 	
 	public boolean login(String login, String pwd) {
 		Person log = pm.readPerson(login);
-    	if(log.equals(null)){
+    	if(log == null){
     		return false;
     	}
     	if(! log.getPassword().equals(pwd)){
@@ -39,7 +39,11 @@ public class AuthenticateManager {
 	public Person getUser(){
 		return cm.getUser();
 	}
-
+	
+	public CV getCV(){
+		return cm.getCV();
+	}
+	
 	public void updateData() {
 		if(isLogin()) pm.updatePerson(getUser()); 
 	}
