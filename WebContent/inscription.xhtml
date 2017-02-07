@@ -18,38 +18,40 @@
 					<h:outputText value="Prénom :" />
 					<h:inputText id="firstName" value="#{c.firstName}" required="true"
 						requiredMessage="Le prénom est obligatoire">
-						<f:validateLength minimum="3" maximum="10" />
-					</h:inputText>
-					<h:message style="color:red" for="firstName" />
+						<f:ajax event="blur" render="firstNameText" />					</h:inputText>
+					<h:message id="firstNameText" for="firstName" style="color:red" />
 					
 					<h:outputText value="Nom :" />
 					<h:inputText id="lastName" value="#{c.lastName}" required="true"
 						requiredMessage="Le nom est obligatoire">
-						<f:validateLength minimum="2" maximum="20" />
+						<f:ajax event="blur" render="lastNameText" />
 					</h:inputText>
-					<h:message style="color:red" for="lastName" />
+					<h:message id="lastNameText" for="lastName" style="color:red" />
 					
 					<h:outputText value="Adresse email :" />
 					<h:inputText id="email" value="#{c.email}" required="true"
 						requiredMessage="L'email est obligatoire">
-						<f:validateLength minimum="2" maximum="20" />
+						<f:ajax event="blur" render="emailText" />
 					</h:inputText>
-					<h:message style="color:red" for="email" />
+					<h:message id="emailText" for="email" style="color:red" />
 					
-					<h:outputText value="Naissance" />
+					
+					<h:outputText value="Date de naissance" />
 					<h:inputText id="birthday" value="#{c.birthday}" required="false">
+						<f:ajax event="blur" render="birthdayText" />
 					</h:inputText>
-					<h:message style="color:red" for="birthday" />
+					<h:message id="birthdayText" for="birthday" style="color:red" />
 					
 					<h:outputText value="Site web :" />
 					<h:inputText id="web" value="#{c.web}" required="false">
+						<f:ajax event="blur" render="webText" />
 					</h:inputText>
-					<h:message style="color:red" for="web" />
+					<h:message id="webText" for="web" style="color:red" />
 					
 					<h:outputText value="Mot de passe :" />
 					<h:inputSecret id="password" value="#{c.password}" required="true" 
 						requiredMessage="Veuillez entrer un mot de passe">
-						<f:validateLength minimum="2" maximum="20" />
+						<f:validateLength minimum="6" maximum="20" />
 						<f:validator validatorId="passwordValidator" />
 						<f:attribute name="confirmation" value="#{confirmation}" />
 					</h:inputSecret>

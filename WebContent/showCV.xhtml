@@ -11,7 +11,7 @@
 	<ui:define name="content">
 		<f:view>
 			<c:set var="c" value="#{cv.theCV}" />
-			<h1>#{c.name}</h1>
+			<h1>#{c.name} de #{c.person.firstName} #{c.person.lastName}</h1>
 
 			<h:form>
 				<table>
@@ -36,11 +36,8 @@
 				</table>
 			</h:form>
 
-
-
-
 			<p>
-				<h:link outcome="cvs">List of  CVs</h:link>
+				<h:link outcome="cvs">Liste de CVs</h:link>
 			</p>
 
 		</f:view>

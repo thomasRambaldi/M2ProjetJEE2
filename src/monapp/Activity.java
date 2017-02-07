@@ -4,29 +4,34 @@ import java.io.Serializable;
 
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Embeddable
 public class Activity implements Serializable{
 	
 	private static final long serialVersionUID = 3595117949735258943L;
 
-	@NotNull
-	private int year;
+	@NotNull(message="Veuillez saisir une année pour votre activitée")
+	private Integer year;
 	
 	@NotNull
 	private Nature nature;
 	
-	@NotNull
+	@NotNull(message="Veuillez saisir titre pour votre activitée")
+	@Size( min=5, max=100, message = "L'année doit avoir caractères" )
+	@Pattern( regexp = "^[a-zA-Z0-9\\s]+$" , message = "Merci de saisir un titre valide" )
 	private String title;
 	
+	@Size( min=0, max=500, message = "La description doit avoir au minimum 0 caractères et au maximum 500" )
 	private String description;
 	
+	@Size( min=0, max=200, message = "L'URL doit avoir au minimum 0 caractères et au maximum 500" )
 	private String web;
 	
 	public Activity() {
 		
 	}
-
 
 	public String getTitle() {
 		return title;
@@ -52,13 +57,14 @@ public class Activity implements Serializable{
 		this.web = webSite;
 	}
 
-	public int getYear() {
+	public Integer getYear() {
 		return year;
 	}
 
-	public void setYear(int year) {
+	public void setYear(Integer year) {
 		this.year = year;
 	}
+
 
 	public Nature getNature() {
 		return nature;

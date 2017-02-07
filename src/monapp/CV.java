@@ -8,6 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 
 @Entity
 @Table(schema="projetjee2")
@@ -19,6 +23,9 @@ public class CV implements Serializable{
 //	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id = 0;
 	
+	@NotNull(message="Veuillez saisir un nom pour votre CV")
+	@Size( min=5, max=200, message = "Le nom du CV doit avoir au moins 5 caractères" )
+	@Pattern( regexp = "^[a-zA-Z0-9\\s]+$" , message = "Merci de saisir un nom de CV valide" )
 	private String name;
 
 

@@ -41,7 +41,7 @@
 					<h:commandLink action="editPerson">Modifier votre profil</h:commandLink>
 				</p>
 				<p>
-					<h:commandLink action="#{authController.removeAccount()}">Supprimer votre profil</h:commandLink>
+					<h:commandLink action="#{authController.removeAccount()}" onclick="return confirm('êtes vous sur de vouloir supprimer votre profile')">Supprimer votre profil</h:commandLink>
 				</p>
 				<p>
 					<h:commandButton action="#{authController.log_out()}"

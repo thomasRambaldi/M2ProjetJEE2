@@ -23,19 +23,21 @@
 					<h:outputText value="Titre :" />
 					<h:inputText id="title" value="#{c.name}" required="true"
 						requiredMessage="Le titre est obligatoire">
-						<f:validateLength minimum="3" maximum="10" />
+						<f:ajax  event="blur" render="titleText" />
 					</h:inputText>
-					<h:message style="color:red" for="title" />
-					
+					<h:message id="titleText"  style="color:red" for="title" />
+
 					<h:outputText value="Id(temporaire) :" />
 					<h:inputText id="idCv" value="#{c.id}" required="true"
 						requiredMessage="L'id est obligatoire">
 					</h:inputText>
 					<h:message style="color:red" for="idCV" />
-					
+
 				</h:panelGrid>
 				<h:commandButton value="Creer votre cv"
-					action="#{cv.createPersonCv(p)}" />
+					action="#{cv.createPersonCv(p)}">
+					 <f:ajax execute="title" render="@form" />
+				</h:commandButton>
 			</h:form>
 		</fieldset>
 

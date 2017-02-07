@@ -41,7 +41,7 @@ public class CVControler {
 		listActivities.add(act);
 		listActivities.add(act2);
 		cv1.setActivities(listActivities);
-		//cvm.createCV(cv1);
+		cvm.createCV(cv1);
 	}
 
 	public List<CV> getCVs(boolean activities) throws SQLException {
