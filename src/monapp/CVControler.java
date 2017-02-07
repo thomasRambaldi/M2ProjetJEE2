@@ -83,6 +83,11 @@ public class CVControler {
 		theCV = new CV();
 		return "editCV";
 	}
+	
+	public String createCV() {
+		theCV = new CV();
+		return "createCV";
+	}
 
 	public String remove(){
 		cvm.deleteCV(theCV);
@@ -91,10 +96,14 @@ public class CVControler {
 	}
 	
 	public String remove(Person p){
-		CV cv = p.getCv();
-		p.setCv(null);
+		CV cv = new CV();
+		cv.setId(p.getCv().getId());
+//		cv.setName(p.getCv().getName());
+//		p.setCv(null);
+		
+		cvm.removePersonCV(p);
+		theCV=null;
 		cvm.deleteCV(cv);
-		saveUserCv(cv,p);
 		return "userAccount";
 	}
 

@@ -1,5 +1,6 @@
 package monapp;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateful;
@@ -57,10 +58,13 @@ public class CVSCRUDManager implements CVSCRUD{
 //		if (!em.contains(cv)){
 //			cv = em.merge(cv);
 //		}
-//		em.remove(cv);
-		Query query = em.createQuery("delete from CV c where c.id = :idCv");
-		query.setParameter("idCv", cv.getId());
-		int result = query.executeUpdate();
+		cv.setActivities(new ArrayList<Activity>());
+		cv = em.merge(cv);
+		em.remove(cv);
+//		Query query = em.createQuery("delete from CV c where c.id = :idCv");
+//		query.setParameter("idCv", cv.getId());
+//		query.executeUpdate();
+//		em.flush();
 	}
 
 	@AroundInvoke
@@ -85,6 +89,15 @@ public class CVSCRUDManager implements CVSCRUD{
 		p.setCv(cv);
 		p=em.merge(p);
 	//	em.merge(p);
+	}
+	
+	@Override
+	public void removePersonCV(Person p){
+//		cv.getActivities().size();
+		p.setCv(null);
+		p=em.merge(p);
+		Person p1 = em.find(Person.class, p.getEmail());
+		p1.setCv(null);
 	}
 
 

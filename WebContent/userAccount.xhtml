@@ -34,7 +34,7 @@
 				</c:if>
 				<c:if test="#{authController.isNullCV()}">
 				<p>
-					<h:commandLink action="createCV">Créer votre curriculum vitae</h:commandLink>
+					<h:commandLink action="#{cv.createCV()}">Créer votre curriculum vitae</h:commandLink>
 				</p>
 				</c:if>
 				<p>

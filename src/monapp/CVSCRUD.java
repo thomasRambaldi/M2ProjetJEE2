@@ -14,5 +14,6 @@ public interface CVSCRUD {
 	public void deleteCV(CV cv);
 	public void createPersonCV(CV cv, Person p);
 	public void updatePerson(CV cv, Person p);
+	public void removePersonCV(Person p);
 
 }
