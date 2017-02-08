@@ -29,7 +29,7 @@
 					<h:commandLink action="userCV">Voir votre curriculum vitae</h:commandLink>
 				</p>
 				<p>
-					<h:commandLink action="editCV">Editer votre curriculum vitae</h:commandLink>
+					<h:commandLink action="#{cv.editTheCv(p)}">Editer votre curriculum vitae(Ajax)</h:commandLink>
 				</p>
 				</c:if>
 				<c:if test="#{authController.isNullCV()}">

@@ -12,21 +12,21 @@ public class Activity implements Serializable{
 	
 	private static final long serialVersionUID = 3595117949735258943L;
 
-	@NotNull(message="Veuillez saisir une année pour votre activitée")
+	@NotNull(message="Veuillez saisir une annï¿½e pour votre activitï¿½e")
 	private Integer year;
 	
 	@NotNull
 	private Nature nature;
 	
-	@NotNull(message="Veuillez saisir titre pour votre activitée")
-	@Size( min=5, max=100, message = "L'année doit avoir caractères" )
+	@NotNull(message="Veuillez saisir titre pour votre activitï¿½e")
+	@Size( min=5, max=100, message = "L'annï¿½e doit avoir caractï¿½res" )
 	@Pattern( regexp = "^[a-zA-Z0-9\\s]+$" , message = "Merci de saisir un titre valide" )
 	private String title;
 	
-	@Size( min=0, max=500, message = "La description doit avoir au minimum 0 caractères et au maximum 500" )
+	@Size( min=0, max=500, message = "La description doit avoir au minimum 0 caractï¿½res et au maximum 500" )
 	private String description;
 	
-	@Size( min=0, max=200, message = "L'URL doit avoir au minimum 0 caractères et au maximum 500" )
+	@Size( min=0, max=200, message = "L'URL doit avoir au minimum 0 caractï¿½res et au maximum 500" )
 	private String web;
 	
 	public Activity() {
@@ -73,4 +73,9 @@ public class Activity implements Serializable{
 	public void setNature(Nature nature) {
 		this.nature = nature;
 	}
+	
+	public boolean isEmpty(){
+		return title == null;
+	}
+	
 }

@@ -1,55 +1,166 @@
 h1 {
-    border-bottom: solid 1px blue;
+	border-bottom: solid 1px blue;
 }
 
 table {
-    border-collapse: collapse;
-    border: 1px solid black;
+	border-collapse: collapse;
+	border: 1px solid black;
 }
 
 td, th {
-    border: 1px solid black;
-    padding: 3px;
+	border: 1px solid black;
+	padding: 3px;
+}
+
+.imageWelcome {
+    margin: auto;
+    width: 100%;
+    padding: 10px;
 }
 
 #page {
-    width: 800px;
-    margin: 0 auto;
+	width: 800px;
+	margin: 0 auto;
 }
 
 #header {
-    border: solid 1px blue;
-    padding: 5px;
-    size: large;
-    color: blue;
-    background-color: #c8bfbf;
-    margin-bottom: 20px;
+	color: #000000;
+	padding: 15px;
+	font-family: "Courier New", Georgia, Serif;
+	font-size: 100px;
+	font-weight: normal;
+	line-height: 48px;
+	margin-bottom: 30px;
+	text-align: center;
+	text-shadow: 1px 1px 2px #082b34;
+
+	/* 	font-weight: bold; */
+	/* 	border: solid 1px blue; */
+	/* 	padding: 5px; */
+	/* 	size: large; */
+	/* 	color: white; */
+	/* 	background-color: #5abdf5; */
+	/* 	margin-bottom: 20px; */
 }
 
-#menu {
-    float: right;
-    width: 150px;
-    border: solid 1px gray;
-    padding: 5px;
-    color: blue;
-    background-color: white;
-    margin-left: 20px;
-}
-
+/* #menu { */
+/* 	float: right; */
+/* 	width: 150px; */
+/* 	border: solid 1px gray; */
+/* 	padding: 5px; */
+/* 	color: blue; */
+/* 	background-color: white; */
+/* 	margin-left: 20px; */
+/* } */
 #content {
-    
+	
 }
 
 #footer {
-    border: solid 1px blue;
-    padding: 5px;
-    size: small;
-    color: blue;
-    background-color: #c8bfbf;
-    margin-top: 20px;
+	font-weight: bold;
+	border: solid 1px blue;
+	padding: 5px;
+	size: small;
+	color: white;
+	background-color: #5abdf5;
+	margin-top: 20px;
 }
 
 .alert {
-    color: red;
-    border: solid 2px red;
+	color: red;
+	border: solid 2px red;
+}
+
+.infoPers {
+	height: 250px;
+}
+
+.info {
+	float: left;
+}
+
+.photo {
+	float: left;
+}
+
+.activity {
+	margin-bottom: 70px;
+	text-align: justify;
+}
+
+.gauche {
+	float: left;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.droite {
+	margin-left: 150px;
+}
+
+strong {
+	font-size: 26px;
+}
+
+h2 {
+	font-size: 28px;
+	color: #3388BB;
+	text-transform: uppercase;
+	border-bottom: 3px solid #3388DD;
+}
+
+h3 {
+	width: 800px;
+	margin: 0 auto;
+	font-size: 28px;
+	color: #3388BB;
+	text-transform: uppercase;
+}
+
+.titre {
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.cvTitle {
+	margin: auto;
+	width: 50%;
+	padding: 10px;
+}
+
+.cvPage {
+	padding: 30px;
+	border: 3px solid black;
+	box-sizing: border-box;
+}
+
+ul {
+	list-style-type: none;
+	border-radius: 25px;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #5abdf5;
+	margin-bottom: 30px;
+}
+
+li {
+	float: left;
+}
+
+li a {
+	font-weight: bold;
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+}
+
+li a:hover:not (.active ) {
+	background-color: #5abdf5;
+}
+
+.active {
+	background-color: #4CAF50;
 }

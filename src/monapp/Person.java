@@ -1,6 +1,7 @@
 package monapp;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,21 +20,21 @@ public class Person implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Column(name = "firstName")
-	@NotNull(message="Veuillez saisir votre prénom")
-	@Size( min=4, max=50, message = "Le prénom doit avoir au moins 4 caractères" )
-	@Pattern( regexp = "^[A-Za-z-]+$", message = "Merci de saisir un prénom valide" )
+	@NotNull(message="Veuillez saisir votre prï¿½nom")
+	@Size( min=4, max=50, message = "Le prï¿½nom doit avoir au moins 4 caractï¿½res" )
+	@Pattern( regexp = "^[A-Za-z-]+$", message = "Merci de saisir un prï¿½nom valide" )
 	private String firstName;
 
 	@Column(name = "lastName")
 	@NotNull(message="Veuillez saisir votre nom")
-	@Size( min=4, max=50, message = "Le nom doit avoir au moins 4 caractères" )
+	@Size( min=4, max=50, message = "Le nom doit avoir au moins 4 caractï¿½res" )
 	@Pattern( regexp = "^[A-Za-z-]+$", message = "Merci de saisir un nom valide" )
 	private String lastName;
 
 	@Id
 	@Column(name = "email")
 	@NotNull(message="Veuillez saisir votre email")
-	@Size( min=2, max=200, message = "Le prénom doit avoir au moins 4 caractères" )
+	@Size( min=2, max=200, message = "Le prï¿½nom doit avoir au moins 4 caractï¿½res" )
 	@Pattern( regexp = "^[A-Za-z0-9-_.]+@[A-Za-z-.]+.[A-Za-z]{2,3}$", message = "Merci de saisir un email valide" )
 	private String email;
 
@@ -44,6 +45,24 @@ public class Person implements Serializable {
 	@Column(name = "birthday")
 	@Pattern( regexp = "^([0-9]{2}/[0-9]{2}/[0-9]{4})?$", message = "Merci de saisir une date de naissance valide" )
 	private String birthday;
+	
+//	@Column(name = "birthday")
+//	private Date birthday;
+//	<h:outputText value="Date de naissance" />
+//	<p:calendar id="birthday" value="#{c.birthday}"
+//		pattern="dd/MM/yyyy">
+//		<f:convertDateTime pattern="dd/MM/yyyy" />
+//		<f:ajax event="blur" render="birthdayText" />
+//	</p:calendar>
+//	<h:message id="birthdayText" for="birthday" style="color:red" />
+//	<p:dialog modal="true" resizable="false" header="Values"
+//	widgetVar="dlg" showEffect="fold">
+//	<p:panelGrid id="display" columns="2" columnClasses="label,value">
+//		<h:outputText value="#{p.birthday}">
+//			<f:convertDateTime pattern="MM/dd/yyyy" />
+//		</h:outputText>
+//	</p:panelGrid>
+//</p:dialog>
 
 	@Column(name = "password")
 	@NotNull(message="Veuillez saisir votre mot de passe")

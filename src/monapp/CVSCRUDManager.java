@@ -84,7 +84,8 @@ public class CVSCRUDManager implements CVSCRUD{
 
 	@Override
 	public void updatePerson(CV cv, Person p){
-		cv.getActivities().size();
+		if(cv.getActivities() != null)
+			cv.getActivities().size();
 		p.setCv(cv);
 		p=em.merge(p);
 	//	em.merge(p);

@@ -6,8 +6,11 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ComponentSystemEvent;
 
 @ManagedBean(name = "cv")
 @SessionScoped
@@ -23,25 +26,6 @@ public class CVControler {
 	@PostConstruct
 	public void init()  {
 		System.out.println("Create " + this);
-		CV cv1 = new CV();
-		cv1.setName("THOMAS RAMBALDI");
-		Activity act = new Activity();
-		act.setTitle("Master 2 informatique");
-		act.setNature(Nature.FORMATION);
-		act.setYear(2010);
-		act.setWeb("https://www.linkedin.com/home?trk=nav_responsive_tab_home");
-		act.setDescription("Site effectue a partir du cahier des charges de la JAM");
-		Activity act2 = new Activity();
-		act2.setTitle("Candidature de stage Atos");
-		act2.setNature(Nature.FORMATION);
-		act2.setYear(2011);
-		act2.setWeb("https://www.google.com/home?trk=nav_responsive_tab_home");
-		act2.setDescription("Site de sopra steria");
-		List<Activity> listActivities = new ArrayList<>();
-		listActivities.add(act);
-		listActivities.add(act2);
-		cv1.setActivities(listActivities);
-		cvm.createCV(cv1);
 	}
 
 	public List<CV> getCVs(boolean activities) throws SQLException {
@@ -69,6 +53,7 @@ public class CVControler {
 	}
 	
 	public String createPersonCv(Person p){
+		System.out.println(theCV.getId());
 		cvm.createPersonCV(theCV, p);
 		return "userAccount";
 	}
@@ -115,13 +100,17 @@ public class CVControler {
 	
 	public String saveActivity(CV c, Person p) throws SQLException {
 		c.getActivities().add(theActivity);
-		saveUserCv(c,p);
+		saveUserCv(p);
 		return "userCV";
 	}
 	
-	public String saveUserCv(CV cv,Person user){
+	public String saveUserCv(Person user){
+		CV cv = user.getCv();
+		if(cv.getActivities() != null && !theActivity.isEmpty() && ! cv.getActivities().contains(theActivity)){
+			cv.getActivities().add(theActivity);
+		}	
 		cvm.updatePerson(cv,user);
-		return "userCV";
+		return "editCV";
 	}
 	
 
@@ -145,8 +134,7 @@ public class CVControler {
 		if(c.getActivities() == null)
 			c.setActivities(new ArrayList<>());
 		theActivity = new Activity();
-		//System.out.println("BOUGE TOI"+c.getName());
-		return "createActivity";
+		return "editActivity";
 	}
 
 	public String removeActivity(Integer index) throws SQLException{
@@ -157,13 +145,80 @@ public class CVControler {
 	
 	public String removeActivity(Person p,Integer index) throws SQLException{
 		p.getCv().getActivities().remove(index.intValue());
-		saveUserCv(p.getCv(),p);
+		theActivity = new Activity();
+		saveUserCv(p);
 		return "userCV";
 	}
 
 	public void getActivitiesTitle(CV cv){
 		for(int i = 0 ; i < cv.getActivities().size() ; i++){
 			((ArrayList<Activity>) cv.getActivities()).get(i).getTitle();
+		}
+	}
+	
+	/* Fonctions pour l'ajax*/
+	public String saveTheCv(Person p){
+		cvm.updatePerson(theCV,p);
+		return "userCV";
+	}
+	
+	public void removeActivityTheCv(Integer index){
+		if(this.index != null && this.index.equals(index))
+			theActivity=null;
+		theCV.getActivities().remove(index.intValue());
+		index = null;
+		System.out.println("INDEX SET TO NULL");
+	}
+	
+	private Integer index = null;
+	
+	public void editActivityTheCv(Integer index){
+//		Activity a = theCV.getActivities().get(index.intValue());
+//		a.setTitle(theActivity.getTitle());
+//		a.setNature(theActivity.getNature());
+//		a.setYear(theActivity.getYear());
+//		a.setDescription(theActivity.getDescription());
+//		a.setWeb(theActivity.getWeb());
+		System.out.println(index);
+		theActivity = new Activity();
+		theActivity = theCV.getActivities().get(index.intValue());
+		this.index=new Integer(index);
+	}
+	
+	public void saveTheActivityTheCv(){
+		if(index == null){
+			theCV.getActivities().add(theActivity);
+			System.out.println("NEW ACTIVTY ADDED");
+		}	
+		else{
+			System.out.println("ACTIVTY CHANGED");
+			theCV.getActivities().set(index.intValue(), theActivity);
+		
+		}
+		index=null;
+		theActivity = null;
+	}
+	
+	public String editTheCv(Person p){
+		theCV = new CV();
+		theCV.setName(p.getCv().getName());
+		theCV.setId(p.getCv().getId());
+		theCV.setActivities(p.getCv().getActivities());
+		index=null;
+		theActivity = null;
+		return "edittCv";
+	}
+	
+	public void newActivityTheCv(){
+		theActivity = new Activity();
+		index=null;
+	}
+	
+	public void redirect(ComponentSystemEvent event){
+		if(theActivity != null || theActivity.getTitle().isEmpty()){
+			FacesContext fc = FacesContext.getCurrentInstance();
+			ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler) fc.getApplication().getNavigationHandler();
+			nav.performNavigation("hello.xhtml");
 		}
 	}
 }

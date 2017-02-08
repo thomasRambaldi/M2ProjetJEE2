@@ -22,6 +22,7 @@ public class AuthenticateController {
     }
 	
 	public String log_out(){
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
     	am.logout();
     	return "hello";
     }

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/template/mylayout.xhtml">
+	<ui:define name="content">
+		<f:view>
+			<c:set var="p" value="#{authController.getUser()}" />
+			<c:set var="c" value="#{cv.theCV}" />
+			<c:set var="theAct" value="#{cv.theActivity}" />
+			<h1>Édition de votre CV : #{c.name}</h1>
+			<h:form id="formCV">
+					Titre : 
+					<h:inputText id="name" value="#{c.name}" required="true">
+					<f:ajax event="keyup" render="nameText" />
+				</h:inputText>
+				<h:message id="nameText" for="name" style="color:red" />
+
+				<c:set var="count" value="0" />
+				<h:panelGroup rendered="#{c.activities.size() > 0}">
+					<table>
+						<tr>
+							<th>Title</th>
+							<th>Nature</th>
+							<th>Year</th>
+							<th>Description</th>
+							<th>Web Site</th>
+							<th>Action</th>
+						</tr>
+						<ui:repeat var="act" varStatus="a" value="#{c.activities}">
+							<tr>
+								<td>${act.title}</td>
+								<td>${act.nature}</td>
+								<td>${act.year}</td>
+								<td>${act.description}</td>
+								<td>${act.web}</td>
+								<td><h:commandLink
+										action="#{cv.removeActivityTheCv(a.index)}" value="Supprimer">
+										<f:ajax render="@form formAct" />
+									</h:commandLink><br /> <h:commandLink action="#{cv.editActivityTheCv(a.index)}"
+										value="Editer">
+										<f:ajax render="@form formAct" />
+									</h:commandLink></td>
+							</tr>
+							<c:set var="count" value="${count + 1}" />
+						</ui:repeat>
+					</table>
+				</h:panelGroup>
+			</h:form>
+			<h:form id="formAct">
+				<h:panelGrid rendered="#{theAct ne null}" columns="3">
+					<h:outputText value="Titre :" />
+					<h:inputText id="title" value="#{theAct.title}" required="true">
+						<f:ajax event="keyup" render="titleText" />
+					</h:inputText>
+					<h:message id="titleText" for="title" style="color:red" />
+
+					<h:outputText value="Nature :" />
+					<h:selectOneMenu id="nature" value="#{theAct.nature}"
+						required="true">
+						<f:selectItems value="#{params.natures}" />
+					</h:selectOneMenu>
+					<h:message for="nature" style="color:red" />
+
+
+					<h:outputText value="Année :" />
+					<h:inputText id="year" value="#{theAct.year}" required="true">
+						<f:validateLength minimum="4" maximum="4" />
+						<f:ajax event="keyup" render="yearText" />
+					</h:inputText>
+					<h:message id="yearText" for="year" style="color:red" />
+
+					<h:outputText value="Description :" />
+					<h:inputTextarea id="description" value="#{theAct.description}"
+						required="false">
+						<f:ajax event="keyup" render="descriptionText" />
+					</h:inputTextarea>
+					<h:message id="descriptionText" for="description" style="color:red" />
+
+					<h:outputText value="Site web :" />
+					<h:inputText id="web" value="#{theAct.web}" required="false">
+						<f:ajax event="keyup" render="webText" />
+					</h:inputText>
+					<h:message id="webText" for="web" style="color:red" />
+
+					<h:commandButton action="#{cv.saveTheActivityTheCv()}"
+						value="Ajouter/Modifier">
+						<f:ajax execute="@form formAct" render="@form formCV" />
+					</h:commandButton>
+				</h:panelGrid>
+				<h:commandButton action="#{cv.newActivityTheCv()}"
+					value="Ajouter une activité">
+					<f:ajax render="@form formAct" />
+				</h:commandButton>
+				<h:commandButton action="#{cv.saveTheCv(p)}"
+					value="Sauvegarder votre cv" />
+			</h:form>
+		</f:view>
+	</ui:define>
+</ui:composition>
+</html>

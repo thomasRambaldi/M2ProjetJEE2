@@ -7,33 +7,42 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
+
 <ui:composition template="/template/mylayout.xhtml">
 	<ui:define name="content">
 		<f:view>
 			<c:set var="c" value="#{cv.theCV}" />
-			<h1>#{c.name} de #{c.person.firstName} #{c.person.lastName}</h1>
+			<c:set var="p" value="#{c.person}" />
+			<h1>CV de #{p.firstName} #{p.lastName}</h1>
 
 			<h:form>
-				<table>
-					<tr>
-						<th>Title</th>
-						<th>Nature</th>
-						<th>Year</th>
-						<th>Description</th>
-						<th>Web Site</th>
-					</tr>
-					<c:set var="count" value="0" />
+				<div class="cvPage">
+					<div class="cvTitle"><h3>#{c.name}</h3></div>
+					<div class="infoPers">
+						<div class="info">
+							<p>
+								<strong>#{p.firstName} #{p.lastName}</strong><br />Né le
+								#{p.birthday}
+							</p>
+							<p>#{p.email}</p>
+						</div>
+						<div class="photo"></div>
+					</div>
+
 					<c:forEach var="a" items="#{c.activities}">
-						<tr>
-							<td>${a.title}</td>
-							<td>${a.nature}</td>
-							<td>${a.year}</td>
-							<td>${a.description}</td>
-							<td>${a.web}</td>
-						</tr>
-						<c:set var="count" value="${count + 1}" />
+						<div class="activity">
+							<h2>${a.nature}</h2>
+							<div class="gauche">
+							<p>${a.year}</p>
+							</div>
+							<div class="droite">
+							<p><span class="title">${a.title}</span></p>
+							<p><span class="title">${a.description}</span></p>
+							<p><span class="title">${a.web}</span></p>
+							</div>
+						</div>
 					</c:forEach>
-				</table>
+				</div>
 			</h:form>
 
 			<p>

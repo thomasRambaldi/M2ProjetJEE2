@@ -13,14 +13,19 @@
 			<c:set var="p" value="#{authController.getUser()}" />
 			<c:set var="c" value="#{p.cv}" />
 			<c:set var="a" value="#{cv.theActivity}" />
-			<h1>Édition de l'activité : #{a.title}, de votre CV : #{c.name}</h1>
+			<c:if test="#{a.isEmpty()}">
+				<h1>Nouvelle activité de votre CV : #{c.name}</h1>
+			</c:if>
+			<c:if test="#{a.isEmpty() eq false}">
+				<h1>Édition de l'activité : #{a.title}, de votre CV : #{c.name}</h1>
+			</c:if>
 			<h:form id="test">
 
 
 				<h:panelGrid columns="3">
 					Titre : 
 					<h:inputText id="title" value="#{a.title}" required="true">
-						<f:ajax  event="blur" render="titleText" />
+						<f:ajax event="keyup" render="titleText" />
 					</h:inputText>
 					<h:message id="titleText" for="title" style="color:red" />		
 					
@@ -32,24 +37,25 @@
 
 					Année : 
 					<h:inputText id="year" value="#{a.year}" required="true">
-						<f:validateRegex pattern="^[0-9]{4}$" />
-						<f:ajax event="blur" render="yearText" />
+						<f:validateLength minimum="4" maximum="4" />
+						<f:ajax event="keyup" render="yearText" />
 					</h:inputText>
-					<h:message  id="yearText" for="year" style="color:red" />		
+					<h:message id="yearText" for="year" style="color:red" />	
 					
 					Description : 
-					<h:inputTextarea id="description" value="#{a.description}" required="false">
-						<f:ajax event="blur" render="descriptionText" />
+					<h:inputTextarea id="description" value="#{a.description}"
+						required="false">
+						<f:ajax event="keyup" render="descriptionText" />
 					</h:inputTextarea>
-					<h:message  id="descriptionText" for="description" style="color:red" />		
+					<h:message id="descriptionText" for="description" style="color:red" />		
 					
 					Site web : 
 					<h:inputText id="web" value="#{a.web}" required="false">
-						<f:ajax event="blur" render="webText" />
+						<f:ajax event="keyup" render="webText" />
 					</h:inputText>
 					<h:message id="webText" for="web" style="color:red" />
 
-					<h:commandButton action="#{cv.saveUserCv(c,p)}" value="Save" /> | <h:link
+					<h:commandButton action="#{cv.saveUserCv(p)}" value="Save" /> | <h:link
 						outcome="cvs" value="Liste des CVs" />
 
 				</h:panelGrid>

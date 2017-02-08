@@ -19,7 +19,7 @@
 					<f:ajax  event="blur" render="nameText" />
 				</h:inputText>
 				<h:message id="nameText" for="name" style="color:red" />
-				<h:commandButton action="#{cv.saveUserCv(c,p)}"
+				<h:commandButton action="#{cv.saveUserCv(p)}"
 					value="Sauvegarder le titre" />
 			</h:form>
 			<c:set var="count" value="0" />
