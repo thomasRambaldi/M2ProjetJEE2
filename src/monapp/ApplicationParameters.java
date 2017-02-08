@@ -1,18 +1,16 @@
 package monapp;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.context.FacesContext;
-
-import org.primefaces.context.RequestContext;
-import org.primefaces.event.SelectEvent;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 @ManagedBean(name = "params", eager = false)
 @ApplicationScoped
@@ -20,6 +18,13 @@ public class ApplicationParameters {
 
     Map<String, Nature> natures = new LinkedHashMap<>();
     private Date date;
+    private String search;
+    
+    private List<Person> resultSearchPerson = null;
+    private List<CV> resultSearchCV = null;
+    
+    @PersistenceContext(unitName = "myData")
+	private EntityManager em;
     
     @PostConstruct
     void init() {
@@ -35,25 +40,58 @@ public class ApplicationParameters {
         return natures;
     }
     
-    public void onDateSelect(SelectEvent event) {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
-    }
-     
-    public void click() {
-        RequestContext requestContext = RequestContext.getCurrentInstance();
-         
-        requestContext.update("form:display");
-        requestContext.execute("PF('dlg').show()");
-    }
-
 	public Date getDate() {
 		return date;
 	}
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	
+	public String getSearch() {
+		return search;
+	}
+
+	public void setSearch(String search) {
+		this.search = search;
+	}
+
+	public List<Person> getResultSearchPerson() {
+		return resultSearchPerson;
+	}
+
+	public void setResultSearchPerson(List<Person> resultSearchPerson) {
+		this.resultSearchPerson = resultSearchPerson;
+	}
+
+	public List<CV> getResultSearchCV() {
+		return resultSearchCV;
+	}
+
+	public void setResultSearchCV(List<CV> resultSearchCV) {
+		this.resultSearchCV = resultSearchCV;
+	}
+
+	public String searchValue(){
+		resultSearchPerson = searchPerson(search);
+		resultSearchCV = searchCV(search);
+		return "resultSearch";
+	}
+	
+	public List<Person> searchPerson(String s) {
+//		 OR p.firstName LIKE CONCAT('%',:search,'%') OR p.lastName LIKE CONCAT('%',:search,'%')"
+		Query query = em.createQuery("Select p From Person p where p.firstName like %"+s+"% ", Person.class);
+		query.setParameter("search", s);
+		query.executeUpdate();
+		return query.getResultList();
+	}
+	
+	public List<CV> searchCV(String s) {
+		Query query = em.createQuery("Select c From CV c"
+				+ " WHERE name LIKE CONCAT('%',:search,'%')", CV.class);  
+		query.setParameter("search", s);
+		query.executeUpdate();
+		return query.getResultList();
 	}
 
 }

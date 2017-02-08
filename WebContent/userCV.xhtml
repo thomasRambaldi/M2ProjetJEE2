@@ -35,8 +35,8 @@
 							</div>
 							<div class="droite">
 							<p><span class="title">${a.title}</span></p>
-							<p><span class="title">${a.description}</span></p>
-							<p><span class="title">${a.web}</span></p>
+							<p><span class="elemActivity">${a.description}</span></p>
+							<p><span class="elemActivity">${a.web}</span></p>
 							</div>
 						</div>
 					</c:forEach>
@@ -49,7 +49,7 @@
 					<h:commandLink action="#{cv.editTheCv(p)}">Modifier votre CV</h:commandLink>
 				</p>
 				<p>
-					<h:commandLink action="#{cv.remove(p)}">Supprimer votre CV</h:commandLink>
+					<h:commandLink action="#{cv.remove(p)}" onclick="return confirm('êtes vous sur de vouloir supprimer votre profile')">Supprimer votre CV</h:commandLink>
 				</p>
 			</h:form>
 

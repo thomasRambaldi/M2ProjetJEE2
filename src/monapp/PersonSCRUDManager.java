@@ -9,6 +9,7 @@ import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 @Stateful(name = "pers", description = "Representation d'une personne")
 //@TransactionManagement(TransactionManagementType.CONTAINER)
@@ -17,6 +18,8 @@ public class PersonSCRUDManager implements IPersonSCRUD{
 
 	@PersistenceContext(unitName = "myData")
 	private EntityManager em;
+	
+	
 
 	@Override
 	public List<Person> searchPerson() {

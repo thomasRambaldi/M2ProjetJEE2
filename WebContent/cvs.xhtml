@@ -17,9 +17,9 @@
 						<tr>
 							<th>Nom</th>
 						</tr>
-						<c:forEach var="p" items="#{person.persons}">
+						<c:forEach var="c" items="#{cv.getCVs(false)}">
 							<tr>
-								<td><h:commandLink action="#{cv.showCV(p.cv.id, true)}" value="Cv de #{p.firstName}  #{p.lastName}" /></td>
+								<td><h:commandLink action="#{cv.showCV(c.id, true)}" value="Cv de #{c.person.firstName}  #{c.person.lastName}" /></td>
 							</tr>
 						</c:forEach>
 					</table>

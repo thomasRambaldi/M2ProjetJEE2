@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -19,9 +21,18 @@ public class CV implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
+//	@Id
+//	@GeneratedValue(strategy=GenerationType.AUTO, generator="my_entity_seq_gen")
+//	@SequenceGenerator(name="my_entity_seq_gen", sequenceName="MY_ENTITY_SEQ")
+//	private long id;
+	
+//	@Id @GeneratedValue(strategy = GenerationType.AUTO)
+//	@Column(name = "id")
+//	private int id;
+	
 	@Id 
-//	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id = 0;
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Integer id;
 	
 	@NotNull(message="Veuillez saisir un nom pour votre CV")
 	@Size( min=5, max=200, message = "Le nom du CV doit avoir au moins 5 caractères" )

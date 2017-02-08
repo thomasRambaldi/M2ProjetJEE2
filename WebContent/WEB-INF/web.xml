@@ -31,6 +31,6 @@
 		<param-value>monapp</param-value>
 	</context-param>
     <error-page>
-        <location>/index.jsp</location>
+        <location>/errorPage.xhtml</location>
     </error-page>
 </web-app>

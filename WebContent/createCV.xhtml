@@ -27,13 +27,6 @@
 					</h:inputText>
 					<h:message id="titleText"  style="color:red" for="title" />
 
-					<h:outputText value="Id(temporaire) :" />
-					<h:inputText id="idCV" value="#{c.id}" required="true"
-						requiredMessage="L'id est obligatoire">
-						<f:ajax  event="blur" render="idText" />
-					</h:inputText>
-					<h:message id="idText" style="color:red" for="idCV" />
-
 				</h:panelGrid>
 				<h:commandButton value="Creer votre cv"
 					action="#{cv.createPersonCv(p)}">

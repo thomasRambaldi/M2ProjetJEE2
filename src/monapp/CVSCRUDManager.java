@@ -16,7 +16,7 @@ public class CVSCRUDManager implements CVSCRUD{
 
 	@PersistenceContext(unitName = "myData")
 	private  EntityManager em;
-
+	
 	@Override
 	public List<CV> searchCV(boolean activities) {
 		List<CV> cvs = em.createQuery("Select c From CV c", CV.class).getResultList();
@@ -77,15 +77,17 @@ public class CVSCRUDManager implements CVSCRUD{
 	}
 
 	@Override
-	public void createPersonCV(CV cv, Person p) {
+	public Person createPersonCV(CV cv, Person p) {
 		p.setCv(cv);
 		p=em.merge(p);
+		return p;
 	}
 
 	@Override
 	public void updatePerson(CV cv, Person p){
 		if(cv.getActivities() != null)
 			cv.getActivities().size();
+		System.out.println("BEFORE SAVE Id thCV = "+cv.getId());
 		p.setCv(cv);
 		p=em.merge(p);
 	//	em.merge(p);

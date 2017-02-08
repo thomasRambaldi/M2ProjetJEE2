@@ -7,6 +7,11 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
+<f:metadata>
+	<f:event listener="#{authController.redirect}" type="preRenderView"></f:event>
+	<f:event listener="#{cv.redirect}" type="preRenderView"></f:event>
+</f:metadata>
+
 <ui:composition template="/template/mylayout.xhtml">
 	<ui:define name="content">
 		<f:view>
