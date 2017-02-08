@@ -1,8 +1,11 @@
 package monapp;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +15,9 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
+import org.primefaces.context.RequestContext;
+import org.primefaces.event.SelectEvent;
 
 @Entity
 @Table(schema="projetjee2")
@@ -39,12 +45,26 @@ public class Person implements Serializable {
 	private String email;
 
 	@Column(name = "web")
-	@Pattern( regexp = "^(www.[A-Za-z0-9-_.]+.[A-za-z]{2,3})?$", message = "Merci de saisir une URL valide" )
+	@Pattern( regexp = "^([A-Za-z0-9-_.]+.[A-za-z]{2,3})?$", message = "Merci de saisir une URL valide" )
 	private String web;
 
 	@Column(name = "birthday")
-	@Pattern( regexp = "^([0-9]{2}/[0-9]{2}/[0-9]{4})?$", message = "Merci de saisir une date de naissance valide" )
-	private String birthday;
+//	@Pattern( regexp = "^([0-9]{2}/[0-9]{2}/[0-9]{4})?$", message = "Merci de saisir une date de naissance valide" )
+	private Date birthday;
+	
+    public void onDateSelect(SelectEvent event) {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
+    }
+     
+    public void click() {
+        RequestContext requestContext = RequestContext.getCurrentInstance();
+         
+        requestContext.update("form:display");
+        requestContext.execute("PF('dlg').show()");
+    }
+ 
 	
 //	@Column(name = "birthday")
 //	private Date birthday;
@@ -107,11 +127,11 @@ public class Person implements Serializable {
 		this.web = web;
 	}
 
-	public String getBirthday() {
+	public Date getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(String birthday) {
+	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
 

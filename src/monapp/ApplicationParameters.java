@@ -80,7 +80,7 @@ public class ApplicationParameters {
 	
 	public List<Person> searchPerson(String s) {
 //		 OR p.firstName LIKE CONCAT('%',:search,'%') OR p.lastName LIKE CONCAT('%',:search,'%')"
-		Query query = em.createQuery("Select p From Person p where p.firstName like %"+s+"% ", Person.class);
+		Query query = em.createQuery("Select p From Person p where p.firstName like '%:search%' ", Person.class);
 		query.setParameter("search", s);
 		query.executeUpdate();
 		return query.getResultList();

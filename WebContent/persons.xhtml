@@ -5,7 +5,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:p="http://primefaces.org/ui">
 
 <h:body>
 	<ui:composition template="/template/mylayout.xhtml">
@@ -13,23 +14,28 @@
 			<f:view>
 				<h1>Liste des personnes</h1>
 				<h:form>
-					<table>
-						<tr>
-							<th>Email</th>
-							<th>firstName</th>
-							<th>lastName</th>
-							<th>Actions</th>
-						</tr>
-						<c:forEach var="c" items="#{person.persons}">
-							<tr>
-								<td>#{c.email}</td>
-								<td>#{c.firstName}</td>
-								<td>#{c.lastName}</td>
-								<td><h:commandLink action="#{person.show(c.email)}"
-										value="Montrer" /></td>
-							</tr>
-						</c:forEach>
-					</table>
+					<p:dataTable var="c" value="#{person.persons}" rows="5"
+						paginator="true"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="5,10,15">
+						
+						<p:column headerText="email">
+							<h:outputText value="#{c.email}" />
+						</p:column>
+
+						<p:column headerText="Prénom">
+							<h:outputText value="#{c.firstName}" />
+						</p:column>
+
+						<p:column headerText="Nom">
+							<h:outputText value="#{c.lastName}" />
+						</p:column>
+						
+						<p:column headerText="Montrer">
+							<h:commandLink action="#{person.show(c.email)}"
+										value="Montrer" />
+						</p:column>
+					</p:dataTable>
 				</h:form>
 			</f:view>
 		</ui:define>
