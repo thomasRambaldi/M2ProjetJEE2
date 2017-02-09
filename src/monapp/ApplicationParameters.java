@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.event.ActionEvent;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -74,13 +75,15 @@ public class ApplicationParameters {
 	}
 
 	public String searchValue(){
+		System.out.println("SEARCHING "+search);
 		resultSearchPerson = new ArrayList<Person>(searchPerson(search));
 		resultSearchCV = new ArrayList<CV>(searchCV(search));
 		if(resultSearchPerson.size() == 0)
 			resultSearchPerson = null;
 		if(resultSearchCV.size() == 0)
 			resultSearchCV = null;
-		return "resultSearch";
+		System.out.println("RETURNING VIEW");
+		return "resultSearch?faces-redirect=true";
 	}
 
 	public List<Person> searchPerson(String s) {

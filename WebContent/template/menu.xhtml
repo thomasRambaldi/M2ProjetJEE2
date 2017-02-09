@@ -5,54 +5,43 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition>
-	<ul>
-		<h:form>
-			<li>
-				<p>
-					<h:commandLink action="#{navigation.hello}" value="Accueil" />
-				</p>
-			</li>
+	<h:form>
+		<p:growl id="messages" />
+
+		<p:menubar>
+			<p:menuitem value="Accueil" url="#{navigation.hello()}" />
+
 
 			<c:if test="#{authController.isLogin() eq false}">
-				<li><p>
-						<h:commandLink action="inscription?faces-redirect=true">Inscription</h:commandLink>
-					</p></li>
+				<p:menuitem value="Inscription" url="#{navigation.inscription()}" />
+				<p:menuitem value="Se connecter" url="#{navigation.connect()}" />
 			</c:if>
 
-			<li><c:if test="#{authController.isLogin()}">
-					<p>
-						<h:commandLink action="userAccount?faces-redirect=true">Votre compte</h:commandLink>
-					</p>
-				</c:if> <c:if test="#{authController.isLogin() eq false}">
-					<p>
-						<h:commandLink action="logIn?faces-redirect=true">Se connecter</h:commandLink>
-					</p>
-				</c:if></li>
+			<c:if test="#{authController.isLogin()}">
+				<p:menuitem value="Votre compte" url="#{navigation.userAccount()}" />
+			</c:if>
 
-			<li>
-				<p>
-					<h:commandLink action="persons?faces-redirect=true">Liste des personnes</h:commandLink>
-				</p>
-			</li>
-
-			<li>
-				<p>
-					<h:commandLink action="cvs?faces-redirect=true">Liste des CVs</h:commandLink>
-				</p>
-			</li>
+			<p:menuitem value="Personnes"
+				url="#{navigation.listPersons()}" />
+			<p:menuitem value="CVs" url="#{navigation.listCVs()}" />
 
 			<c:set var="s" value="#{params.search}" />
-
-			<li> <div><h:inputText
-					id="search" value="#{s}" required="false">
-				</h:inputText>
-				<h:commandLink action="#{params.searchValue()}">Rechercher</h:commandLink>
-				</div></li>
-		</h:form>
-	</ul>
+			<f:facet name="options">
+				<p:inputText style="margin-right:10px" placeholder="Chercher"
+					value="#{s}" />
+				<p:commandButton value="Rechercher" action="#{params.searchValue()}"
+					icon="ui-icon-search" />
+				<c:if test="#{authController.isLogin()}">
+					<p:commandButton action="#{authController.log_out()}"
+						value="Deconnexion" icon="ui-icon-extlink" />
+				</c:if>
+			</f:facet>
+		</p:menubar>
+	</h:form>
 </ui:composition>
 
 </html>
