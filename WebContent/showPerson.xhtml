@@ -16,7 +16,12 @@
 			<p>email : #{c.email}</p>
 			<p>Prénom : #{c.firstName}</p>
 			<p>Nom : #{c.lastName}</p>
-			<p>Naissance : #{c.birthday}</p>
+			<p>
+				Naissance :
+				<h:outputText value="#{c.birthday}">
+					<f:convertDateTime pattern="dd/MM/yyyy" type="date" timeZone="Europe/Paris" />
+				</h:outputText>
+			</p>
 			<p>Site Web : #{c.web}</p>
 			<c:if test="#{c.cv ne null}">
 				<h:form><p>

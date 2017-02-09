@@ -1,4 +1,4 @@
-package monapp;
+package fr.services;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,6 +10,9 @@ import javax.interceptor.InvocationContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+
+import fr.beans.IPersonSCRUD;
+import fr.beans.Person;
 
 @Stateful(name = "pers", description = "Representation d'une personne")
 //@TransactionManagement(TransactionManagementType.CONTAINER)

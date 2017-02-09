@@ -1,7 +1,11 @@
-package monapp;
+package fr.services;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+
+import fr.beans.CV;
+import fr.beans.IPersonSCRUD;
+import fr.beans.Person;
 
 @Stateless(name="authManager")
 public class AuthenticateManager {

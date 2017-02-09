@@ -14,6 +14,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import fr.beans.CV;
+import fr.beans.Nature;
+import fr.beans.Person;
+
 @ManagedBean(name = "params", eager = false)
 @ApplicationScoped
 public class ApplicationParameters {

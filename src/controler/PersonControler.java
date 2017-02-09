@@ -1,4 +1,4 @@
-package monapp;
+package controler;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
@@ -12,6 +12,10 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+
+import fr.beans.IPersonSCRUD;
+import fr.beans.Person;
+import monapp.Cryptography;
 
 @ManagedBean(name = "person")
 @SessionScoped

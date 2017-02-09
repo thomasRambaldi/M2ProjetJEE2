@@ -1,4 +1,4 @@
-package monapp;
+package fr.services;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +9,11 @@ import javax.interceptor.InvocationContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+
+import fr.beans.Activity;
+import fr.beans.CV;
+import fr.beans.CVSCRUD;
+import fr.beans.Person;
 
 
 @Stateful(name = "act", description = "Representation d'une activitee")

@@ -20,7 +20,9 @@
 						<div class="info">
 							<p>
 								<strong>#{p.firstName} #{p.lastName}</strong><br />Né le
-								#{p.birthday}
+								<h:outputText value="#{p.birthday}">
+										<f:convertDateTime pattern="dd/MM/yyyy" type="date" timeZone="Europe/Paris" />
+									</h:outputText>
 							</p>
 							<p>#{p.email}</p>
 						</div>

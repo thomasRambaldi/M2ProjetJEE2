@@ -1,4 +1,4 @@
-package monapp;
+package controler;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
@@ -10,6 +10,11 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
+
+import fr.beans.CV;
+import fr.beans.Person;
+import fr.services.AuthenticateManager;
+import monapp.Cryptography;
 
 @ManagedBean(name = "authController")
 @SessionScoped

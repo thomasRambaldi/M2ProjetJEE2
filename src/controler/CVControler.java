@@ -1,4 +1,4 @@
-package monapp;
+package controler;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -11,6 +11,11 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
+
+import fr.beans.Activity;
+import fr.beans.CV;
+import fr.beans.CVSCRUD;
+import fr.beans.Person;
 
 @ManagedBean(name = "cv")
 @SessionScoped

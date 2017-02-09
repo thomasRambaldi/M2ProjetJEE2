@@ -1,8 +1,11 @@
-package monapp;
+package fr.services;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
+
+import fr.beans.CV;
+import fr.beans.Person;
 
 @Stateful(name = "connectedUser")
 public class ConnectedUserManager {
