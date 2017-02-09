@@ -7,8 +7,6 @@
 
 	<persistence-unit name="myData" transaction-type="JTA">
 		<non-jta-data-source>myDS</non-jta-data-source>
-<!-- 		<class>myapp.model.entities.Group</class> -->
-<!--     	<class>myapp.model.entities.User</class> -->
 		<properties>
 			<property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)" />
 		</properties>
