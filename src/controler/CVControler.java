@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
@@ -30,7 +31,17 @@ public class CVControler {
 
 	private boolean edition = false;
 
+	@ManagedProperty(value="#{authController}")
+	private AuthenticateController authController;
 	//	private boolean isShowedCv = false;
+
+	public AuthenticateController getAuthController() {
+		return authController;
+	}
+
+	public void setAuthController(AuthenticateController authControler) {
+		this.authController = authControler;
+	}
 
 	@PostConstruct
 	public void init()  {
@@ -87,6 +98,8 @@ public class CVControler {
 
 	public String remove(){
 		cvm.deleteCV(theCV);
+		theActivity=null;
+		theCV=null;
 		return "index";
 
 	}
@@ -241,7 +254,16 @@ public class CVControler {
 			FacesContext fc = FacesContext.getCurrentInstance();
 			ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler) fc.getApplication().getNavigationHandler();
 			edition=true;
-			nav.performNavigation("hello.xhtml");
+			nav.performNavigation("userAccount.xhtml");
+		}
+	}
+	
+	public void redirectAccessUserCV(ComponentSystemEvent event){
+		if(theCV == null ||  authController.getCV() == null){
+			FacesContext fc = FacesContext.getCurrentInstance();
+			ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler) fc.getApplication().getNavigationHandler();
+			edition=true;
+			nav.performNavigation("userAccount.xhtml");
 		}
 	}
 

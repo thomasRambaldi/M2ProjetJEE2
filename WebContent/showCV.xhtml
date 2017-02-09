@@ -15,37 +15,14 @@
 			<c:set var="p" value="#{c.person}" />
 			<h1>CV de #{p.firstName} #{p.lastName}</h1>
 
-			<h:form>
-				<div class="cvPage">
-					<div class="cvTitle"><h3>#{c.name}</h3></div>
-					<div class="infoPers">
-						<div class="info">
-							<p>
-								<strong>#{p.firstName} #{p.lastName}</strong><br />Né le
-									<h:outputText value="#{p.birthday}">
-										<f:convertDateTime pattern="dd/MM/yyyy" type="date" timeZone="Europe/Paris" />
-									</h:outputText>
-							</p>
-							<p>#{p.email}</p>
-						</div>
-						<div class="photo"></div>
-					</div>
+			<ui:insert>
+				<ui:include src="template/cv.xhtml">
 
-					<c:forEach var="a" items="#{c.activities}">
-						<div class="activity">
-							<h2>${a.nature}</h2>
-							<div class="gauche">
-							<p>${a.year}</p>
-							</div>
-							<div class="droite">
-							<p><span class="title">${a.title}</span></p>
-							<p><span class="elemActivity">${a.description}</span></p>
-							<p><span class="elemActivity">${a.web}</span></p>
-							</div>
-						</div>
-					</c:forEach>
-				</div>
-			</h:form>
+					<ui:param name="p" value="#{p}" />
+					<ui:param name="c" value="#{c}" />
+
+				</ui:include>
+			</ui:insert>
 
 			<p>
 				<h:link outcome="cvs">Liste de CVs</h:link>

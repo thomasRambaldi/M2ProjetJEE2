@@ -32,4 +32,32 @@
 	    <managed-bean-class>java.util.Date</managed-bean-class>
 	    <managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>authController</managed-bean-name>
+		<managed-bean-class>controler.AuthenticateController</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>person</managed-bean-name>
+		<managed-bean-class>controler.PersonControler</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>authController</property-name>
+			<value>#{authController}</value>
+		</managed-property>
+	</managed-bean>
+	
+	
+	<managed-bean>
+		<managed-bean-name>cv</managed-bean-name>
+		<managed-bean-class>controler.CVControler</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>authController</property-name>
+			<value>#{authController}</value>
+		</managed-property>
+	</managed-bean>
+	
 </faces-config>

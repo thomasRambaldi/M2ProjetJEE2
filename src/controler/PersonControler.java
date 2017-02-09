@@ -8,10 +8,13 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ComponentSystemEvent;
 
 import fr.beans.IPersonSCRUD;
 import fr.beans.Person;
@@ -25,6 +28,20 @@ public class PersonControler {
 	private IPersonSCRUD pm;
 
 	private Person thePerson  = new Person();
+	
+	boolean inscription= false;
+	
+	@ManagedProperty(value="#{authController}")
+	private AuthenticateController authController;
+	//	private boolean isShowedCv = false;
+
+	public AuthenticateController getAuthController() {
+		return authController;
+	}
+
+	public void setAuthController(AuthenticateController authControler) {
+		this.authController = authControler;
+	}
 
 	@PostConstruct
 	public void init()  {
@@ -42,6 +59,7 @@ public class PersonControler {
     
 	public String show(String email) {
 		thePerson  = pm.readPerson(email);
+		System.out.println("WEB = "+thePerson.getWeb());
 		return "showPerson";
 	}
 
@@ -53,6 +71,11 @@ public class PersonControler {
 	public String newPerson() {
 		thePerson = new Person();
 		return "editPerson";
+	}
+	
+	public void initInscription(ComponentSystemEvent event){
+			if(authController.isLogin())
+				thePerson=new Person();
 	}
 
 	public String inscription(){
@@ -72,6 +95,7 @@ public class PersonControler {
 			e.printStackTrace();
 		}
 		pm.createPerson(thePerson);
+		thePerson = null;
 		return "hello";
 	}
 	

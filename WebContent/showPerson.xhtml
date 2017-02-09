@@ -5,31 +5,26 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui" >
 
 <ui:composition template="/template/mylayout.xhtml">
 	<ui:define name="content">
 		<f:view>
-			<c:set var="c" value="#{person.thePerson}" />
+			<c:set var="p" value="#{person.thePerson}" />
 
-			<h1>Person #{c.firstName}</h1>
-			<p>email : #{c.email}</p>
-			<p>Prénom : #{c.firstName}</p>
-			<p>Nom : #{c.lastName}</p>
-			<p>
-				Naissance :
-				<h:outputText value="#{c.birthday}">
-					<f:convertDateTime pattern="dd/MM/yyyy" type="date" timeZone="Europe/Paris" />
-				</h:outputText>
-			</p>
-			<p>Site Web : #{c.web}</p>
-			<c:if test="#{c.cv ne null}">
+			<ui:insert>
+				<ui:include src="template/person.xhtml">
+
+					<ui:param name="p" value="#{p}" />
+
+				</ui:include>
+			</ui:insert>
+			
+			<c:if test="#{p.cv ne null}">
 				<h:form><p>
 					CV :
-					
-						<h:commandLink action="#{cv.showCV(c.cv.id, true)}"
-							value="#{c.cv.name}" />
-					
+						<p:commandButton value="#{p.cv.name}"  action="#{cv.showCV(p.cv.id, true)}" ajax="false" />
 				</p></h:form>
 			</c:if>
 
