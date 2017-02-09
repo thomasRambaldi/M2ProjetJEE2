@@ -46,11 +46,11 @@
 
 			<c:set var="s" value="#{params.search}" />
 
-			<li> <h:inputText
+			<li> <div><h:inputText
 					id="search" value="#{s}" required="false">
 				</h:inputText>
 				<h:commandLink action="#{params.searchValue()}">Rechercher</h:commandLink>
-				</li>
+				</div></li>
 		</h:form>
 	</ul>
 </ui:composition>

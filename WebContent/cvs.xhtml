@@ -15,18 +15,14 @@
 				<h1>Liste des CVs</h1>
 
 				<h:form>
-					<p:dataTable var="c" value="#{cv.getCVs(false)}" rows="5"
-						paginator="true"
-						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-						rowsPerPageTemplate="5,10,15">
-
-						<p:column headerText="Nom du CV">
-							<c:forEach var="c" items="#{cv.getCVs(false)}">
-								<h:commandLink action="#{cv.showCV(c.id, true)}"
-									value="Cv de #{c.person.firstName}  #{c.person.lastName}" />
-							</c:forEach>
-						</p:column>
-					</p:dataTable>
+					<p:dataTable var="c" value="#{cv.getCVs(false)}" 
+							rows="5" paginator="true"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="5,10,15">
+							<p:column headerText="CV">
+								<h:commandLink action="#{cv.showCV(c.id, true)}" value="Cv de #{c.person.firstName}  #{c.person.lastName}" />
+							</p:column>
+						</p:dataTable>
 				</h:form>
 
 

@@ -5,26 +5,41 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:body>
 	<ui:composition template="/template/mylayout.xhtml">
 		<ui:define name="content">
 			<f:view>
-				<h1>Personnes trouvées</h1>
-				<h:form>
-					<c:forEach var="p" items="#{params.resultSearchPerson}">
-						<h:commandLink action="#{person.show(p.email)}"
-							value="#{p.firstName} #{p.lastName}" />
-					</c:forEach>
-				</h:form>
-				<h1>CVs trouvés</h1>
-				<h:form>
-					<c:forEach var="c" items="#{params.resultSearchCV}">
-						<h:commandLink action="#{cv.showCV(c.id, true)}"
-							value="Cv de #{c.person.firstName}  #{c.person.lastName}" />
-					</c:forEach>
-				</h:form>
+
+
+
+				<c:if test="#{params.resultSearchPerson ne null}">
+					<h:form>
+						<p:dataTable var="pers" value="#{params.resultSearchPerson}"
+							rows="10" paginator="true"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="5,10,15">
+							<p:column headerText="Personne">
+								<h:commandLink action="#{person.show(pers.email)}" value="#{pers.firstName} #{pers.lastName}" />
+							</p:column>
+						</p:dataTable>
+					</h:form>
+				</c:if>
+				<br/>
+				<c:if test="#{params.resultSearchCV ne null}">
+					<h:form>
+						<p:dataTable var="c" value="#{params.resultSearchCV}"
+							rows="10" paginator="true"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="5,10,15">
+							<p:column headerText="CV">
+								<h:commandLink action="#{cv.showCV(c.id, true)}" value="Cv de #{c.person.firstName}  #{c.person.lastName}" />
+							</p:column>
+						</p:dataTable>
+					</h:form>
+				</c:if>
 			</f:view>
 		</ui:define>
 	</ui:composition>

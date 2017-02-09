@@ -1,5 +1,6 @@
 package monapp;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -10,36 +11,36 @@ import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 @ManagedBean(name = "params", eager = false)
 @ApplicationScoped
 public class ApplicationParameters {
 
-    Map<String, Nature> natures = new LinkedHashMap<>();
-    private Date date;
-    private String search;
-    
-    private List<Person> resultSearchPerson = null;
-    private List<CV> resultSearchCV = null;
-    
-    @PersistenceContext(unitName = "myData")
-	private EntityManager em;
-    
-    @PostConstruct
-    void init() {
-        natures.put("EXP", Nature.EXPERIENCE);
-        natures.put("FRM", Nature.FORMATION);
-        natures.put("HOB", Nature.HOBBIES);
-        natures.put("LANG", Nature.LANGUAGES);
-        natures.put("OT", Nature.OTHER);
-        System.out.println("Init " + this);
-    }
+	Map<String, Nature> natures = new LinkedHashMap<>();
+	private Date date;
+	private String search;
 
-    public Map<String, Nature> getNatures() {
-        return natures;
-    }
-    
+	private List<Person> resultSearchPerson = null;
+	private List<CV> resultSearchCV = null;
+
+	@PersistenceContext(unitName = "myData")
+	private EntityManager em;
+
+	@PostConstruct
+	void init() {
+		natures.put("EXP", Nature.EXPERIENCE);
+		natures.put("FRM", Nature.FORMATION);
+		natures.put("HOB", Nature.HOBBIES);
+		natures.put("LANG", Nature.LANGUAGES);
+		natures.put("OT", Nature.OTHER);
+		System.out.println("Init " + this);
+	}
+
+	public Map<String, Nature> getNatures() {
+		return natures;
+	}
+
 	public Date getDate() {
 		return date;
 	}
@@ -47,7 +48,7 @@ public class ApplicationParameters {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	
+
 	public String getSearch() {
 		return search;
 	}
@@ -73,25 +74,25 @@ public class ApplicationParameters {
 	}
 
 	public String searchValue(){
-		resultSearchPerson = searchPerson(search);
-		resultSearchCV = searchCV(search);
+		resultSearchPerson = new ArrayList<Person>(searchPerson(search));
+		resultSearchCV = new ArrayList<CV>(searchCV(search));
+		if(resultSearchPerson.size() == 0)
+			resultSearchPerson = null;
+		if(resultSearchCV.size() == 0)
+			resultSearchCV = null;
 		return "resultSearch";
 	}
-	
+
 	public List<Person> searchPerson(String s) {
-//		 OR p.firstName LIKE CONCAT('%',:search,'%') OR p.lastName LIKE CONCAT('%',:search,'%')"
-		Query query = em.createQuery("Select p From Person p where p.firstName like '%:search%' ", Person.class);
-		query.setParameter("search", s);
-		query.executeUpdate();
-		return query.getResultList();
-	}
-	
-	public List<CV> searchCV(String s) {
-		Query query = em.createQuery("Select c From CV c"
-				+ " WHERE name LIKE CONCAT('%',:search,'%')", CV.class);  
-		query.setParameter("search", s);
-		query.executeUpdate();
-		return query.getResultList();
+		TypedQuery<Person> query = em.createQuery(
+				"SELECT p FROM Person p WHERE p.firstName LIKE :search OR p.lastName LIKE :search OR CONCAT(p.firstName,' ',p.lastName) LIKE :search", Person.class);
+		return query.setParameter("search", "%"+s+"%").getResultList();
 	}
 
+	public List<CV> searchCV(String s) {
+		TypedQuery<CV> query = em.createQuery(
+				"SELECT c FROM CV c WHERE c.name LIKE :search", CV.class);
+		return query.setParameter("search", "%"+s+"%").getResultList();
+	}
+	
 }
