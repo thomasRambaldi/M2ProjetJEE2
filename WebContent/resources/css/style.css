@@ -13,13 +13,13 @@ td, th {
 }
 
 .imageWelcome {
-    margin: auto;
-    width: 100%;
-    padding: 10px;
+	margin: auto;
+	width: 100%;
+	padding: 10px;
 }
 
 #page {
-	width: 800px;
+	width: 1000px;
 	margin: 0 auto;
 }
 
@@ -127,44 +127,86 @@ h3 {
 }
 
 .cvTitle {
-	margin: auto;
+	margin-left: auto;
+	margin-right: auto;
 	width: 50%;
 	padding: 10px;
 }
 
 .cvPage {
+	margin-left: auto;
+	margin-right: auto;
+	width: 800px;
 	padding: 30px;
 	border: 3px solid black;
 	box-sizing: border-box;
+	margin-top: 20px;
 }
 
-ul {
-	list-style-type: none;
-	border-radius: 25px;
+.ui-menubar {
+	border: 1px initial grey;
+	margin-bottom: 30px;
 	margin: 0;
 	padding: 0;
-	overflow: hidden;
-	background-color: #5abdf5;
-	margin-bottom: 30px;
 }
 
-li {
-	float: left;
-}
-
-li a {
+.ui-menu-child {
 	font-weight: bold;
 	display: block;
-	color: white;
+	color: blue;
 	text-align: center;
 	padding: 14px 16px;
 	text-decoration: none;
 }
 
-li a:hover:not (.active ) {
-	background-color: #5abdf5;
+.ui-menu {
+	background: #ffffff !important;
 }
 
-.active {
-	background-color: #4CAF50;
+.ui-button {
+	background: #229ce8 !important;
+	color: white !important;
 }
+
+/* .ui-icon-search { */
+/* 	background-image: */
+/* 		url("../javax.faces.resource/images/ui-icons_ffffff_256x240.png.jsf?ln=primefaces-aristo"); */
+/* } */
+
+.ui-icon {
+	background-color: white !important;
+}
+
+/* .whiteIcon .ui-icon { */
+/* 	color: white !important; */
+/* } */
+/* .ui-button .ui-widget .ui-state-default .ui-corner-all .ui-button-text-icon-left .mygreen { */
+
+/* ul { */
+/* 	list-style-type: none; */
+/* 	border-radius: 25px; */
+/* 	margin: 0; */
+/* 	padding: 0; */
+/* 	overflow: hidden; */
+/* 	background-color: #5abdf5; */
+/* 	margin-bottom: 30px; */
+/* }li { */
+/* 	float: left; */
+/* } */
+
+/* li a { */
+/* 	font-weight: bold; */
+/* 	display: block; */
+/* 	color: white; */
+/* 	text-align: center; */
+/* 	padding: 14px 16px; */
+/* 	text-decoration: none; */
+/* } */
+
+/* li a:hover:not (.active ) { */
+/* 	background-color: #5abdf5; */
+/* } */
+
+/* .active { */
+/* 	background-color: #4CAF50; */
+/* } */
