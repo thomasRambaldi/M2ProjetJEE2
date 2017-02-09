@@ -92,7 +92,7 @@ public class ApplicationParameters {
 
 	public List<Person> searchPerson(String s) {
 		TypedQuery<Person> query = em.createQuery(
-				"SELECT p FROM Person p WHERE p.firstName LIKE :search OR p.lastName LIKE :search OR CONCAT(p.firstName,' ',p.lastName) LIKE :search", Person.class);
+				"SELECT p FROM Person p WHERE p.firstName LIKE :search OR p.lastName LIKE :search OR CONCAT(p.firstName,' ',p.lastName) LIKE :search OR p.email LIKE :search", Person.class);
 		return query.setParameter("search", "%"+s+"%").getResultList();
 	}
 

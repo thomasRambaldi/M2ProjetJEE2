@@ -1,15 +1,13 @@
 package fr.services;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
+import javax.ejb.Local;
 import javax.ejb.Stateful;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 import fr.beans.IPersonSCRUD;
 import fr.beans.Person;
