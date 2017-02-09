@@ -16,14 +16,14 @@
 		<f:view>
 
 			<c:set var="p" value="#{authController.getUser()}" />
-			<h1>Person #{p.firstName}</h1>
+			<h1>#{p.firstName} #{p.lastName}</h1>
 			<p>email : #{p.email}</p>
 			<p>Prénom : #{p.firstName}</p>
 			<p>Nom : #{p.lastName}</p>
 			<p>
 				Naissance :
 				<h:outputText value="#{p.birthday}">
-					<f:convertDateTime pattern="dd/MM/yyyy" />
+					<f:convertDateTime pattern="dd/MM/yyyy" type="date" timeZone="Europe/Paris" />
 				</h:outputText>
 			</p>
 			<p>

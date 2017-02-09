@@ -40,7 +40,7 @@ public class Person implements Serializable {
 	@Id
 	@Column(name = "email")
 	@NotNull(message="Veuillez saisir votre email")
-	@Size( min=2, max=200, message = "Le pr�nom doit avoir au moins 4 caract�res" )
+	@Size( min=2, max=200, message = "Le prenom doit avoir au moins 4 caracteres" )
 	@Pattern( regexp = "^[A-Za-z0-9-_.]+@[A-Za-z-.]+.[A-Za-z]{2,3}$", message = "Merci de saisir un email valide" )
 	private String email;
 

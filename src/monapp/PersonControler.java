@@ -54,7 +54,7 @@ public class PersonControler {
 	public String inscription(){
 		FacesContext ct = FacesContext.getCurrentInstance();
 		if(pm.readPerson(thePerson.getEmail()) != null){
-			FacesMessage msg = new FacesMessage("Cet email est deja�pris");
+			FacesMessage msg = new FacesMessage("Cet email est deja pris");
 			ct.addMessage("test:email", msg);
 			ct.validationFailed();
 			return "inscription";

@@ -41,9 +41,9 @@
 
 					
 					Site Web :
-					<h:inputText id="web" value="#{p.web}">
+					<p:inputText id="web" value="#{p.web}">
 						<f:ajax event="blur" render="webText" />
-					</h:inputText>
+					</p:inputText>
 					<h:message id="webText" for="web" style="color:red" />
 					
 <!-- 					Mot de passe : -->
@@ -53,8 +53,9 @@
 <!-- 					</h:inputSecret> -->
 <!-- 					<h:message for="pwd" style="color:red" /> -->
 					
-					<h:commandButton action="#{authController.save()}" value="Save" /> 
-
+<!-- 					<h:commandButton action="#{authController.save()}" value="Save" />  -->
+					<p:commandButton value="Sauvegarder" action="#{authController.save()}" icon="ui-icon-check" />
+ 
 				</h:panelGrid>
 
 
