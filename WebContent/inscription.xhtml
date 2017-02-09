@@ -6,8 +6,11 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui"
-	>
+	xmlns:p="http://primefaces.org/ui">
+
+<f:metadata>
+	<f:event listener="#{person.initInscription}" type="preRenderView"></f:event>
+</f:metadata>
 
 <ui:composition template="/template/mylayout.xhtml">
 	<ui:define name="content">
@@ -20,54 +23,54 @@
 					<h:outputText value="Prénom :" />
 					<h:inputText id="firstName" value="#{c.firstName}" required="true"
 						requiredMessage="Le prénom est obligatoire">
-						<f:ajax event="blur" render="firstNameText" />					</h:inputText>
+						<f:ajax event="keyup" render="firstNameText" />
+					</h:inputText>
 					<h:message id="firstNameText" for="firstName" style="color:red" />
-					
+
 					<h:outputText value="Nom :" />
 					<h:inputText id="lastName" value="#{c.lastName}" required="true"
 						requiredMessage="Le nom est obligatoire">
-						<f:ajax event="blur" render="lastNameText" />
+						<f:ajax event="keyup" render="lastNameText" />
 					</h:inputText>
 					<h:message id="lastNameText" for="lastName" style="color:red" />
-					
+
 					<h:outputText value="Adresse email :" />
 					<h:inputText id="email" value="#{c.email}" required="true"
 						requiredMessage="L'email est obligatoire">
-						<f:ajax event="blur" render="emailText" />
+						<f:ajax keyup="blur" render="emailText" />
 					</h:inputText>
 					<h:message id="emailText" for="email" style="color:red" />
-					
-					
+
+
 					<h:outputText value="Date de naissance" />
-					<p:calendar id="effect" value="#{c.birthday}" />
+					<p:calendar id="birthday" value="#{c.birthday}" />
 					<h:message id="birthdayText" for="birthday" style="color:red" />
-					
+
 					<h:outputText value="Site web :" />
 					<h:inputText id="web" value="#{c.web}" required="false">
-						<f:ajax event="blur" render="webText" />
+						<f:ajax event="keyup" render="webText" />
 					</h:inputText>
 					<h:message id="webText" for="web" style="color:red" />
-					
-					<h:outputText value="Mot de passe :" />
-					<h:inputSecret id="password" value="#{c.password}" required="true" 
-						requiredMessage="Veuillez entrer un mot de passe">
-						<f:validateLength minimum="6" maximum="20" />
-						<f:validator validatorId="passwordValidator" />
-						<f:attribute name="confirmation" value="#{confirmation}" />
-					</h:inputSecret>
-					<h:message style="color:red" for="password" />
-					
-					<h:outputText value="Confirmation du mot de passe :" />
-					<h:inputSecret id="confirmation" value="#{c.password}" required="true"
-						binding="#{confirmation}" 
-						requiredMessage="Veuillez entrer un mot de passe de confirmation">
-						<f:validateLength minimum="2" maximum="20" />
-					</h:inputSecret>
-					<h:message style="color:red" for="confirmation" />
-					
+
+					<h:outputLabel for="pwd1" value="Mot de passe :" />
+					<p:password id="pwd1" value="#{c.password}" match="pwd2"
+						label="Mot de passe " required="true"
+						requiredMessage="Le mot de passe est obligatoire" />
+					<h:message id="pwd1Text" for="pwd1" style="color:red" />
+
+					<h:outputLabel for="pwd2" value="Confirmer le mot de passe" />
+					<p:password id="pwd2" label="Confirmer le mot de passe"
+						required="true"
+						requiredMessage="Le mot de passe doit être le même" />
+					<h:message id="pwd2Text" for="pwd2" style="color:red" />
+
+
 				</h:panelGrid>
-				<h:commandButton value="Inscription"
-					action="#{person.inscription()}" />
+				<h:commandButton action="#{person.inscription()}"
+					value="Inscription">
+					<f:ajax execute="@form test" render="@form test" />
+				</h:commandButton>
+
 			</h:form>
 		</fieldset>
 

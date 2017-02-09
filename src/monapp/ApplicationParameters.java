@@ -25,7 +25,11 @@ public class ApplicationParameters {
 	Map<String, Nature> natures = new LinkedHashMap<>();
 	private Date date;
 	private String search;
+	private Nature nature;
 
+    public Nature getNature() {
+        return nature;
+    }
 	private List<Person> resultSearchPerson = null;
 	private List<CV> resultSearchCV = null;
 

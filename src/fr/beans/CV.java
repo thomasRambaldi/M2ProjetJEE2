@@ -1,6 +1,8 @@
 package fr.beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.persistence.ElementCollection;
@@ -35,7 +37,7 @@ public class CV implements Serializable{
 	private Integer id;
 	
 	@NotNull(message="Veuillez saisir un nom pour votre CV")
-	@Size( min=5, max=200, message = "Le nom du CV doit avoir au moins 5 caractères" )
+	@Size( min=5, max=200, message = "Le nom du CV doit avoir au moins 5 caractï¿½res" )
 	@Pattern( regexp = "^[a-zA-Z0-9\\s]+$" , message = "Merci de saisir un nom de CV valide" )
 	private String name;
 
@@ -56,6 +58,24 @@ public class CV implements Serializable{
 
 	public void setActivities(List<Activity> activities) {
 		this.activities = activities;
+	}
+//	EXPERIENCE, FORMATION, HOBBIES, LANGUAGES, OTHER
+	public List<Activity> getNature(Nature nature){
+		List<Activity> nat = new ArrayList<Activity>();
+		if(activities == null)
+			return null;
+		for(Activity a : activities)
+			if(a.getNature() == nature)
+				nat.add(a);
+		if(nat.isEmpty())
+			return null;
+		nat.sort(new Comparator<Activity>() {
+			@Override
+			public int compare(Activity a1, Activity a2) {
+				return a1.getYear().intValue() > a2.getYear().intValue() ? -1 : 1;
+			}
+		});
+		return nat;
 	}
 
 	public void setId(Integer id) {

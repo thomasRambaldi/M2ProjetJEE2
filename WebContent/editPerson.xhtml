@@ -24,14 +24,14 @@
 					FirstName :
 					<h:inputText id="firstName" value="#{p.firstName}" required="true" 
 					requiredMessage="Le prénom est obligatoire">
-						<f:ajax event="blur" render="firstNameText" />
+						<f:ajax event="keyup" render="firstNameText" />
 					</h:inputText>
 					<h:message id="firstNameText" for="firstName" style="color:red" />
 
 					Lastname :
 					<h:inputText id="lastName" value="#{p.lastName}" required="true"
 					requiredMessage="Le nom est obligatoire">
-						<f:ajax event="blur" render="lastNameText" />
+						<f:ajax event="keyup" render="lastNameText" />
 					</h:inputText>
 					<h:message id="lastNameText" for="lastName" style="color:red" />
 					
@@ -42,7 +42,7 @@
 					
 					Site Web :
 					<p:inputText id="web" value="#{p.web}">
-						<f:ajax event="blur" render="webText" />
+						<f:ajax event="keyup" render="webText" />
 					</p:inputText>
 					<h:message id="webText" for="web" style="color:red" />
 					

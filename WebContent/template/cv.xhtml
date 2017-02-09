@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+	<h:form>
+		<div class="cvPage">
+			<div class="cvTitle">
+				<h3>#{c.name}</h3>
+			</div>
+			<div class="infoPers">
+				<div class="info">
+					<p>
+						<strong>#{p.firstName} #{p.lastName}</strong><br />Né le
+						<h:outputText value="#{p.birthday}">
+							<f:convertDateTime pattern="dd/MM/yyyy" type="date"
+								timeZone="Europe/Paris" />
+						</h:outputText>
+					</p>
+					<p>#{p.email}</p>
+				</div>
+				<div class="photo"></div>
+			</div>
+
+			<c:set var="nature" value="#{c.getNature('EXPERIENCE')}" />
+			<c:if test="#{not empty nature}">
+				<h2>EXPERIENCE</h2>
+			</c:if>
+			<c:forEach var="a" items="#{nature}">
+				<div class="activity">
+					<div class="gauche">
+						<p>${a.year}</p>
+					</div>
+					<div class="droite">
+						<p>
+							<span class="title">${a.title}</span>
+						</p>
+						<p>
+							<span class="elemActivity">${a.description}</span>
+						</p>
+						<p>
+							<span class="elemActivity">${a.web}</span>
+						</p>
+					</div>
+				</div>
+			</c:forEach>
+			<c:set var="nature" value="#{c.getNature('FORMATION')}" />
+			<c:if test="#{not empty nature}">
+				<h2>FORMATION</h2>
+			</c:if>
+			<c:forEach var="a" items="${nature}">
+				<div class="activity">
+					<div class="gauche">
+						<p>${a.year}</p>
+					</div>
+					<div class="droite">
+						<p>
+							<span class="title">${a.title}</span>
+						</p>
+						<p>
+							<span class="elemActivity">${a.description}</span>
+						</p>
+						<p>
+							<span class="elemActivity">${a.web}</span>
+						</p>
+					</div>
+				</div>
+			</c:forEach>
+			<c:set var="nature" value="#{c.getNature('HOBBIES')}" />
+			<c:if test="#{not empty nature}">
+				<h2>HOBBIES</h2>
+			</c:if>
+			<c:forEach var="a" items="${nature}">
+				<div class="activity">
+					<div class="gauche">
+						<p>${a.year}</p>
+					</div>
+					<div class="droite">
+						<p>
+							<span class="title">${a.title}</span>
+						</p>
+						<p>
+							<span class="elemActivity">${a.description}</span>
+						</p>
+						<p>
+							<span class="elemActivity">${a.web}</span>
+						</p>
+					</div>
+				</div>
+			</c:forEach>
+			<c:set var="nature" value="#{c.getNature('LANGUAGES')}" />
+			<c:if test="#{not empty nature}">
+				<h2>LANGUAGES</h2>
+			</c:if>
+			<c:forEach var="a" items="${nature}">
+				<div class="activity">
+					<div class="gauche">
+						<p>${a.year}</p>
+					</div>
+					<div class="droite">
+						<p>
+							<span class="title">${a.title}</span>
+						</p>
+						<p>
+							<span class="elemActivity">${a.description}</span>
+						</p>
+						<p>
+							<span class="elemActivity">${a.web}</span>
+						</p>
+					</div>
+				</div>
+			</c:forEach>
+			<c:set var="nature" value="#{c.getNature('OTHER')}" />
+			<c:if test="#{not empty nature}">
+				<h2>OTHER</h2>
+			</c:if>
+			<c:forEach var="a" items="${nature}">
+				<div class="activity">
+					<div class="gauche">
+						<p>${a.year}</p>
+					</div>
+					<div class="droite">
+						<p>
+							<span class="title">${a.title}</span>
+						</p>
+						<p>
+							<span class="elemActivity">${a.description}</span>
+						</p>
+						<p>
+							<span class="elemActivity">${a.web}</span>
+						</p>
+					</div>
+				</div>
+			</c:forEach>
+		</div>
+	</h:form>
+</ui:composition>
+</html>
